@@ -435,7 +435,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T11:26:41+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T11:28:11+08:00">
                 2019-03-04
               </time>
             
@@ -921,7 +921,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T09:47:32+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T16:51:35+08:00">
                 2019-03-04
               </time>
             
@@ -980,7 +980,7 @@
         
           
             <p>This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down.</p>
-<h2 id="Course-Introduction"><a href="#Course-Introduction" class="headerlink" title="Course Introduction"></a>Course Introduction</h2><blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="Course-Introduction"><a href="#Course-Introduction" class="headerlink" title="Course Introduction"></a>Course Introduction</h2><blockquote>
 <p>operating systems advanced class<br>会比本科的操作系统更难，进阶<br>建议本科没学过操作系统的同学选修<br>研究生阶段 - 补充短板，打好基础</p>
 </blockquote>
 <h3 id="系统能力培养"><a href="#系统能力培养" class="headerlink" title="系统能力培养"></a>系统能力培养</h3><p>程序性开发能力→系统性设计能力<br><strong>解决复杂工程问题的基本能力</strong><br>综合能力 &gt;&gt; coding<br>系统：若干相互关联的部件有机结合在一起，具有一定功能。</p>
@@ -998,7 +998,7 @@
 <li>动手完成一个很小的模拟操作系统</li>
 <li>提高总结凝练的能力</li>
 </ol>
-<h3 id="教学计划："><a href="#教学计划：" class="headerlink" title="教学计划："></a>教学计划：</h3><p>==进程线程，运行机制，同步机制，虚存机制，文件系统==<br>XV6源代码阅读<br>实例：Windows，Linux<br>实验 Nachos<br>华文慕课</p>
+<h3 id="教学计划："><a href="#教学计划：" class="headerlink" title="教学计划："></a>教学计划：</h3><p>进程线程，运行机制，同步机制，虚存机制，文件系统<br>XV6源代码阅读<br>实例：Windows，Linux<br>实验 Nachos<br>华文慕课</p>
 <h3 id="课程环节："><a href="#课程环节：" class="headerlink" title="课程环节："></a>课程环节：</h3><p>Nachos实习笔试(5.20 开卷-编程+简答)、期末Nachos实习面测(选)，期末笔试<br>分值：<br>Nachos实习报告24(格式规范、按时提交、内容质量，注重个人心得体会，注重实作) Nachos笔试10 (可选面测弥补) XV6代码阅读报告16 课堂参与10<br>期末40闭卷<br>创新实践、特色实践+1~10 (可选题目，加到平时分)</p>
 <h3 id="参考书："><a href="#参考书：" class="headerlink" title="参考书："></a>参考书：</h3><p>教材（选用哪一本都可以）<br>•Modern Operating System Andrew S. Tanenbaum<br>•现代操作系统（第4版）陈向群等译机械工业出版社<br>相关参考书目<br>•Windows内核原理与实现潘爱民电子工业出版社<br>•Linux内核设计与实现[美] R.Love著，陈莉君译机械工业出版社<br>•深入理解计算机系统[美]R.E. Bryant等著龚奕利雷迎春译机械工业出版社</p>
 <h2 id="Nachos操作系统"><a href="#Nachos操作系统" class="headerlink" title="Nachos操作系统"></a>Nachos操作系统</h2><p>UC Berkeley教学用操作系统 使用C++编写，也可以用java（改写5.0j）PintOS（C,可运行于x86-硬件需要C语言）<br>使用3.4稳定版本 latest 4.1<br>（JOS by MIT 也是教学用操作系统）<br>不真正运行于硬件，模拟了一个==MIPS模拟器==<br>可拓展功能，可移植到其它架构（可以真正运行于硬件上）</p>
@@ -1066,6 +1066,142 @@
 <p>10视频硬件将像素转换成显示器可接收和一组控制数据信号</p>
 <p>11显示器解释信号，激发液晶屏</p>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>复习本课内容，下载XV6源码，完成Lab0（环境搭建，阅读源码，编写程序）</p>
+<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p>不是只有CPU<strong>调度</strong></p>
+<p>CPU调度是短程调度-选进程,送入CPU-最底层</p>
+<h2 id="处理器调度-1"><a href="#处理器调度-1" class="headerlink" title="处理器调度"></a>处理器调度</h2><p>基本认识:按一定调度算法,选一个,给CPU使用权</p>
+<p>若无就绪进程,系统空闲进程/闲逛进程/idle进程,不属于用户,执行空指令-<em>占座</em>-CPU周而复始运作</p>
+<p>调度程序:内核函数,决策-挑选就绪进程</p>
+<ol>
+<li>What 调度算法</li>
+<li>When 调度时机</li>
+<li>W</li>
+</ol>
+<h3 id="CPU调度时机"><a href="#CPU调度时机" class="headerlink" title="CPU调度时机"></a>CPU调度时机</h3><p>事件:进程运行过程中有很多事件</p>
+<p>事件发生后→进程暂停→硬件机制响应→进入操作系统-<strong>内核</strong>处理相应事件→处理完后-格局变化(可能进程状态改变,可能创建了新进程)</p>
+<p>4种调度时机-总结:内核对中断/异常/系统调用处理后返回用户态时</p>
+<h3 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h3><p>可能是刚刚暂停执行的进程/新进程</p>
+<p>被换入的进程:事件发生后,当前进程的内容context被放入内核栈(系统栈)中-栈是临时存储,PCB是长久存储-数据结构</p>
+<p>若恢复该进程,从栈中弹出,否则若切换另一个进程,将栈中内容放入PCB中</p>
+<p>新选入进程的上下文context在PCB中,若被选中,将其内容取出</p>
+<ol>
+<li><p>切换全局页目录</p>
+<p>每个进程有不同地址空间,加载新地址空间</p>
+<p>全局页目录:指向地址空间的物理地址的指针(Intel中CR3)</p>
+</li>
+<li><p>切换内核栈和上下文</p>
+</li>
+</ol>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>(A下CPU,B上CPU)</p>
+<ol>
+<li>保存进程A上下文到PCB中</li>
+<li>更新A的PCB</li>
+<li>将A移到合适对垒</li>
+</ol>
+<h3 id="上下文切换开销"><a href="#上下文切换开销" class="headerlink" title="上下文切换开销"></a>上下文切换开销</h3><p>寄存器存取时间</p>
+<ol>
+<li><p>直接开销</p>
+<p>内核完成切换的CPU时间:保存恢复寄存器,切换地址空间</p>
+<p>(不同指令的代价不同-时间也不同</p>
+</li>
+<li><p>间接开销</p>
+<p>高速缓存cache,缓冲区缓存buffer cache,TLB(进程页表的部分表项)清空</p>
+<p>肯定不会命中,所以开销大</p>
+<p><strong>了解Cache工作原理</strong></p>
+</li>
+</ol>
+<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>不同操作系统-不同难易-需要考虑完成的任务不同</p>
+<p>需要在<strong>PCB</strong>中记录跟CPU调度有关的信息-用于调度</p>
+<h4 id="优先级和优先数"><a href="#优先级和优先数" class="headerlink" title="优先级和优先数"></a>优先级和优先数</h4><p>优先数并不一定是越大越高,只是指标,所以一般说优先级-是更显著的指标</p>
+<p>优先级:动态-过程中动态变化;静态-运行过程中不变</p>
+<h4 id="就绪队列组织"><a href="#就绪队列组织" class="headerlink" title="就绪队列组织"></a>就绪队列组织</h4><h4 id="抢占-amp-非抢占"><a href="#抢占-amp-非抢占" class="headerlink" title="抢占&amp;非抢占"></a>抢占&amp;非抢占</h4><p>抢占:有更高优先级就绪,系统就强行剥夺CPU</p>
+<p>靠中断-异常-系统调用,实际就是切换 具体是由调度程序执行</p>
+<p>非抢占:进程不想下CPU就可以不下CPU</p>
+<h4 id="I-O密集型-CPU密集型进程"><a href="#I-O密集型-CPU密集型进程" class="headerlink" title="I/O密集型/CPU密集型进程"></a>I/O密集型/CPU密集型进程</h4><p>一般操作系统对IO密集型更友好</p>
+<h4 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h4><p>长/短 固定/可变</p>
+<h3 id="不同调度算法"><a href="#不同调度算法" class="headerlink" title="不同调度算法"></a>不同调度算法</h3><ol>
+<li><p>短作业优先SJF</p>
+<p>可以抢占(有更短的立刻上CPU)/非抢占(在就绪对列中选短)-各有利弊</p>
+<p><strong>所以进程同时可运行时</strong>SJF可得到最短平均等待时间</p>
+</li>
+<li><p>最高响应比优先HRRN</p>
+<p>计算响应比R,抢占+非抢占折中</p>
+</li>
+<li><p>时间片轮转RR</p>
+<p>周期性切换-时间片</p>
+<p>时间片长短-</p>
+<p>对不同大小进程-有利</p>
+<p>对相同大小的进程(2*100ms)-切换失去意义: 平均为199.5ms;若FCFS则平均150ms</p>
+</li>
+<li><p>虚拟轮转VIRTUAL RR</p>
+<p>原本:时间片到-回到就绪;等待IO-回到等待队列-IO好了之后回到就绪队列</p>
+<p>优待IO型进程(主动放弃CPU),将IO等待的进程专开一个队列,先从这个队列中选择进程上CPU(认为可能还会主动放弃CPU</p>
+</li>
+<li><p>最高优先级</p>
+<p>系统&gt;用户</p>
+<p>前台&gt;后台</p>
+<p>IO密集&gt;CPU密集</p>
+<p>静态/动态优先级</p>
+<p><strong>饥饿问题</strong></p>
+<p>可能会<strong>优先级反转</strong></p>
+<h4 id="优先级反转-反置"><a href="#优先级反转-反置" class="headerlink" title="优先级反转/反置"></a>优先级反转/反置</h4><p>抢占式会出现</p>
+<p>L进入临界区操作(原语),被抢占,但是临界区中不可打断,因此H被阻塞,M反而上CPU执行,若M为CPU密集,LR都不能执行</p>
+<p>e.g. 美国火星探测器天气预报为M,地面重启系统</p>
+<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ol>
+<li>优先级天花板协议</li>
+<li>优先级继承:低优先级提升</li>
+<li>使用中断禁止-低优先级临界区中不可被打断</li>
+</ol>
+</li>
+<li><p>多级队列</p>
+<h4 id="多级反馈队列"><a href="#多级反馈队列" class="headerlink" title="多级反馈队列"></a>多级反馈队列</h4><p><strong>重点</strong></p>
+<p>多个就绪队列-级别依次降低,进队都是进第一个,用完时间片下CPU后下降一级;由于阻塞下CPU会原级队列(可以队首/队尾),重上CPU时上次时间片的处理(可以保留/抛弃)(均是设计者对IO型的友好程度)</p>
+<p><strong>总是对IO密集型友好</strong></p>
+<p>不同级队列时间片长度不同,级别高-时间片短</p>
+<p>优先调第一级</p>
+<p>各级队列按<strong>时间片轮转</strong></p>
+</li>
+</ol>
+<ol start="7">
+<li>最短进程≈段作业</li>
+</ol>
+<h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>最短剩余时间优先-最适合此例</p>
+<h2 id="典型系统"><a href="#典型系统" class="headerlink" title="典型系统"></a>典型系统</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>很像 多级反馈队列</p>
+<p>时间配额≈时间片,大小可变</p>
+<p>区别多级反馈队列-其队列是按照进程优先级分配的</p>
+<h4 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级:"></a>线程优先级:</h4><ol>
+<li><p>实时优先级</p>
+<p>不可变</p>
+</li>
+</ol>
+<h4 id="调度策略"><a href="#调度策略" class="headerlink" title="调度策略:"></a>调度策略:</h4><ol>
+<li><p>主动切换</p>
+<p>主动转到阻塞态</p>
+</li>
+<li><p>抢占</p>
+<p>高优先级的从阻塞态中唤醒-抢占</p>
+<p>则低优先级被强占的回到<strong>原</strong>优先级队列<strong>队首</strong>,若实时优先级,重置完整配额;否则执行其剩余时间</p>
+</li>
+<li></li>
+</ol>
+<h4 id="优先级提升-amp-时间配额调整"><a href="#优先级提升-amp-时间配额调整" class="headerlink" title="优先级提升&amp;时间配额调整"></a>优先级提升&amp;时间配额调整</h4><p>漏洞/瑕疵:饥饿等问题</p>
+<ol>
+<li><p>IO操作完成</p>
+<p>提升值写在文件中</p>
+<p>且时间配额每次-1</p>
+</li>
+<li><p>饥饿线程</p>
+<p>排队&gt;300时间周期 平衡集管理器(还有其他工作)1s写一次,扫描一次就绪队列,将优先级提到最高15,时间配额为正常值*4,用完时间配额后优先级恢复原状</p>
+</li>
+</ol>
+<h3 id="Linux-CFS"><a href="#Linux-CFS" class="headerlink" title="Linux CFS"></a>Linux CFS</h3><h1 id="Nachos"><a href="#Nachos" class="headerlink" title="Nachos"></a>Nachos</h1><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>规定了依赖关系,顺序,把Makefile基本看懂</p>
+<h2 id="Nachos框架"><a href="#Nachos框架" class="headerlink" title="Nachos框架"></a>Nachos框架</h2><ol>
+<li>内核几部分-全局变量</li>
+<li>添加HelloWorld测试?</li>
+<li>启动的流程 函数mian initi threadtest…</li>
+<li>线程</li>
+</ol>
+<p>…</p>
+<p>下次课</p>
 
           
         
