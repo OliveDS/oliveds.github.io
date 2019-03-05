@@ -86,10 +86,13 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down. 引言Course Introduction operating systems advanced class会比本科的操作系统更难，进阶建议本科没学过操作">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-04T08:51:35.211Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20151026170356243">
+<meta property="og:image" content="https://img-blog.csdn.net/20151026165444864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2019-03-05T00:32:11.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统高级课程-笔记">
 <meta name="twitter:description" content="This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down. 引言Course Introduction operating systems advanced class会比本科的操作系统更难，进阶建议本科没学过操作">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20151026170356243">
 
 
 
@@ -281,8 +284,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T16:51:35+08:00">
-                2019-03-04
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T08:32:11+08:00">
+                2019-03-05
               </time>
             
           </span>
@@ -424,8 +427,21 @@
 <p>10视频硬件将像素转换成显示器可接收和一组控制数据信号</p>
 <p>11显示器解释信号，激发液晶屏</p>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>复习本课内容，下载XV6源码，完成Lab0（环境搭建，阅读源码，编写程序）</p>
-<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p>不是只有CPU<strong>调度</strong></p>
-<p>CPU调度是短程调度-选进程,送入CPU-最底层</p>
+<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p><img src="https://img-blog.csdn.net/20151026170356243" alt="3种调度位置"></p>
+<ol>
+<li><p>短程调度(进程调度)</p>
+<p>从<strong>就绪队列(内存</strong>用户态区)调度到<strong>CPU</strong></p>
+<p><strong>CPU调度</strong>是短程调度-选进程,送入CPU-最底层</p>
+</li>
+<li><p>中程调度(交换调度)</p>
+<p>调整进程在内存中的存在数量和时机,将处于<strong>外存交换区</strong>中的就绪状态或等待状态的进程调入<strong>内存</strong>,或把处于内存就绪状态或内存等待状态的进程交换到外存交换区</p>
+<p>一般是挂起状态进程的调度</p>
+</li>
+<li><p>长程调度(作业调度,高级调度)</p>
+<p>从<strong>外存</strong>(可能)批量,为其建立进程,调度到<strong>内存</strong></p>
+<p><img src="https://img-blog.csdn.net/20151026165444864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="三级调度"></p>
+</li>
+</ol>
 <h2 id="处理器调度-1"><a href="#处理器调度-1" class="headerlink" title="处理器调度"></a>处理器调度</h2><p>基本认识:按一定调度算法,选一个,给CPU使用权</p>
 <p>若无就绪进程,系统空闲进程/闲逛进程/idle进程,不属于用户,执行空指令-<em>占座</em>-CPU周而复始运作</p>
 <p>调度程序:内核函数,决策-挑选就绪进程</p>
