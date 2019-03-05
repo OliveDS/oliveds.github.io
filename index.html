@@ -604,8 +604,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T09:58:30+08:00">
-                2019-03-04
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T10:01:06+08:00">
+                2019-03-05
               </time>
             
           </span>
@@ -762,7 +762,10 @@
 </ol>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h3 id="社交媒体存储"><a href="#社交媒体存储" class="headerlink" title="社交媒体存储"></a>社交媒体存储</h3><p>关注列表 join 活动列表 join 活动列表 …</p>
 <p>实时统计-每天点赞量-二级缓存</p>
-<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><h3 id="关系型"><a href="#关系型" class="headerlink" title="关系型"></a>关系型</h3><ol>
+<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><p>(目前前4名都是SQL no.q Oracle, no.5 MongoDB,虽然大数据发展迅猛)</p>
+<p>SQL适合数据规模小,对事务要求高</p>
+<p>数据结构简单,规模大,适合 Key-Value; column-based, Document, graph 逐渐适合数据结构变复杂,规模变小; 不知道用什么的时候适合MongoDB,更类SQL,与之处于同一y=kx线</p>
+<h3 id="关系型"><a href="#关系型" class="headerlink" title="关系型"></a>关系型</h3><ol>
 <li><p>读写压力大,存储量有限</p>
 <p>可以分库分表</p>
 </li>
@@ -806,27 +809,92 @@
 <p>基本可用A:出现故障时可损失部分可用e.g.降级页面,保证可用</p>
 <p>柔性状态:</p>
 <p>BASE数据库 = NoSQL AP CP均有</p>
-<h4 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h4><p>Key-Value</p>
+<h4 id="分类-按最小单位"><a href="#分类-按最小单位" class="headerlink" title="分类 (按最小单位)"></a>分类 (按最小单位)</h4><p>Key-Value</p>
 <p>ordered key-value</p>
-<p>colume列族(big table): 层层嵌套 key-value</p>
+<p>colume列族(big table): 层层嵌套 key-value (3key-行列时间戳)</p>
 <p>document: 半结构化 +schema+index</p>
 <p>graph: +order,key可以为map/document 可多层深度查询-好友 具有节点之间关系,又像SQL靠近</p>
-<p>Key-Value: Dynamo (Amazon) Cassandra</p>
-<p>Colume Oriented: BigTable 读取快速 HBASE</p>
-<p>Document: MongoDB</p>
-<p>Graph: Neo4j</p>
-<h4 id="Dynamo"><a href="#Dynamo" class="headerlink" title="Dynamo"></a>Dynamo</h4><p>Amazon云服务提供,API </p>
+<p>Key-Value: Dynamo (Amazon) Cassandra 键值对</p>
+<p>Ordered Key-value 增加key之间连接</p>
+<p>Colume Oriented: BigTable 读取快速 HBASE 三维键值对</p>
+<p>Document: MongoDB 多个键值对有序组织在一起</p>
+<p>Graph: Neo4j 强调节点之间关系</p>
+<h3 id="Key-Value数据库"><a href="#Key-Value数据库" class="headerlink" title="Key-Value数据库"></a>Key-Value数据库</h3><h4 id="Dynamo"><a href="#Dynamo" class="headerlink" title="Dynamo"></a>Dynamo</h4><p>Amazon云服务提供,API </p>
 <p>key叫做attributes</p>
 <p>可无限拓展-云服务</p>
 <p>读写很快</p>
 <p>容错</p>
 <p>可以与Map-Reduce(Amazon提供)直接</p>
-<h4 id="Big-Table"><a href="#Big-Table" class="headerlink" title="Big Table"></a>Big Table</h4><p>建立在GFS Clubby table 之上</p>
+<h3 id="列数据库"><a href="#列数据库" class="headerlink" title="列数据库"></a>列数据库</h3><h4 id="Big-Table"><a href="#Big-Table" class="headerlink" title="Big Table"></a>Big Table</h4><p>建立在GFS Clubby table 之上</p>
 <p>HBASE 列数据库</p>
 <p>适合读操作密集型的应用,</p>
 <p>行数据库:按记录存,存储所有列,读取时会读取不必要的列</p>
-<p>列数据库:e.g.价格作为一列,存在一个store中,</p>
-
+<p>列数据库:e.g.价格作为一列,存在一个store中</p>
+<h4 id="HBASE"><a href="#HBASE" class="headerlink" title="HBASE"></a>HBASE</h4><p>数据模型类似big table </p>
+<p>族-family-列的聚合</p>
+<p>store-family的聚合</p>
+<p>互联网应用-一般单次写,多次读-按列读-根据colume name即可→若为行数据库-会读取大量无关信息</p>
+<h3 id="Document-DB"><a href="#Document-DB" class="headerlink" title="Document DB"></a>Document DB</h3><h4 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h4><p>模式自由,数据结构松散</p>
+<p>支持类SQL语言操作</p>
+<p>自动分片:支持动态,自动化扩展-当表扩大后-在机器间分片</p>
+<p>(适合网站动态数据,不适合事务-原子性-回滚,不适合传统商业数据)</p>
+<p>基本单元-Document文档,类似SQL中的行</p>
+<p>Collection-SQL中表</p>
+<p>MongoDB-Collection-Document-键值对</p>
+<h5 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h5><p>多个键有序存放</p>
+<p>不能有重复的键,键名区分大小写</p>
+<p>键值可以是内嵌的文档</p>
+<p>_id不是其中一个key,是Document的唯一标识符</p>
+<h5 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h5><p>类SQL语句</p>
+<p>e.g. db.student.find({name:”Tim”,age:20}).sort({sex:1,grade:-1}) .limit(5)//1正序 -1倒序 取前5个结果</p>
+<p>.count()//计数</p>
+<h5 id="写操作"><a href="#写操作" class="headerlink" title="写操作"></a>写操作</h5><p>.insert({…})</p>
+<p>.update({find…},{modify…})</p>
+<h5 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h5><p>db.student.group({key})?</p>
+<h5 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h5><p>shard server: primary DB secondary DB</p>
+<p>config server: 集群元数据 逻辑与物理数据映射</p>
+<p>route server: 客户端访问接口-将client请求发送给集群;含有balancer-负载均衡(迁移)</p>
+<h5 id="分片-Sharding"><a href="#分片-Sharding" class="headerlink" title="分片 Sharding"></a>分片 Sharding</h5><p>物理磁盘不够/放到内存中提高性能/写数据性能要求</p>
+<p>数据并行:分割数据</p>
+<blockquote>
+<p>scale out 增加机器 -适应上层高吞吐量</p>
+<p>scale up 提高单机性能</p>
+</blockquote>
+<p>How to ?</p>
+<p>指定key对collection分片,放到多个chunk(默认64MB)上</p>
+<p>chunk分布保存在多个Shard上-根据Shard资源放置多个chunk</p>
+<p>chunk大小可能改变-当超过chunk size后自动分片(<strong>只会分裂,不会合并</strong>)</p>
+<p>chunk在shard之间迁移-shard之间不均衡时</p>
+<p>(chunk size↑ sharding↓ shard数目↓ 不均匀 网络传输次数↓)</p>
+<h3 id="图数据库"><a href="#图数据库" class="headerlink" title="图数据库"></a>图数据库</h3><p>属性图形property graph: 节点+关系+节点 三元组,均带有属性</p>
+<p>GCN 图神经网络</p>
+<h4 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h4><p>基于Java</p>
+<p>数据结构不是必须的</p>
+<p>适合几度好友的查找</p>
+<h2 id="计算框架"><a href="#计算框架" class="headerlink" title="计算框架"></a>计算框架</h2><h3 id="分布式机器学习平台"><a href="#分布式机器学习平台" class="headerlink" title="分布式机器学习平台"></a>分布式机器学习平台</h3><p>机器学习的程序与普通程序的区别:</p>
+<ol>
+<li><p>容错 容许中间结果的错误</p>
+<p>e.g. 深度学习中间层</p>
+</li>
+<li><p>动态依赖的结构</p>
+<p>模型参数间依赖关系变化</p>
+</li>
+<li><p>非统一的收敛</p>
+<p>不同次数迭代才能收敛</p>
+<p><strong>收敛</strong>是评判的指标</p>
+</li>
+</ol>
+<p>分布式异构环境-特点-现状:</p>
+<ol>
+<li><p>计算节点能力差异</p>
+</li>
+<li><p>网络带宽有限</p>
+<p>消息同步-若占用大量带宽-可能训练很慢</p>
+</li>
+<li><p>集群中经常出现故障-硬盘最容易故障</p>
+</li>
+</ol>
+<h4 id="并行-加速计算"><a href="#并行-加速计算" class="headerlink" title="并行-加速计算"></a>并行-加速计算</h4>
           
         
       
