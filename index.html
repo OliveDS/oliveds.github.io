@@ -348,10 +348,15 @@
       
         
           
-            <h2 id="绘制立方体程序及注释"><a href="#绘制立方体程序及注释" class="headerlink" title="绘制立方体程序及注释"></a>绘制立方体程序及注释</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># from matplotlib import pyplot as plt</span></span><br><span class="line">img = np.zeros((<span class="number">550</span>,<span class="number">550</span>,<span class="number">3</span>),np.uint8)<span class="comment">#生成一个空图像,用0填充 dtype数据类型=8bitunsigned</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 空间透视下立方体的边并不一定平行,因此直接用line画比较方便</span></span><br><span class="line"><span class="comment"># cv2.rectangle(img,(256,256),(411,411),(100,100,255),2)#cv::rectangle (InputOutputArray img, Point pt1, Point pt2, const Scalar &amp;color, int thickness=1, int lineType=LINE_8, int shift=0)</span></span><br><span class="line"><span class="comment"># font = cv2.FONT_HERSHEY_SIMPLEX </span></span><br><span class="line"><span class="comment"># cv2.putText(img, 'ds', (50, 50), </span></span><br><span class="line"><span class="comment">#             font, 0.8, (100,100,255), 2, cv2.LINE_AA) </span></span><br><span class="line">cv2.line(img,(<span class="number">150</span>,<span class="number">300</span>),(<span class="number">250</span>,<span class="number">300</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#AB</span></span><br><span class="line">cv2.line(img,(<span class="number">250</span>,<span class="number">300</span>),(<span class="number">250</span>,<span class="number">200</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#BC</span></span><br><span class="line">cv2.line(img,(<span class="number">250</span>,<span class="number">200</span>),(<span class="number">150</span>,<span class="number">200</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#CD</span></span><br><span class="line">cv2.line(img,(<span class="number">150</span>,<span class="number">200</span>),(<span class="number">150</span>,<span class="number">300</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#DA</span></span><br><span class="line">cv2.line(img,(<span class="number">150</span>,<span class="number">200</span>),(<span class="number">200</span>,<span class="number">150</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#DE</span></span><br><span class="line">cv2.line(img,(<span class="number">200</span>,<span class="number">150</span>),(<span class="number">300</span>,<span class="number">150</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#EF</span></span><br><span class="line">cv2.line(img,(<span class="number">300</span>,<span class="number">150</span>),(<span class="number">250</span>,<span class="number">200</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#FC</span></span><br><span class="line">cv2.line(img,(<span class="number">300</span>,<span class="number">150</span>),(<span class="number">300</span>,<span class="number">250</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#FG</span></span><br><span class="line">cv2.line(img,(<span class="number">300</span>,<span class="number">250</span>),(<span class="number">250</span>,<span class="number">300</span>),(<span class="number">100</span>,<span class="number">100</span>,<span class="number">255</span>),<span class="number">2</span>)<span class="comment">#GB</span></span><br><span class="line"></span><br><span class="line">fmg=cv2.imread(<span class="string">"name.jpg"</span>,<span class="number">1</span>) <span class="comment"># 读取显示在立方体面上的图像 300*300</span></span><br><span class="line">inpoints=np.float32([(<span class="number">0</span>,<span class="number">0</span>),(<span class="number">300</span>,<span class="number">0</span>),(<span class="number">300</span>,<span class="number">300</span>)]) <span class="comment"># 图像上的3个点</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ABCD面仿射</span></span><br><span class="line">outpoints=np.float32([(<span class="number">0</span>,<span class="number">0</span>),(<span class="number">100</span>,<span class="number">0</span>),(<span class="number">100</span>,<span class="number">100</span>)])<span class="comment"># D,C,B,以D为零点</span></span><br><span class="line">Trans=cv2.getAffineTransform(np.array(inpoints),np.array(outpoints))<span class="comment"># 计算仿射变换</span></span><br><span class="line">cols,rows,channels=fmg.shape <span class="comment"># 获取图像尺寸</span></span><br><span class="line">transimg=cv2.warpAffine(fmg,Trans,(cols,rows))<span class="comment"># 旋转已扭曲图像</span></span><br><span class="line">cols,rows,channels=transimg.shape <span class="comment"># 获取旋转后图像的尺寸</span></span><br><span class="line">mask=img[<span class="number">200</span>:<span class="number">200</span>+rows,<span class="number">150</span>:<span class="number">150</span>+cols] <span class="comment"># 在原图上选取对应区域作为ROI-region of interest</span></span><br><span class="line">mask=cv2.add(mask,transimg) <span class="comment">#Put fmg in ROI and modify the main image</span></span><br><span class="line">img[<span class="number">200</span>:<span class="number">200</span>+rows,<span class="number">150</span>:<span class="number">150</span>+cols]=mask[<span class="number">0</span>:rows,<span class="number">0</span>:cols] <span class="comment"># 替换区域</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CDEF面仿射</span></span><br><span class="line">outpoints=np.float32([(<span class="number">50</span>,<span class="number">0</span>),(<span class="number">150</span>,<span class="number">0</span>),(<span class="number">100</span>,<span class="number">50</span>)])<span class="comment"># E,F,C,以(150,150)为零点</span></span><br><span class="line">Trans=cv2.getAffineTransform(np.array(inpoints),np.array(outpoints))<span class="comment"># 计算仿射变换</span></span><br><span class="line">cols,rows,channels=fmg.shape <span class="comment"># 获取图像尺寸</span></span><br><span class="line">transimg=cv2.warpAffine(fmg,Trans,(cols,rows))<span class="comment"># 旋转已扭曲图像</span></span><br><span class="line">cols,rows,channels=transimg.shape <span class="comment"># 获取旋转后图像的尺寸</span></span><br><span class="line">mask=img[<span class="number">150</span>:<span class="number">150</span>+rows,<span class="number">150</span>:<span class="number">150</span>+cols] <span class="comment"># 在原图上选取对应区域作为ROI-region of interest</span></span><br><span class="line"><span class="comment">#print(mask.shape)</span></span><br><span class="line">mask=cv2.add(mask,transimg) <span class="comment">#Put fmg in ROI and modify the main image</span></span><br><span class="line">img[<span class="number">150</span>:<span class="number">150</span>+rows,<span class="number">150</span>:<span class="number">150</span>+cols]=mask[<span class="number">0</span>:rows,<span class="number">0</span>:cols] <span class="comment"># 替换区域</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># BCFG面仿射</span></span><br><span class="line">outpoints=np.float32([(<span class="number">0</span>,<span class="number">50</span>),(<span class="number">50</span>,<span class="number">0</span>),(<span class="number">50</span>,<span class="number">100</span>)])<span class="comment">#C,F,G 以(250,150)为零点</span></span><br><span class="line">Trans=cv2.getAffineTransform(np.array(inpoints),np.array(outpoints))<span class="comment"># 计算仿射变换</span></span><br><span class="line">cols,rows,channels=fmg.shape <span class="comment"># 获取图像尺寸</span></span><br><span class="line">transimg=cv2.warpAffine(fmg,Trans,(cols,rows))<span class="comment"># 旋转已扭曲图像</span></span><br><span class="line">cols,rows,channels=transimg.shape <span class="comment"># 获取旋转后图像的尺寸</span></span><br><span class="line">mask=img[<span class="number">150</span>:<span class="number">150</span>+rows,<span class="number">250</span>:<span class="number">250</span>+cols] <span class="comment"># 在原图上选取对应区域作为ROI-region of interest</span></span><br><span class="line"><span class="comment"># print(mask.shape) # 空白图像尺寸设为512 时,由于需要显示的图片尺寸为(300,300),250+300&gt;512导致图像被截,add时尺寸不一致无法相加</span></span><br><span class="line">mask=cv2.add(mask,transimg) <span class="comment">#Put fmg in ROI and modify the main image</span></span><br><span class="line">img[<span class="number">150</span>:<span class="number">150</span>+rows,<span class="number">250</span>:<span class="number">250</span>+cols]=mask[<span class="number">0</span>:rows,<span class="number">0</span>:cols] <span class="comment"># 替换区域</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">'cube with name'</span>,img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#关闭窗口/键盘ESC退出</span></span><br><span class="line">cv2.destroyAllWindows() </span><br><span class="line"><span class="comment"># 也可以设置检测用户输入ESC</span></span><br><span class="line"><span class="comment"># while 1:</span></span><br><span class="line"><span class="comment"># 	key=cv2.waitKey(1) #等待键盘输入,间隔1ms</span></span><br><span class="line"><span class="comment"># 	# print key 鼠标需要点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</span></span><br><span class="line"><span class="comment"># 	if key == 27 : #ESC键的ASCII码</span></span><br><span class="line"><span class="comment"># 		print "detect ESC"</span></span><br><span class="line"><span class="comment"># 		cv2.destroyAllWindows() #关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/cube.jpg?q-sign-algorithm=sha1&amp;q-ak=AKIDKag3vwUYjLBquGOchymMbIxYR81cxlSX&amp;q-sign-time=1551669354;1551671154&amp;q-key-time=1551669354;1551671154&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=a34fed7d92d85f5fbfc5644d9e1a11d6b1ed5c73&amp;x-cos-security-token=8a51900d0fd1936c12aecca6e5e7e997a40c07a310001----" alt="cube"> </p>
-
-          
+          绘制立方体程序及注释1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#!/usr/local/
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/04/OpenCV3-绘制立方体-Python2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -513,24 +518,16 @@
       
         
           
-            <h2 id="安装OpenCV"><a href="#安装OpenCV" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h2><h3 id="安装-Xcode"><a href="#安装-Xcode" class="headerlink" title="安装 Xcode"></a>安装 Xcode</h3><p>直接在APP Store中下载安装即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo xcodebuild -license</span><br><span class="line">sudo xcode-select --install</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><p>≈Mac上的apt-get<br>参考 Mac API那篇文章,那里已经安装了<br>安装完可以用<code>brew doctor</code>检查一下<br>如果有Warning的话根据提示执行一下就好了</p>
-<h3 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h3><p>其实Mac上已经有Python 2.7<br>但是看了一篇文章这样讲的</p>
-<blockquote>
-<p>The next step is to install the Homebrew versions of Python 2.7 and Python 3. It is considered bad form to develop against the system Python as your main interpreter. The system version of Python should serve exactly that.<br><a href="https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/</a></p>
-</blockquote>
-<p>所以还是乖乖安装新的吧<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python python3</span><br></pre></td></tr></table></figure></p>
-<p>这个指令应该是能同时安装python2 和 python3的,但是在我的Mac就是只安装了Python3…所以我用的是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 python3</span><br></pre></td></tr></table></figure></p>
-<p>但是这样装完以后,我看brew管理的包的文件夹下面有<code>python</code> <code>python2</code> <code>python3</code>三种,然后brew现在指定<code>python</code>默指的是<code>python3</code> 我不知道这是重复安装了还是必须要有个<code>python</code>的文件夹? ==please inform me if you know==<br>安装完成后</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which python</span><br><span class="line">which python3</span><br></pre></td></tr></table></figure>
-<p>看一下指向的是不是你自己新安装的python,即路径应该是<code>/usr/local/bin/python</code> and <code>/usr/local/bin/python3</code> 否则如果是<code>/usr/bin/...</code>下的那你用的依然是系统的python</p>
-<h3 id="安装OpenCV-1"><a href="#安装OpenCV-1" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h3><p>其实简单的方法只要<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure></p>
-<p>就好了,但是安装的时候它显示安装的OpenCV版本是4.0.1 就导致我很confused<br>因为老师说了要求3.x.x版本,所以我以为不行<br>确实也可以自己手动指定安装版本的,但是后来我才发现,其实这个安装的就是3.4.4版本…可能这两个是不同含义的版本号? ==please tell me==<br>另外直接安装的话使用的python2.7版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python #进入python2命令行</span><br><span class="line">import cv2 #import刚刚安装的库,如果没有报错则安装成功了</span><br><span class="line">cv2.__version__ #就是这里它告诉它是3.4.4版本</span><br></pre></td></tr></table></figure>
-<h3 id="HelloWorld示例程序"><a href="#HelloWorld示例程序" class="headerlink" title="HelloWorld示例程序"></a>HelloWorld示例程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="comment">#导入OpenCV</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#死循环</span></span><br><span class="line">    ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    cv2.imshow(<span class="string">'hello world'</span>,img)</span><br><span class="line">    key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">    	<span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">        <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
-<p>效果就是打开一个窗口显示摄像头-按帧显示<br>但是我的程序接收不到键盘的输入,就是按了ESC后只会在命令行中显示ESC键值,但不会实际退出,有人能告诉我为啥吗?==😂sorry啦发现我写blog其实是求助了吧==<br>==解决啦== 需要鼠标点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</p>
-
-          
+          安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install
+安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew docto
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/04/OpenCV 安装 & Hello World 示例程序/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -692,314 +689,17 @@
       
         
           
-            <p>Please contact me if there is any legal issues.</p>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>课程笔记，授课教师：<br>李影 大数据系统核平台 NoSQLDB 大数据计算引擎spark/tensorflow<br>刘宏志 分析、算法<br>张齐勋 3案例设计：数据收取分析，搭建大数据平台，平台调优</p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>柯达→索尼（数码领先）→诺基亚（手机=照相机）（被微软收购合并，大量裁员）→苹果（smart phone）→手机大战-三星领先<br>传音手机 解决African People拍照的人脸识别，小而美<br>大数据中很多都是<strong>非结构数据</strong>，e.g.图像</p>
-<p>“如果网络能够解决人与企业之间沟通的问题，那么会带来两场革命，一是计算，二是商务。” ——by ==Louis ？==<br>预言准确<br>数据中心系统：性能差的机器、故障是常态。<br>基于此基础设施，实现高性能支撑，并可进行机器学习、人工智能等</p>
-<p>Gartner 市场咨询企业<br>新兴技术成熟度曲线<br>e.g. 去年深度学习“寒冬”，每种技术都会经过反省期，后来形成方法论指导（也可能消失被取代），逐渐发展<br>2018年AI普惠，区块链，生化芯片等处于热潮<br>知识图谱未来对机器学习可能有很大推动<br>技术不断创新，<strong>树立全局观</strong></p>
-<h2 id="从技术创新长波理论看新一代信息技术"><a href="#从技术创新长波理论看新一代信息技术" class="headerlink" title="从技术创新长波理论看新一代信息技术"></a>从技术创新长波理论看新一代信息技术</h2><p>IT正在颠覆传统行业<br><strong>能力 应用 成本</strong> 是IT发展的3大目标<br>追求能力的提高，迫切要求应用的广度、深度，成本的要求</p>
-<blockquote>
-<p>摩尔定律：晶体管数量每18-24月增长一倍<br>梅特卡夫定律：网络价值随用户数量的平方数而增加（用的人越多价值越高-流量）<br>贝尔定律：计算机每10年更新一代，面向新应用，价格更低<br>香农定理：信道最大传输速率与？的关系==？==</p>
-</blockquote>
-<p>早期面向能力和成本<br>“注意力的经济” 互联网商业价值开始体现<br>Backrub→Google<br>后摩尔时代：①质变：改进/替换图灵机、冯诺依曼结构……量子计算机、类脑芯片…… ②<strong>量变引起质变</strong>：资源聚合，云计算、泛互联网……<br><strong>梅特卡夫定律和贝尔定律</strong>成为主导，取代摩尔定律和香农定理<br>未来形成 <strong>新平台、新模式、新思维</strong><br>互联网+移动互联网(人)+物联网(物)<br>开源机器学习平台 tensorflow …<br>量子计算机，类脑计算机（比特大陆）<br>人类智能 vs 人工智能 差距仍然很大</p>
-<blockquote>
-<p>符号主义 逻辑推理<br>连接主义 神经网络、深度学习<br>行为主义 ==？==<br><strong>小样本学习，基于贝叶斯程序</strong>学习等概率学习方法，应该是下一代人工智能的重要方向</p>
-</blockquote>
-<p>深度学习探索we don’t know what we known<br>传统算法总结 we know what we know<br>情感、意识的深度学习模拟 we know what we unknown 脑科学继续探索 </p>
-<h2 id="大数据是新一代信息技术的业务引擎"><a href="#大数据是新一代信息技术的业务引擎" class="headerlink" title="大数据是新一代信息技术的业务引擎"></a>大数据是新一代信息技术的业务引擎</h2><p>《大数据时代》<br>数据产生方式：<strong>运营式系统数据(数据仓库，知识系统)+用户原创数据(Web2.0 带动大数据e.g. Hadoop发展)+感知式系统数据(物理世界-互联网)</strong><br>数据资源：可再生，待挖掘</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
-<li>数据量巨大<br>且增长迅速</li>
-<li>数据类型繁多<br>10%结构化数据，存储在数据库中<br>90%非/半结构化数据，与人类信息密切相关 e.g.简历=半结构化数据<br>e.g. 结构化数据 远程监督学习 类自然语言中挖掘信息 👈互补</li>
-<li>数据处理速度快，价值密度低<br>时间窗口变小，仅在极短时间内具有价值 - 密度低</li>
-<li>数据不确定性<br>e.g. 自动驾驶：①先检测车辆、行人，再规划路径，再控制方向②端到端学习将视频、雷达、激光测距都丢给学习算法，直接控制方向 但是干扰因素很多，小的扰动就会造成波动-深度学习的模式规律难以总结<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3>Jim Gary 实验归纳→模型推演(公理)→仿真模拟(理论指导下 计算机)→<strong>数据密集型科学发现</strong>(没有明确目标，从中总结)</li>
-</ol>
-<ul>
-<li><strong>描述性分析</strong></li>
-<li><strong>预测性分析</strong> pattern👉套用</li>
-<li><strong>规范性分析</strong> 优化/决策</li>
-</ul>
-<p>e.g. 银行客户保留 根据描述性分析的结果，不正常行为的pattern，进行预测性分析，采取关系策略<br><em>仅进行数据分析是不能产生价值的，要将分析结果应用于现实~</em><br>e.g. 微软城市计算 高维数据，速度块，稀疏性→分析城市道路网中的不合理规划，划分城市功能区域，连锁店布局，出租车扒活/拼车，自行车空气质量细粒度检测……<br>e.g. <strong>医疗领域</strong>的发展前景最优 患者相似性分析→疾病特征<br>e.g. ==OpenAI==</p>
-<h3 id="风险"><a href="#风险" class="headerlink" title="风险"></a>风险</h3><ul>
-<li>大数据有预测失误<br>e.g. Google 流感预测-依赖搜索 效果不佳</li>
-<li>数据可能说谎<br>e.g. 飓风前夜 - 食品大量采购 推特数最多 - 飓风中心？wrong!<br>==产生数据的可能是特权阶层==</li>
-<li>盲点<br>自主智能系统无法找到真正能评估其持续性影响的方法<br>与训练集有关<br>e.g. Uber L4自动驾驶车辆车祸致人死亡</li>
-<li>偏见<br>e.g. 面部图像自动犯罪概率推断<h3 id="技术挑战"><a href="#技术挑战" class="headerlink" title="技术挑战"></a>技术挑战</h3></li>
-</ul>
-<ol>
-<li>Raw data</li>
-<li>关联 不等于 因果</li>
-<li>弱智能：不同数据集、不同特征集合、不同应用领域<strong>迁移</strong>的问题</li>
-<li>理解性（可解释性）差：图片加扰动可以大幅影响结果</li>
-<li>可拓展性差：算法、数据、算力 推动AI发展的3大动力 AI算力每3.43个月需求增长一倍（超过摩尔定律）∴深度神经网络精确度接近饱和，每增长一点对算力的要求提高很多，投入产出比很低，应该考虑3个主义中的==行为主义？==<h2 id="大数据平台的挑战"><a href="#大数据平台的挑战" class="headerlink" title="大数据平台的挑战"></a>大数据平台的挑战</h2><h3 id="大数据平台"><a href="#大数据平台" class="headerlink" title="大数据平台"></a>大数据平台</h3>数据量大，数据模型规模(参数)大<br>==Big Data, Big Model and <strong>Big System</strong>==<h3 id="层次"><a href="#层次" class="headerlink" title="层次"></a>层次</h3>操作框架<br>数据集成<br>数据分析<br>计算框架//资源管理器&amp;？<br>数据存储//<br>文件系统</li>
-</ol>
-<p>大数据系统中<strong>算法</strong>只占核心一小部分，依赖数据收集、可视化、机器资源管理、存储……</p>
-<p>Fine Lab<br>重点讲计算框架和数据存储</p>
-<p>李影-大数据平台,NoSQL…</p>
-<p>讲座: 联通研究院-大数据平台</p>
-<p>刘洪志-机器学习算法 金融应用</p>
-<p>张启勋-课程项目报告-决定成绩</p>
-<ol>
-<li>大数据平台搭建,优化 benchmark</li>
-<li>收集数据,简单分析预测分类</li>
-</ol>
-<h1 id="大数据平台-1"><a href="#大数据平台-1" class="headerlink" title="大数据平台"></a>大数据平台</h1><p>最底层-文件系统 HDFS</p>
-<p>数据存储-</p>
-<p>Lenovo: Spark-大批量大量查询无法满足, Pycum仿照angel</p>
-<p>ZooKeeper-资源协调器:协调计算框架+数据存储</p>
-<h2 id="过去"><a href="#过去" class="headerlink" title="过去:"></a>过去:</h2><p>运营系统-产生数据</p>
-<p>底层小型机+关系数据库+中间件Apache(J2EE事务型)+在线数据分析挖掘-与现在算法差不多-数据量小</p>
-<p>问题: 海量数据,大量并发,实时,拓展</p>
-<p>用一个集群的资源-仿佛一台机器-可扩充</p>
-<p>分布式: 可扩展性 指标</p>
-<p>单节点-scale up-针对机器修改-难度高-AIX操作系统-</p>
-<p>scale out 单节点不变, 数量增加-软件目前&lt;8000</p>
-<p>云计算-scale out-弹性拓展</p>
-<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>对操作系统存储空间的抽象,对下屏蔽物理设备,对上提供用户统一的对象化接口</p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>本地,网络,分布式</p>
-<h3 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h3><p>分布在多节点-对上统一管理</p>
-<p>常用Client/Server模式</p>
-<h3 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h3><p>存储管理,容错(分布式中重要),高可扩展,高可靠,高可用(7*24可用-重要-99.99%=每年6hdown)</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>GFS HDFS(GFS简化实现) TFS(淘宝) Ceph(块+文件 集大成) RCFile(Facebook)</p>
-<h3 id="GFS"><a href="#GFS" class="headerlink" title="GFS"></a>GFS</h3><p>组件component(网络,硬盘-所有硬件中最易坏)故障是常态</p>
-<p>逻辑块-可以无限大-存到硬盘时则有IO等很多的限制</p>
-<p>HDFS &lt; GFS</p>
-<p>主控服务器NameNode Master</p>
-<p>数据服务器 DataNode ChunkServer </p>
-<p>文件块 BLock CHunk</p>
-<p>数据包 经过IO操作,对性能影响大-累计一定再写 Packet /</p>
-<p>HDFS-单点故障-NameNode-对其备份-Secondary NameNode(DataNode已经相互备份</p>
-<p>Append-GFS多客户端并发模型…等</p>
-<h3 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h3><p>分Block-每个BLock至少3份,对硬件检测</p>
-<p>适合批量:一次写入,多次读取(一般读&gt;&gt;写),更强调吞吐量(单位时间),低延迟(每个请求处理时间-高性能计算机强调),成本-强调资源利用率,要求数据均衡</p>
-<p>基于TCP/IP</p>
-<p>DataNode启动时向NameNode报告,定期向NameNode心跳,接收客户端读写</p>
-<p>Replication:写冗余-机架感知策略 1 2另一机架 32的机架另一机器 防止整个机架网络down;读-client最近块</p>
-<p>心跳包</p>
-<p>数据完整性验证</p>
-<p>删除-仅目录</p>
-<h3 id="TFS"><a href="#TFS" class="headerlink" title="TFS"></a>TFS</h3><p>对开源的改造,企业会使用开源作为基础,定制</p>
-<h4 id="1-0"><a href="#1-0" class="headerlink" title="1.0"></a>1.0</h4><p>NameServer-文件目录信息</p>
-<p>DadaServer-块</p>
-<p>Client向NameServer查询,与DataNode传输</p>
-<h4 id="2-0"><a href="#2-0" class="headerlink" title="2.0"></a>2.0</h4><p>+RootServer 分配MetaServer</p>
-<p>+MetaServer 对目录再做一层缓存</p>
-<p>+ResourceServer 管理应用(权限,统计),管理集群(扩容)…-很多NameServer+DataServer集群</p>
-<h3 id="Ceph"><a href="#Ceph" class="headerlink" title="Ceph"></a>Ceph</h3><p>三种存储服务-三种接口</p>
-<ol>
-<li>块存储</li>
-<li>文件存储</li>
-<li>对象存储</li>
-</ol>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h3 id="社交媒体存储"><a href="#社交媒体存储" class="headerlink" title="社交媒体存储"></a>社交媒体存储</h3><p>关注列表 join 活动列表 join 活动列表 …</p>
-<p>实时统计-每天点赞量-二级缓存</p>
-<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><p>(目前前4名都是SQL no.q Oracle, no.5 MongoDB,虽然大数据发展迅猛)</p>
-<p>SQL适合数据规模小,对事务要求高</p>
-<p>数据结构简单,规模大,适合 Key-Value; column-based, Document, graph 逐渐适合数据结构变复杂,规模变小; 不知道用什么的时候适合MongoDB,更类SQL,与之处于同一y=kx线</p>
-<h3 id="关系型"><a href="#关系型" class="headerlink" title="关系型"></a>关系型</h3><ol>
-<li><p>读写压力大,存储量有限</p>
-<p>可以分库分表</p>
-</li>
-<li><p>横向扩展难,表结构</p>
-<p>分库分表</p>
-</li>
-<li><p>分库分表</p>
-<p>管理难,需要修改代码</p>
-</li>
-<li><p>Master-Slave</p>
-</li>
-</ol>
-<h3 id="NoSQL-BASE数据库"><a href="#NoSQL-BASE数据库" class="headerlink" title="NoSQL = BASE数据库"></a>NoSQL = BASE数据库</h3><p>分布式数据<strong>管理</strong>系统</p>
-<p>(简化存储,加强管理)</p>
-<p>不完全遵循ACID</p>
-<p>最大区别<strong>不事先定义Schema(表结构)</strong>,易拓展</p>
-<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><p>A原子性,C一致性,I隔离性,D持久性</p>
-<p>e.g.银行转账</p>
-<p>隔离:若没有隔离,则时间顺序可能穿插,可能钱款没有到账就开始转出.一个事务完成另一个事务才能执行 简单实现方法-加锁</p>
-<p>DBMS中的基本单位</p>
-<h4 id="C一致性"><a href="#C一致性" class="headerlink" title="C一致性"></a>C一致性</h4><ol>
-<li><p>强一致性 ACID</p>
-<p>分布式难以做到,且分布式基于网络协议</p>
-</li>
-<li><p>弱一致性</p>
-</li>
-<li><p>最终一致性</p>
-</li>
-<li><p>不一致性窗口</p>
-<p>分布式</p>
-<p>取决于:1)交互延迟2)系统负载3)复制中replicate</p>
-</li>
-</ol>
-<h4 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h4><p>一致性,可用性,分区容忍性 Partition tolerance</p>
-<p>分布式系统-网络+节点不可靠 -需要分区容忍性(可能数据不一致)</p>
-<p>e.g.强事务型不允许读到历史值,分布式系统中易由于网络故障读到不一致数据</p>
-<p>3选2 APnotC</p>
-<h4 id="BASE"><a href="#BASE" class="headerlink" title="BASE"></a>BASE</h4><p>最终一致性,一定P</p>
-<p>基于CAP演化</p>
-<p>牺牲强一致性-基于网络-必修AP</p>
-<p>基本可用A:出现故障时可损失部分可用e.g.降级页面,保证可用</p>
-<p>柔性状态:</p>
-<p>BASE数据库 = NoSQL AP CP均有</p>
-<h4 id="分类-按最小单位"><a href="#分类-按最小单位" class="headerlink" title="分类 (按最小单位)"></a>分类 (按最小单位)</h4><p>Key-Value</p>
-<p>ordered key-value</p>
-<p>colume列族(big table): 层层嵌套 key-value (3key-行列时间戳)</p>
-<p>document: 半结构化 +schema+index</p>
-<p>graph: +order,key可以为map/document 可多层深度查询-好友 具有节点之间关系,又像SQL靠近</p>
-<p>Key-Value: Dynamo (Amazon) Cassandra 键值对</p>
-<p>Ordered Key-value 增加key之间连接</p>
-<p>Colume Oriented: BigTable 读取快速 HBASE 三维键值对</p>
-<p>Document: MongoDB 多个键值对有序组织在一起</p>
-<p>Graph: Neo4j 强调节点之间关系</p>
-<h3 id="Key-Value数据库"><a href="#Key-Value数据库" class="headerlink" title="Key-Value数据库"></a>Key-Value数据库</h3><h4 id="Dynamo"><a href="#Dynamo" class="headerlink" title="Dynamo"></a>Dynamo</h4><p>Amazon云服务提供,API </p>
-<p>key叫做attributes</p>
-<p>可无限拓展-云服务</p>
-<p>读写很快</p>
-<p>容错</p>
-<p>可以与Map-Reduce(Amazon提供)直接</p>
-<h3 id="列数据库"><a href="#列数据库" class="headerlink" title="列数据库"></a>列数据库</h3><h4 id="Big-Table"><a href="#Big-Table" class="headerlink" title="Big Table"></a>Big Table</h4><p>建立在GFS Clubby table 之上</p>
-<p>HBASE 列数据库</p>
-<p>适合读操作密集型的应用,</p>
-<p>行数据库:按记录存,存储所有列,读取时会读取不必要的列</p>
-<p>列数据库:e.g.价格作为一列,存在一个store中</p>
-<h4 id="HBASE"><a href="#HBASE" class="headerlink" title="HBASE"></a>HBASE</h4><p>数据模型类似big table </p>
-<p>族-family-列的聚合</p>
-<p>store-family的聚合</p>
-<p>互联网应用-一般单次写,多次读-按列读-根据colume name即可→若为行数据库-会读取大量无关信息</p>
-<h3 id="Document-DB"><a href="#Document-DB" class="headerlink" title="Document DB"></a>Document DB</h3><h4 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h4><p>模式自由,数据结构松散</p>
-<p>支持类SQL语言操作</p>
-<p>自动分片:支持动态,自动化扩展-当表扩大后-在机器间分片</p>
-<p>(适合网站动态数据,不适合事务-原子性-回滚,不适合传统商业数据)</p>
-<p>基本单元-Document文档,类似SQL中的行</p>
-<p>Collection-SQL中表</p>
-<p>MongoDB-Collection-Document-键值对</p>
-<h5 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h5><p>多个键有序存放</p>
-<p>不能有重复的键,键名区分大小写</p>
-<p>键值可以是内嵌的文档</p>
-<p>_id不是其中一个key,是Document的唯一标识符</p>
-<h5 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h5><p>类SQL语句</p>
-<p>e.g. db.student.find({name:”Tim”,age:20}).sort({sex:1,grade:-1}) .limit(5)//1正序 -1倒序 取前5个结果</p>
-<p>.count()//计数</p>
-<h5 id="写操作"><a href="#写操作" class="headerlink" title="写操作"></a>写操作</h5><p>.insert({…})</p>
-<p>.update({find…},{modify…})</p>
-<h5 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h5><p>db.student.group({key})?</p>
-<h5 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h5><p>shard server: primary DB secondary DB</p>
-<p>config server: 集群元数据 逻辑与物理数据映射</p>
-<p>route server: 客户端访问接口-将client请求发送给集群;含有balancer-负载均衡(迁移)</p>
-<h5 id="分片-Sharding"><a href="#分片-Sharding" class="headerlink" title="分片 Sharding"></a>分片 Sharding</h5><p>物理磁盘不够/放到内存中提高性能/写数据性能要求</p>
-<p>数据并行:分割数据</p>
-<blockquote>
-<p>scale out 增加机器 -适应上层高吞吐量</p>
-<p>scale up 提高单机性能</p>
-</blockquote>
-<p>How to ?</p>
-<p>指定key对collection分片,放到多个chunk(默认64MB)上</p>
-<p>chunk分布保存在多个Shard上-根据Shard资源放置多个chunk</p>
-<p>chunk大小可能改变-当超过chunk size后自动分片(<strong>只会分裂,不会合并</strong>)</p>
-<p>chunk在shard之间迁移-shard之间不均衡时</p>
-<p>(chunk size↑ sharding↓ shard数目↓ 不均匀 网络传输次数↓)</p>
-<h3 id="图数据库"><a href="#图数据库" class="headerlink" title="图数据库"></a>图数据库</h3><p>属性图形property graph: 节点+关系+节点 三元组,均带有属性</p>
-<p>GCN 图神经网络</p>
-<h4 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h4><p>基于Java</p>
-<p>数据结构不是必须的</p>
-<p>适合几度好友的查找</p>
-<h2 id="计算框架"><a href="#计算框架" class="headerlink" title="计算框架"></a>计算框架</h2><h3 id="分布式机器学习平台"><a href="#分布式机器学习平台" class="headerlink" title="分布式机器学习平台"></a>分布式机器学习平台</h3><p>机器学习的程序与普通程序的区别:</p>
-<ol>
-<li><p>容错 容许中间结果的错误</p>
-<p>e.g. 深度学习中间层</p>
-</li>
-<li><p>动态依赖的结构</p>
-<p>模型参数间依赖关系变化</p>
-</li>
-<li><p>非统一的收敛</p>
-<p>不同次数迭代才能收敛</p>
-<p><strong>收敛</strong>是评判的指标</p>
-</li>
-</ol>
-<p>分布式异构环境-特点-现状:</p>
-<ol>
-<li><p>计算节点能力差异</p>
-</li>
-<li><p>网络带宽有限</p>
-<p>消息同步-若占用大量带宽-可能训练很慢</p>
-</li>
-<li><p>集群中经常出现故障-硬盘最容易故障</p>
-</li>
-</ol>
-<h4 id="并行-加速计算"><a href="#并行-加速计算" class="headerlink" title="并行-加速计算"></a>并行-加速计算</h4><p>均涉及<strong>参数同步</strong>问题</p>
-<ol>
-<li>数据并行 </li>
-<li>模型并行</li>
-<li>混合并行</li>
-</ol>
-<h4 id="同步协议"><a href="#同步协议" class="headerlink" title="同步协议"></a>同步协议</h4><ol>
-<li><p>BSP bulk synchronous parallel</p>
-<p>整体同步,worker之间需要等待-barrier-进行communicate-结束后再次compute</p>
-<p><em>收敛性好,处理速度慢</em></p>
-</li>
-<li><p>ASP asynchronous synchronous parallel</p>
-<p>完全<strong>无同步线</strong>,节点独立更新模型参数</p>
-<p><em>执行速度快,收敛性差</em> (没有计算资源浪费)</p>
-</li>
-<li><p>SSP stale syn… 有限异步同步协议</p>
-<p>设定staleness - 最长等待的迭代轮数</p>
-<p><em>保证理论收敛性的同时加快执行速度</em></p>
-</li>
-</ol>
-<p>同样时间内准确度,stale 32 最优</p>
-<p>####框架演变</p>
-<p>MapReduce同步,数据并行</p>
-<p>参数服务器 同步+异步 数据并行+模型并行</p>
-<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p>Master将user program fork到worker(mapper/reducer),map作业数量与split个数对应</p>
-<p>map结果默认对key hash-patition-reducer,由moaster执行,并通知reducer</p>
-<p>对文件系统读写:至少3次,影响性能:1中间结果写2中间结果读3最终结果写</p>
-<p><strong>Map - shuffle - Reduce</strong></p>
-<p>shuffle:对map结果分区排序分割(根据patition的key),若没有shuffle,reducer得到的数据分片数很大</p>
-<p>(环形数据结构)</p>
-<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>基于内存的计算 Hadoop(mapreduce)基于磁盘</p>
-<p>Spark提供了多种数据集操作模型,60%内存缓存结果-RDD; Hadoop则只有map,reduce,不能缓存结果</p>
-<p>适合实时大数据量,不适合增量计算/…</p>
-<h4 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h4><p>数据抽象为RDD</p>
-<p>只读的分区记录集合,不可修改</p>
-<p>属性:</p>
-<ol>
-<li>一组分区(partition) 按key分</li>
-<li>一个计算每个分区的函数</li>
-<li>依赖dependencies 描述RDD之间的lineage</li>
-</ol>
-<p>Rdd1从HDFS中读出(多个)数据文件得出,Spark默认一个block一个分区patition; 对rdd1做filter,生成新的数据集合rdd2;则rdd1与rdd2之间的依赖关系为filter(rdd只读,做修改只能生产新的rdd)</p>
-<p>RDD操作(前面提到比MapReduce支持操作多):</p>
-<ol>
-<li><p>transformation</p>
-<p>数据集内容修改</p>
-</li>
-<li><p>action</p>
-<p>计算,将内容规约为一个值返回给驱动程序</p>
-<p>e.g. collect()</p>
-<p><strong>惰性调用</strong> 只有执行到action操作才真正计算,其他只是记录RDD生成的轨道-<strong>DAG图</strong></p>
-</li>
-</ol>
-<h4 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h4><p>依赖关系(根据依赖<strong>划分stage</strong>):</p>
-<ol>
-<li><p>窄依赖关系</p>
-<p>父子关系1:n/1</p>
-<p>从父出来只有一条线</p>
-<p><strong>一个stage</strong></p>
-</li>
-<li><p>宽依赖</p>
-<p>从父出来的为多条线</p>
-<p><strong>换分stage</strong>的依据,需要patition-shuffling</p>
-</li>
-</ol>
-<h4 id="Job-多层分解"><a href="#Job-多层分解" class="headerlink" title="Job 多层分解"></a>Job 多层分解</h4><p>job=n stage</p>
-<p>each stage 对应一个 taskset(一组无shuffle依赖的task组成)</p>
-<h4 id="Scheduler"><a href="#Scheduler" class="headerlink" title="Scheduler"></a>Scheduler</h4><h4 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h4><p>管理缓存的RDD</p>
-<h4 id="三层结构"><a href="#三层结构" class="headerlink" title="三层结构"></a>三层结构</h4><ol>
-<li>与外对接task</li>
-<li>task管理</li>
-<li>task物理执行</li>
-</ol>
-<h4 id="Standalone"><a href="#Standalone" class="headerlink" title="Standalone"></a>Standalone</h4><h4 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h4><p>与standalone类似,与spark配合,也可与MapReduce兼容,可以跑MapReduce/Spark,商业环境中常用</p>
-<h4 id="其他-Mlib-GraphX"><a href="#其他-Mlib-GraphX" class="headerlink" title="其他 Mlib GraphX"></a>其他 Mlib GraphX</h4>
-          
+          Please contact me if there is any legal issues.
+声明课程笔记，授课教师：李影 大数据系统核平台 NoSQLDB 大数据计算引擎spark/tensorflow刘宏志 分析、算法张齐勋 3案例设计：数据收取分析，搭建大数据平台，平台调优
+引言柯达→索尼（
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/26/大数据专题notes/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1161,244 +861,17 @@
       
         
           
-            <p>This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down.</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h2 id="Course-Introduction"><a href="#Course-Introduction" class="headerlink" title="Course Introduction"></a>Course Introduction</h2><blockquote>
-<p>operating systems advanced class<br>会比本科的操作系统更难，进阶<br>建议本科没学过操作系统的同学选修<br>研究生阶段 - 补充短板，打好基础</p>
-</blockquote>
-<h3 id="系统能力培养"><a href="#系统能力培养" class="headerlink" title="系统能力培养"></a>系统能力培养</h3><p>程序性开发能力→系统性设计能力<br><strong>解决复杂工程问题的基本能力</strong><br>综合能力 &gt;&gt; coding<br>系统：若干相互关联的部件有机结合在一起，具有一定功能。</p>
-<h4 id="三个层次："><a href="#三个层次：" class="headerlink" title="三个层次："></a>三个层次：</h4><ol>
-<li>本课：基础系统</li>
-<li>专门系统 计算机领域系统</li>
-<li>应用系统 </li>
-</ol>
-<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>缺乏整体系统整体能力，缺少知识关联，实践能力差</p>
-<h3 id="教学目的："><a href="#教学目的：" class="headerlink" title="教学目的："></a>教学目的：</h3><ol>
-<li>深入理解操作系统：阅读源码<br>1.1. 全局结构<br>1.2. 内部工作方式<br>1.3. 数据结构和算法<br>1.4. 发现问题，解决方案<br>1.5. 典型技术和应用<br>e.g. 数据结构-进程控制块PCB<blockquote>
-<p>PCB包括：（以Linux为例）<br>1）进程标识符（内部，外部）<br>2）处理机的信息（通用寄存器，指令计数器，PSW，用户的栈指针）。<br>3）进程调度信息（进程状态，进程的优先级，进程调度所需的其它信息，事件）<br>4）进程控制信息（程序的数据的地址，资源清单，进程同步和通信机制，链接指针）<br>能够提出问题、解决方案、折中</p>
-</blockquote>
-</li>
-<li>动手完成一个很小的模拟操作系统</li>
-<li>提高总结凝练的能力</li>
-</ol>
-<h3 id="教学计划："><a href="#教学计划：" class="headerlink" title="教学计划："></a>教学计划：</h3><p>进程线程，运行机制，同步机制，虚存机制，文件系统<br>XV6源代码阅读<br>实例：Windows，Linux<br>实验 Nachos<br>华文慕课</p>
-<h3 id="课程环节："><a href="#课程环节：" class="headerlink" title="课程环节："></a>课程环节：</h3><p>Nachos实习笔试(5.20 开卷-编程+简答)、期末Nachos实习面测(选)，期末笔试<br>分值：<br>Nachos实习报告24(格式规范、按时提交、内容质量，注重个人心得体会，注重实作) Nachos笔试10 (可选面测弥补) XV6代码阅读报告16 课堂参与10<br>期末40闭卷<br>创新实践、特色实践+1~10 (可选题目，加到平时分)</p>
-<h3 id="参考书："><a href="#参考书：" class="headerlink" title="参考书："></a>参考书：</h3><p>教材（选用哪一本都可以）<br>•Modern Operating System Andrew S. Tanenbaum<br>•现代操作系统（第4版）陈向群等译机械工业出版社<br>相关参考书目<br>•Windows内核原理与实现潘爱民电子工业出版社<br>•Linux内核设计与实现[美] R.Love著，陈莉君译机械工业出版社<br>•深入理解计算机系统[美]R.E. Bryant等著龚奕利雷迎春译机械工业出版社</p>
-<h2 id="Nachos操作系统"><a href="#Nachos操作系统" class="headerlink" title="Nachos操作系统"></a>Nachos操作系统</h2><p>UC Berkeley教学用操作系统 使用C++编写，也可以用java（改写5.0j）PintOS（C,可运行于x86-硬件需要C语言）<br>使用3.4稳定版本 latest 4.1<br>（JOS by MIT 也是教学用操作系统）<br>不真正运行于硬件，模拟了一个==MIPS模拟器==<br>可拓展功能，可移植到其它架构（可以真正运行于硬件上）</p>
-<h3 id="e-g-线程切换"><a href="#e-g-线程切换" class="headerlink" title="e.g. 线程切换"></a>e.g. 线程切换</h3><p>（Nachos中只有线程）<del>实际只是命名问题</del><br>关键：保存和恢复线程的<strong>上下文环境(context)</strong>(使用的寄存器-CPU中) e.g. PC, PSW (程序状态字/程序状态寄存器, Program Status Word)…<br>使用<strong>汇编</strong>编写完成-与硬件打交道需要汇编，高级语言难以实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl x,x #保存现场</span><br><span class="line">movl x,x #恢复现场</span><br></pre></td></tr></table></figure></p>
-<h3 id="Nachos体系结构"><a href="#Nachos体系结构" class="headerlink" title="Nachos体系结构"></a>Nachos体系结构</h3><p>Linux宿主机上的一个进程，一个<strong>应用程序</strong><br>分为3层：<strong>MIPS模拟器，Nachos操作系统，Nachos应用程序</strong>（C程序，在x86平台上交叉编译-MIPS指令集）<br>不涉及真正硬件）底层为Host OS和真正硬件</p>
-<h3 id="实习要求"><a href="#实习要求" class="headerlink" title="实习要求"></a>实习要求</h3><p>0环境+6+7,8附加</p>
-<h3 id="Nachos系统源代码树结构"><a href="#Nachos系统源代码树结构" class="headerlink" title="Nachos系统源代码树结构"></a>Nachos系统源代码树结构</h3><p>见PPT0 page31</p>
-<h2 id="XV6"><a href="#XV6" class="headerlink" title="XV6"></a>XV6</h2><p>能够真正运行于硬件的简单操作系统，基于x86架构，Unix-like<br>本课需要阅读源代码，小组每周讨论</p>
-<h2 id="课程目标"><a href="#课程目标" class="headerlink" title="课程目标"></a>课程目标</h2><h3 id="典型名词术语"><a href="#典型名词术语" class="headerlink" title="典型名词术语"></a>典型名词术语</h3><h4 id="高速缓存-vs-TLB-vs-块高速缓存-Linux-文件缓存-Windows"><a href="#高速缓存-vs-TLB-vs-块高速缓存-Linux-文件缓存-Windows" class="headerlink" title="高速缓存 vs TLB vs 块高速缓存(Linux)/文件缓存(Windows)"></a>高速缓存 vs TLB vs 块高速缓存(Linux)/文件缓存(Windows)</h4><ol>
-<li>高速缓存<br>CPU Cache(高速缓存) 分级为 L1 L2 L3<br>（多核CPU中，可能每核具有L1 L2，L3共用 ==correct me if I’m wrong==）<br>依次命中</li>
-<li>TLB<br>= Translation Lookaside Buffer 传输后备缓冲器<br>是<strong>内存管理单元MMU用于改进虚拟地址到物理地址转换速度的缓存，位于MMU中</strong><br>MMU中包含页表地址寄存器，记录了页表本身的存放位置，位于CPU中；<strong>页表位于物理内存中</strong>，由很多页表项组成，页表项并不是包含具体物理地址的单元，此页表项只是给出页表描述符的地址，描述符当中给出物理地址的部分内容，再加上虚拟地址当中的部分内容就得到了具体的物理地址；TLB位于MMU中。<blockquote>
-<p>MMU是，在中央处理器CPU中用来管理虚拟存储器、物理存储器的控制线路，同时也负责虚拟地址映射为物理地址，以及提供硬件机制的内存访问授权，多用户多进程操作系统。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>在计算机技术中，把内存中的程序段复制回辅存的做法叫做“换出”，而把辅存中程序段映射到内存的做法叫做“换入”。经过不断有目的的换入和换出，处理器就可以运行一个大于实际物理内存的应用程序了。或者说，处理器似乎是拥有了一个大于实际物理内存的内存空间。于是，这个存储空间叫做<strong>虚拟内存空间</strong>，而把真正的内存叫做实际物理内存，或简称为<strong>物理内存</strong>。<br>一个应用程序从编写到被执行，需要进行两次映射。第一次是映射到虚拟内存空间，<strong>第二次时映射到物理内存空间</strong>。在计算机系统中，第两次映射的工作是由硬件和软件共同来完成的。承担这个任务的<strong>硬件部分叫做存储管理单元MMU</strong>，软件部分就是操作系统的内存管理模块了。<br>在映射工作中，为了记录程序段占用物理内存的情况，操作系统的内存管理模块需要建立一个表格，该表格以虚拟地址为索引，记录了程序段所占用的物理内存的物理地址。这个虚拟地址/物理地址记录表，即<strong>页表</strong>便是存储管理单元MMU把虚拟地址转化为实际物理地址的依据。<br>Yngz_Miao <a href="https://blog.csdn.net/qq_38410730/article/details/81036768" target="_blank" rel="noopener">https://blog.csdn.net/qq_38410730/article/details/81036768</a> </p>
-</blockquote>
-<ol start="3">
-<li><p>块高速缓存<br>为了解决读取物理存储（盘）较慢的问题，在内存中设置块缓存，存储经常读取的磁盘内容。==correct me if i’m wrong==</p>
-<blockquote>
-<p>与内存页相比，块不仅比较小（大多数情况下），而且长度可变的，依赖于使用的块设备（或文件系统）。随着日渐倾向于使用基于页操作实现的通用文件存取方法，块缓存作为中枢系统缓存的重要性已经逐渐失去。主要的缓存任务现在由页缓存承担。另外，基于块的I/O的标准数据结构，现在已经不再是缓冲区，而是struct bio结构。<br>bullbat <a href="https://blog.csdn.net/bullbat/article/details/7306178" target="_blank" rel="noopener">https://blog.csdn.net/bullbat/article/details/7306178</a> </p>
-</blockquote>
-</li>
-<li><p>Web Page Cache<br>同样地，Web Server中，网页存储在磁盘中，读取速度较慢。在内存中开辟 Web page cache存取访问量大的网页。==correct me if i’m wrong==</p>
-<h4 id="其它典型名词术语-E-G"><a href="#其它典型名词术语-E-G" class="headerlink" title="其它典型名词术语 E.G."></a>其它典型名词术语 E.G.</h4><p>Multiprogramming<br>PCB<br>Starvation 进程调度-饥饿算法<br>Page replacement<br>Time-sharing<br>Context switch<br>Preemptive<br>Temporal locality<br>Booting<br>Thread<br>Priority<br>Programmed I/O<br>Protection<br>Multithreading<br>Deadlock<br>DMA<br>Privileged instruction<br>Scheduling<br>Wait-for graph<br>Buffer<br>Exception<br>Synchronization<br>Virtual memory<br>RAID<br>Fault<br>Data race<br>Paging<br>Disk cache<br>System call<br>Mutual exclusion<br>Virtual address<br>File<br>Interrupt<br>Critical section<br>Swapping<br>Directory<br>Process<br>Atomic operation<br>Page table<br>Device driver<br>Execution state<br>Lock<br>TLB<br>Pagefault<br>Address space<br>Semaphore<br>Shared address space<br>Spatial locality</p>
-<h4 id="回顾知识点"><a href="#回顾知识点" class="headerlink" title="回顾知识点"></a>回顾知识点</h4><p>•存储器层次结构<br>•局部性原理<br>Cache，在内存缓存磁盘块，Web Cache<br>•异常控制流<br>中断、陷阱、故障、系统调用、内核/用户模式<br>•进程、线程<br>•并发：同步与通信机制、死锁<br>•虚存<br>页表、TLB、地址翻译（地址转换）、Page fault<br>内存映射</p>
-<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="地位"><a href="#地位" class="headerlink" title="地位"></a>地位</h3><p>应用程序 👈终端用户<br>系统功能调用 👈应用软件设计者<br>操作系统        👈应用软件设计者<br>计算机硬件 👈操作系统设计者</p>
-<h3 id="名称"><a href="#名称" class="headerlink" title="名称"></a>名称</h3><p>软件越来越重要，从Monitor(Supervisor)→Operating System</p>
-<h3 id="Helloworld-程序运行时操作系统作用"><a href="#Helloworld-程序运行时操作系统作用" class="headerlink" title="Helloworld 程序运行时操作系统作用"></a>Helloworld 程序运行时操作系统作用</h3></li>
-<li><p>用户告诉操作系统执行HelloWorld程序<br>键盘输入指令(./filename) / 可视化界面下双击执行？==correct me if i’m wrong==</p>
-</li>
-<li><p>操作系统：找到helloworld程序的相关信息，检查其类型是否是<strong>可执行文件</strong>；并通过程序首部信息，确定<strong>代码和数据</strong>在可执行文件中的位置并计算出对应的<strong>磁盘块地址</strong><br>Linux/Unix 中可执行文件为 elf 类型（Windows中为PE）</p>
-<blockquote>
-<p>ELF(Executable and Linking Format)是一种<strong>对象文件的格式</strong>，用于定义不同类型的对象文件(Object files)中都放了什么东西、以及都以什么样的格式去放这些东西。它自最早在 System V 系统上出现后，被 xNIX 世界所广泛接受，作为缺省的二进制文件格式来使用。可以说，ELF是构成众多xNIX系统的基础之一。<br>ELF文件有三种类型：</p>
-<ul>
-<li>可重定位的对象文件(Relocatable file) 由<strong>汇编器汇编生成的 .o 文件</strong></li>
-<li>可执行的对象文件(Executable file) <strong>可执行应用程序</strong></li>
-<li>可被共享的对象文件(Shared object file)<strong> 动态库文件，也即 .so 文件</strong></li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>PE是目前Windows平台上主流的可执行文件格式，包括常见的可执行程序EXE文件、动态链接库DLL文件等。</p>
-</blockquote>
-<p>Linux/Unix 文件开头几个字节为Magic Number，在每种特定文件类型中是唯一的</p>
-<blockquote>
-<p>Magic numbers are the first few bytes of a file which are unique to a particular file type. </p>
-<ol start="3">
-<li>操作系统：创建一个新进程，将HelloWorld可执行文件映射到该进程结构，表示由该进程执行helloworld程序。<br>创建数据结构(PCB)并填写==correct me if i’m wrong==</li>
-</ol>
-</blockquote>
-<p>(<strong>3.5. 调度程序</strong>-看不见的手<br>进程创建成功后控制权属于调度程序，等待调度后才可执行）</p>
-<ol start="4">
-<li><p>(调度程序选中HelloWorld后) 操作系统：为helloworld程序设置cpu上下文环境，并跳到程序开始处。</p>
-</li>
-<li><p>执行helloworld程序的第一条指令，发生<strong>缺页异常</strong><br>程序未被读入内存中</p>
-</li>
-</ol>
-<p>6操作系统：分配一页物理内存，并将代码从磁盘读入内存，然后继续执行helloworld程序</p>
-<p>7helloword程序执行puts函数（系统调用），在显示器上写一字符串</p>
-<p>8操作系统：找到要将字符串送往的显示设备，通常设备是由一个进程控制的，所以，操作系统将要写的字符串送给该进程</p>
-<p>9操作系统：控制设备的进程告诉设备的窗口系统，它要显示该字符串，窗口系统确定这是一个合法的操作，然后将字符串转换成像素，将像素写入设备的存储映像区</p>
-<p>10视频硬件将像素转换成显示器可接收和一组控制数据信号</p>
-<p>11显示器解释信号，激发液晶屏</p>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>复习本课内容，下载XV6源码，完成Lab0（环境搭建，阅读源码，编写程序）</p>
-<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026165444864.bmp?q-sign-algorithm=sha1&amp;q-ak=AKIDcfowjZ3QQXxQLOuGEQfKgF4yslRo26Lb&amp;q-sign-time=1551764724;1551766524&amp;q-key-time=1551764724;1551766524&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ed134d0e138d05a9b8fcec7a644c4100aad093ac&amp;x-cos-security-token=d726e95e40868c76ff1bff29d38c7b20dca1121610001" alt="3种调度位置"></p>
-<ol>
-<li><p>短程调度(进程调度)</p>
-<p>从<strong>就绪队列(内存</strong>用户态区)调度到<strong>CPU</strong></p>
-<p><strong>CPU调度</strong>是短程调度-选进程,送入CPU-最底层</p>
-</li>
-<li><p>中程调度(交换调度)</p>
-<p>调整进程在内存中的存在数量和时机,将处于<strong>外存交换区</strong>中的就绪状态或等待状态的进程调入<strong>内存</strong>,或把处于内存就绪状态或内存等待状态的进程交换到外存交换区</p>
-<p>一般是挂起状态进程的调度</p>
-</li>
-<li><p>长程调度(作业调度,高级调度)</p>
-<p>从<strong>外存</strong>(可能)批量,为其建立进程,调度到<strong>内存</strong></p>
-<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026170356243.bmp?q-sign-algorithm=sha1&amp;q-ak=AKIDy3EGv5wi5qyfi9aAjBnDCkiqKixDuFqK&amp;q-sign-time=1551764756;1551766556&amp;q-key-time=1551764756;1551766556&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=482117859aec765ff9e3c380b8f066f8904eeeb2&amp;x-cos-security-token=c7cc50ed43f05fe4351fc5ef616bd68f455dc34a10001" alt="三级调度"></p>
-</li>
-</ol>
-<h2 id="处理器调度-1"><a href="#处理器调度-1" class="headerlink" title="处理器调度"></a>处理器调度</h2><p>基本认识:按一定调度算法,选一个,给CPU使用权</p>
-<p>若无就绪进程,系统空闲进程/闲逛进程/idle进程,不属于用户,执行空指令-<em>占座</em>-CPU周而复始运作</p>
-<p>调度程序:内核函数,决策-挑选就绪进程</p>
-<ol>
-<li>What 调度算法</li>
-<li>When 调度时机</li>
-<li>W</li>
-</ol>
-<h3 id="CPU调度时机"><a href="#CPU调度时机" class="headerlink" title="CPU调度时机"></a>CPU调度时机</h3><p>事件:进程运行过程中有很多事件</p>
-<p>事件发生后→进程暂停→硬件机制响应→进入操作系统-<strong>内核</strong>处理相应事件→处理完后-格局变化(可能进程状态改变,可能创建了新进程)</p>
-<p>4种调度时机-总结:内核对中断/异常/系统调用处理后返回用户态时</p>
-<h3 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h3><p>可能是刚刚暂停执行的进程/新进程</p>
-<p>被换入的进程:事件发生后,当前进程的内容context被放入内核栈(系统栈)中-栈是临时存储,PCB是长久存储-数据结构</p>
-<p>若恢复该进程,从栈中弹出,否则若切换另一个进程,将栈中内容放入PCB中</p>
-<p>新选入进程的上下文context在PCB中,若被选中,将其内容取出</p>
-<ol>
-<li><p>切换全局页目录</p>
-<p>每个进程有不同地址空间,加载新地址空间</p>
-<p>全局页目录:指向地址空间的物理地址的指针(Intel中CR3)</p>
-</li>
-<li><p>切换内核栈和上下文</p>
-</li>
-</ol>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>(A下CPU,B上CPU)</p>
-<ol>
-<li>保存进程A上下文到PCB中</li>
-<li>更新A的PCB</li>
-<li>将A移到合适对垒</li>
-</ol>
-<h3 id="上下文切换开销"><a href="#上下文切换开销" class="headerlink" title="上下文切换开销"></a>上下文切换开销</h3><p>寄存器存取时间</p>
-<ol>
-<li><p>直接开销</p>
-<p>内核完成切换的CPU时间:保存恢复寄存器,切换地址空间</p>
-<p>(不同指令的代价不同-时间也不同</p>
-</li>
-<li><p>间接开销</p>
-<p>高速缓存cache,缓冲区缓存buffer cache,TLB(进程页表的部分表项)清空</p>
-<p>肯定不会命中,所以开销大</p>
-<p><strong>了解Cache工作原理</strong></p>
-</li>
-</ol>
-<h3 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h3><p>不同操作系统-不同难易-需要考虑完成的任务不同</p>
-<p>需要在<strong>PCB</strong>中记录跟CPU调度有关的信息-用于调度</p>
-<h4 id="优先级和优先数"><a href="#优先级和优先数" class="headerlink" title="优先级和优先数"></a>优先级和优先数</h4><p>优先数并不一定是越大越高,只是指标,所以一般说优先级-是更显著的指标</p>
-<p>优先级:动态-过程中动态变化;静态-运行过程中不变</p>
-<h4 id="就绪队列组织"><a href="#就绪队列组织" class="headerlink" title="就绪队列组织"></a>就绪队列组织</h4><h4 id="抢占-amp-非抢占"><a href="#抢占-amp-非抢占" class="headerlink" title="抢占&amp;非抢占"></a>抢占&amp;非抢占</h4><p>抢占:有更高优先级就绪,系统就强行剥夺CPU</p>
-<p>靠中断-异常-系统调用,实际就是切换 具体是由调度程序执行</p>
-<p>非抢占:进程不想下CPU就可以不下CPU</p>
-<h4 id="I-O密集型-CPU密集型进程"><a href="#I-O密集型-CPU密集型进程" class="headerlink" title="I/O密集型/CPU密集型进程"></a>I/O密集型/CPU密集型进程</h4><p>一般操作系统对IO密集型更友好</p>
-<h4 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h4><p>长/短 固定/可变</p>
-<h3 id="不同调度算法"><a href="#不同调度算法" class="headerlink" title="不同调度算法"></a>不同调度算法</h3><ol>
-<li><p>短作业优先SJF</p>
-<p>可以抢占(有更短的立刻上CPU)/非抢占(在就绪对列中选短)-各有利弊</p>
-<p><strong>所以进程同时可运行时</strong>SJF可得到最短平均等待时间</p>
-</li>
-<li><p>最高响应比优先HRRN</p>
-<p>计算响应比R,抢占+非抢占折中</p>
-</li>
-<li><p>时间片轮转RR</p>
-<p>周期性切换-时间片</p>
-<p>时间片长短-</p>
-<p>对不同大小进程-有利</p>
-<p>对相同大小的进程(2*100ms)-切换失去意义: 平均为199.5ms;若FCFS则平均150ms</p>
-</li>
-<li><p>虚拟轮转VIRTUAL RR</p>
-<p>原本:时间片到-回到就绪;等待IO-回到等待队列-IO好了之后回到就绪队列</p>
-<p>优待IO型进程(主动放弃CPU),将IO等待的进程专开一个队列,先从这个队列中选择进程上CPU(认为可能还会主动放弃CPU</p>
-</li>
-<li><p>最高优先级</p>
-<p>系统&gt;用户</p>
-<p>前台&gt;后台</p>
-<p>IO密集&gt;CPU密集</p>
-<p>静态/动态优先级</p>
-<p><strong>饥饿问题</strong></p>
-<p>可能会<strong>优先级反转</strong></p>
-<h4 id="优先级反转-反置"><a href="#优先级反转-反置" class="headerlink" title="优先级反转/反置"></a>优先级反转/反置</h4><p>抢占式会出现</p>
-<p>L进入临界区操作(原语),被抢占,但是临界区中不可打断,因此H被阻塞,M反而上CPU执行,若M为CPU密集,LR都不能执行</p>
-<p>e.g. 美国火星探测器天气预报为M,地面重启系统</p>
-<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><ol>
-<li>优先级天花板协议</li>
-<li>优先级继承:低优先级提升</li>
-<li>使用中断禁止-低优先级临界区中不可被打断</li>
-</ol>
-</li>
-<li><p>多级队列</p>
-<h4 id="多级反馈队列"><a href="#多级反馈队列" class="headerlink" title="多级反馈队列"></a>多级反馈队列</h4><p><strong>重点</strong></p>
-<p>多个就绪队列-级别依次降低,进队都是进第一个,用完时间片下CPU后下降一级;由于阻塞下CPU会原级队列(可以队首/队尾),重上CPU时上次时间片的处理(可以保留/抛弃)(均是设计者对IO型的友好程度)</p>
-<p><strong>总是对IO密集型友好</strong></p>
-<p>不同级队列时间片长度不同,级别高-时间片短</p>
-<p>优先调第一级</p>
-<p>各级队列按<strong>时间片轮转</strong></p>
-</li>
-</ol>
-<ol start="7">
-<li>最短进程≈段作业</li>
-</ol>
-<h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>最短剩余时间优先-最适合此例</p>
-<h2 id="典型系统"><a href="#典型系统" class="headerlink" title="典型系统"></a>典型系统</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>很像 多级反馈队列</p>
-<p>时间配额≈时间片,大小可变</p>
-<p>区别多级反馈队列-其队列是按照进程优先级分配的</p>
-<h4 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级:"></a>线程优先级:</h4><ol>
-<li><p>实时优先级</p>
-<p>不可变</p>
-</li>
-</ol>
-<h4 id="调度策略"><a href="#调度策略" class="headerlink" title="调度策略:"></a>调度策略:</h4><ol>
-<li><p>主动切换</p>
-<p>主动转到阻塞态</p>
-</li>
-<li><p>抢占</p>
-<p>高优先级的从阻塞态中唤醒-抢占</p>
-<p>则低优先级被强占的回到<strong>原</strong>优先级队列<strong>队首</strong>,若实时优先级,重置完整配额;否则执行其剩余时间</p>
-</li>
-<li></li>
-</ol>
-<h4 id="优先级提升-amp-时间配额调整"><a href="#优先级提升-amp-时间配额调整" class="headerlink" title="优先级提升&amp;时间配额调整"></a>优先级提升&amp;时间配额调整</h4><p>漏洞/瑕疵:饥饿等问题</p>
-<ol>
-<li><p>IO操作完成</p>
-<p>提升值写在文件中</p>
-<p>且时间配额每次-1</p>
-</li>
-<li><p>饥饿线程</p>
-<p>排队&gt;300时间周期 平衡集管理器(还有其他工作)1s写一次,扫描一次就绪队列,将优先级提到最高15,时间配额为正常值*4,用完时间配额后优先级恢复原状</p>
-</li>
-</ol>
-<h3 id="Linux-CFS"><a href="#Linux-CFS" class="headerlink" title="Linux CFS"></a>Linux CFS</h3><h1 id="Nachos"><a href="#Nachos" class="headerlink" title="Nachos"></a>Nachos</h1><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>规定了依赖关系,顺序,把Makefile基本看懂</p>
-<h2 id="Nachos框架"><a href="#Nachos框架" class="headerlink" title="Nachos框架"></a>Nachos框架</h2><ol>
-<li>内核几部分-全局变量</li>
-<li>添加HelloWorld测试?</li>
-<li>启动的流程 函数mian initi threadtest…</li>
-<li>线程</li>
-</ol>
-<p>…</p>
-<p>下次课</p>
-
-          
+          This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down.
+引言Course Introduction
+opera
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/24/OSnotes/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
