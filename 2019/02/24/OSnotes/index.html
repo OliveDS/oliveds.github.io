@@ -86,10 +86,13 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down. 引言Course Introduction operating systems advanced class会比本科的操作系统更难，进阶建议本科没学过操作">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T05:42:42.152Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026165444864.bmp?q-sign-algorithm=sha1&q-ak=AKIDcfowjZ3QQXxQLOuGEQfKgF4yslRo26Lb&q-sign-time=1551764724;1551766524&q-key-time=1551764724;1551766524&q-header-list=&q-url-param-list=&q-signature=ed134d0e138d05a9b8fcec7a644c4100aad093ac&x-cos-security-token=d726e95e40868c76ff1bff29d38c7b20dca1121610001">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026170356243.bmp?q-sign-algorithm=sha1&q-ak=AKIDy3EGv5wi5qyfi9aAjBnDCkiqKixDuFqK&q-sign-time=1551764756;1551766556&q-key-time=1551764756;1551766556&q-header-list=&q-url-param-list=&q-signature=482117859aec765ff9e3c380b8f066f8904eeeb2&x-cos-security-token=c7cc50ed43f05fe4351fc5ef616bd68f455dc34a10001">
+<meta property="og:updated_time" content="2019-03-05T05:46:04.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统高级课程-笔记">
 <meta name="twitter:description" content="This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down. 引言Course Introduction operating systems advanced class会比本科的操作系统更难，进阶建议本科没学过操作">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026165444864.bmp?q-sign-algorithm=sha1&q-ak=AKIDcfowjZ3QQXxQLOuGEQfKgF4yslRo26Lb&q-sign-time=1551764724;1551766524&q-key-time=1551764724;1551766524&q-header-list=&q-url-param-list=&q-signature=ed134d0e138d05a9b8fcec7a644c4100aad093ac&x-cos-security-token=d726e95e40868c76ff1bff29d38c7b20dca1121610001">
 
 
 
@@ -281,7 +284,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T13:42:42+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T13:46:04+08:00">
                 2019-03-05
               </time>
             
@@ -424,7 +427,7 @@
 <p>10视频硬件将像素转换成显示器可接收和一组控制数据信号</p>
 <p>11显示器解释信号，激发液晶屏</p>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>复习本课内容，下载XV6源码，完成Lab0（环境搭建，阅读源码，编写程序）</p>
-<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p>![3种调度位置])</p>
+<h1 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h1><h2 id="三个层次"><a href="#三个层次" class="headerlink" title="三个层次"></a>三个层次</h2><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026165444864.bmp?q-sign-algorithm=sha1&amp;q-ak=AKIDcfowjZ3QQXxQLOuGEQfKgF4yslRo26Lb&amp;q-sign-time=1551764724;1551766524&amp;q-key-time=1551764724;1551766524&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ed134d0e138d05a9b8fcec7a644c4100aad093ac&amp;x-cos-security-token=d726e95e40868c76ff1bff29d38c7b20dca1121610001" alt="3种调度位置"></p>
 <ol>
 <li><p>短程调度(进程调度)</p>
 <p>从<strong>就绪队列(内存</strong>用户态区)调度到<strong>CPU</strong></p>
@@ -436,7 +439,7 @@
 </li>
 <li><p>长程调度(作业调度,高级调度)</p>
 <p>从<strong>外存</strong>(可能)批量,为其建立进程,调度到<strong>内存</strong></p>
-<p><img src alt="三级调度"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026170356243.bmp?q-sign-algorithm=sha1&amp;q-ak=AKIDy3EGv5wi5qyfi9aAjBnDCkiqKixDuFqK&amp;q-sign-time=1551764756;1551766556&amp;q-key-time=1551764756;1551766556&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=482117859aec765ff9e3c380b8f066f8904eeeb2&amp;x-cos-security-token=c7cc50ed43f05fe4351fc5ef616bd68f455dc34a10001" alt="三级调度"></p>
 </li>
 </ol>
 <h2 id="处理器调度-1"><a href="#处理器调度-1" class="headerlink" title="处理器调度"></a>处理器调度</h2><p>基本认识:按一定调度算法,选一个,给CPU使用权</p>
