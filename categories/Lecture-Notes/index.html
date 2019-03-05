@@ -573,6 +573,28 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'uaU7K98rSYcLih6bDPXI5vbf-gzGzoHsz',
+        appKey: 'lfonkoBe1cGLNBLsjTuWaae9',
+        placeholder: '请给菜鸡小码农一点意见和建议吧ε٩(๑> ₃ <)۶з',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
