@@ -604,7 +604,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T10:41:53+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T13:32:43+08:00">
                 2019-03-05
               </time>
             
@@ -926,7 +926,49 @@
 <p>(环形数据结构)</p>
 <h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>基于内存的计算 Hadoop(mapreduce)基于磁盘</p>
 <p>Spark提供了多种数据集操作模型,60%内存缓存结果-RDD; Hadoop则只有map,reduce,不能缓存结果</p>
-
+<p>适合实时大数据量,不适合增量计算/…</p>
+<h4 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h4><p>数据抽象为RDD</p>
+<p>只读的分区记录集合,不可修改</p>
+<p>属性:</p>
+<ol>
+<li>一组分区(partition) 按key分</li>
+<li>一个计算每个分区的函数</li>
+<li>依赖dependencies 描述RDD之间的lineage</li>
+</ol>
+<p>Rdd1从HDFS中读出(多个)数据文件得出,Spark默认一个block一个分区patition; 对rdd1做filter,生成新的数据集合rdd2;则rdd1与rdd2之间的依赖关系为filter(rdd只读,做修改只能生产新的rdd)</p>
+<p>RDD操作(前面提到比MapReduce支持操作多):</p>
+<ol>
+<li><p>transformation</p>
+<p>数据集内容修改</p>
+</li>
+<li><p>action</p>
+<p>计算,将内容规约为一个值返回给驱动程序</p>
+<p>e.g. collect()</p>
+<p><strong>惰性调用</strong> 只有执行到action操作才真正计算,其他只是记录RDD生成的轨道-<strong>DAG图</strong></p>
+</li>
+</ol>
+<h4 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h4><p>依赖关系(根据依赖<strong>划分stage</strong>):</p>
+<ol>
+<li><p>窄依赖关系</p>
+<p>父子关系1:n/1</p>
+<p>从父出来只有一条线</p>
+<p><strong>一个stage</strong></p>
+</li>
+<li><p>宽依赖</p>
+<p>从父出来的为多条线</p>
+<p><strong>换分stage</strong>的依据,需要patition-shuffling</p>
+</li>
+</ol>
+<h4 id="Job-多层分解"><a href="#Job-多层分解" class="headerlink" title="Job 多层分解"></a>Job 多层分解</h4><p>job=n stage</p>
+<p>each stage 对应一个 taskset(一组无shuffle依赖的task组成)</p>
+<h4 id="Scheduler"><a href="#Scheduler" class="headerlink" title="Scheduler"></a>Scheduler</h4><h4 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h4><p>管理缓存的RDD</p>
+<h4 id="三层结构"><a href="#三层结构" class="headerlink" title="三层结构"></a>三层结构</h4><ol>
+<li>与外对接task</li>
+<li>task管理</li>
+<li>task物理执行</li>
+</ol>
+<h4 id="Standalone"><a href="#Standalone" class="headerlink" title="Standalone"></a>Standalone</h4><h4 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h4><p>与standalone类似,与spark配合,也可与MapReduce兼容,可以跑MapReduce/Spark,商业环境中常用</p>
+<h4 id="其他-Mlib-GraphX"><a href="#其他-Mlib-GraphX" class="headerlink" title="其他 Mlib GraphX"></a>其他 Mlib GraphX</h4>
           
         
       
