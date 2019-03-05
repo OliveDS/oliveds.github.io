@@ -604,7 +604,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T10:01:06+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T10:41:53+08:00">
                 2019-03-05
               </time>
             
@@ -894,7 +894,39 @@
 <li><p>集群中经常出现故障-硬盘最容易故障</p>
 </li>
 </ol>
-<h4 id="并行-加速计算"><a href="#并行-加速计算" class="headerlink" title="并行-加速计算"></a>并行-加速计算</h4>
+<h4 id="并行-加速计算"><a href="#并行-加速计算" class="headerlink" title="并行-加速计算"></a>并行-加速计算</h4><p>均涉及<strong>参数同步</strong>问题</p>
+<ol>
+<li>数据并行 </li>
+<li>模型并行</li>
+<li>混合并行</li>
+</ol>
+<h4 id="同步协议"><a href="#同步协议" class="headerlink" title="同步协议"></a>同步协议</h4><ol>
+<li><p>BSP bulk synchronous parallel</p>
+<p>整体同步,worker之间需要等待-barrier-进行communicate-结束后再次compute</p>
+<p><em>收敛性好,处理速度慢</em></p>
+</li>
+<li><p>ASP asynchronous synchronous parallel</p>
+<p>完全<strong>无同步线</strong>,节点独立更新模型参数</p>
+<p><em>执行速度快,收敛性差</em> (没有计算资源浪费)</p>
+</li>
+<li><p>SSP stale syn… 有限异步同步协议</p>
+<p>设定staleness - 最长等待的迭代轮数</p>
+<p><em>保证理论收敛性的同时加快执行速度</em></p>
+</li>
+</ol>
+<p>同样时间内准确度,stale 32 最优</p>
+<p>####框架演变</p>
+<p>MapReduce同步,数据并行</p>
+<p>参数服务器 同步+异步 数据并行+模型并行</p>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p>Master将user program fork到worker(mapper/reducer),map作业数量与split个数对应</p>
+<p>map结果默认对key hash-patition-reducer,由moaster执行,并通知reducer</p>
+<p>对文件系统读写:至少3次,影响性能:1中间结果写2中间结果读3最终结果写</p>
+<p><strong>Map - shuffle - Reduce</strong></p>
+<p>shuffle:对map结果分区排序分割(根据patition的key),若没有shuffle,reducer得到的数据分片数很大</p>
+<p>(环形数据结构)</p>
+<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><p>基于内存的计算 Hadoop(mapreduce)基于磁盘</p>
+<p>Spark提供了多种数据集操作模型,60%内存缓存结果-RDD; Hadoop则只有map,reduce,不能缓存结果</p>
+
           
         
       
