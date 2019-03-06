@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="Please contact me about any legal issue. 引言今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T12:38:35.480Z">
+<meta property="og:updated_time" content="2019-03-06T02:42:05.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Jupyter 使用">
 <meta name="twitter:description" content="Please contact me about any legal issue. 引言今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T20:38:35+08:00">
-                2019-03-05
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-06T10:42:05+08:00">
+                2019-03-06
               </time>
             
           </span>
@@ -375,7 +375,29 @@
 <p>为python3 安装Jupyter <del>才不是因为python2没安装成功呢才不是不知道为啥timeout了我懒得搞了</del></p>
 <h2 id="Start-Jupyter"><a href="#Start-Jupyter" class="headerlink" title="Start Jupyter"></a>Start Jupyter</h2><p>使用下面指令在默认端口启动Jupyter,会自动打开 <a href="http://localhost:8888" target="_blank" rel="noopener">http://localhost:8888</a>. 注意启动后终端不能关闭,否则会断开与本地服务器的连接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
-<p>还有更多启动方式,参考 :</p>
+<p>还有更多启动方式,参考 <a href="https://zhuanlan.zhihu.com/p/33105153" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33105153</a></p>
+<p>启动之后,页面显示的文件目录就是你执行启动命令所在的目录</p>
+<h2 id="Using-Jupyter"><a href="#Using-Jupyter" class="headerlink" title="Using Jupyter"></a>Using Jupyter</h2><p>关于使用,这篇文章说得比较详细了.</p>
+<p><a href="https://blog.csdn.net/DataCastle/article/details/78890469" target="_blank" rel="noopener">https://blog.csdn.net/DataCastle/article/details/78890469</a></p>
+<p>但是我又遇到了一个问题,就是我的code使用 <code>shift+enter</code>执行之后,结果并不会显示在code下方…查资料说可能是</p>
+<ol>
+<li><p>使用了杀毒/…软件 → 排除,并没有</p>
+</li>
+<li><p>浏览器问题 → Chrome换成Safari也还是不行(换的时候直接把链接粘贴过去,然后需要你在新的页面输入token,你可以在终端中输入<code>control+C</code>但是不真的退出,就可以看到当前的token了</p>
+</li>
+<li><p>在页面上重启kernel → 依然不行</p>
+</li>
+<li><p>something is wrong with your python distribution package → so sad…这是我最怕的</p>
+<p>我把笔记本中的内容通过File→save as→.py保存下来,发现它在文件开头声明使用的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br></pre></td></tr></table></figure>
+<p>而我的Jupyter是安装在<code>/usr/local/bin/python3</code>下的,我查看Jupyter的path,返回结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 在终端执行 jupyter --paths</span><br><span class="line">config:</span><br><span class="line">    /Users/oliveds/.jupyter</span><br><span class="line">    /usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/etc/jupyter</span><br><span class="line">    /usr/local/etc/jupyter</span><br><span class="line">    /etc/jupyter</span><br><span class="line">data:</span><br><span class="line">    /Users/oliveds/Library/Jupyter</span><br><span class="line">    /usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/share/jupyter</span><br><span class="line">    /usr/local/share/jupyter</span><br><span class="line">    /usr/share/jupyter</span><br><span class="line">runtime:</span><br><span class="line">    /Users/oliveds/Library/Jupyter/runtime</span><br><span class="line"></span><br><span class="line"># 在终端执行 jupyter kernelspec list</span><br><span class="line">Available kernels:</span><br><span class="line">  python3    /usr/local/share/jupyter/kernels/python3</span><br></pre></td></tr></table></figure>
+<p>这应该证明我安装的Jupyter确实是在brew安装的python3.7下的</p>
+<p><strong>问题来了</strong> <code>#!/usr/bin/env python</code>到底是Jupyter生成python文件的统一语句还是就是我的Jupyter使用的kernel呢?</p>
+<p>后来我又给Jupyter安装了python2的kernel,结果还是一样的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip2 install -U ipykernel</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -556,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter"><span class="nav-number"></span> <span class="nav-text">Jupyter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Jupyter"><span class="nav-number">1.</span> <span class="nav-text">What is Jupyter?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jupyter"><span class="nav-number">2.</span> <span class="nav-text">Install Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-Jupyter"><span class="nav-number">3.</span> <span class="nav-text">Start Jupyter</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter"><span class="nav-number"></span> <span class="nav-text">Jupyter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Jupyter"><span class="nav-number">1.</span> <span class="nav-text">What is Jupyter?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jupyter"><span class="nav-number">2.</span> <span class="nav-text">Install Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-Jupyter"><span class="nav-number">3.</span> <span class="nav-text">Start Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Jupyter"><span class="nav-number">4.</span> <span class="nav-text">Using Jupyter</span></a></li></ol></li></div>
             
 
           </div>
