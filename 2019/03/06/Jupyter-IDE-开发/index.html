@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="旧 java IDE 运行旧的IDE是放在GitLab上的 题外话 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程… 旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA… 打开后直接bu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-06T09:31:15.941Z">
+<meta property="og:updated_time" content="2019-03-06T13:59:52.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binder IDE 开发 (Jupyter)">
 <meta name="twitter:description" content="旧 java IDE 运行旧的IDE是放在GitLab上的 题外话 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程… 旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA… 打开后直接bu">
@@ -281,7 +281,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-06T17:31:15+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-06T21:59:52+08:00">
                 2019-03-06
               </time>
             
@@ -374,6 +374,8 @@
 <p> We are undergoing a dramatic increase in the complexity of techniques for <strong>analyzing data, doing scientific research, and sharing our work with others</strong>. In early 2016, the <a href="https://mybinder.org/" target="_blank" rel="noopener">Binder project</a> was announced, attempting to connect these three components. </p>
 </blockquote>
 <p>Binder是一种开源服务,相当于Jupyter的接口,使用户能够在 web 浏览器中的 GitHub 上使用 Jupyter notebook，无需安装软件或任何编程库。所以我们现在的任务就是学习Binder的架构,利用Binder在我们自己的网页IDE上集成Jupyter.</p>
+<p>以下内容均是基于Binder团队在SCIPy 2018 的演讲,视频链接: </p>
+<p><a href="https://www.youtube.com/watch?v=KcC0W5LP9GM&amp;feature=youtu.be" target="_blank" rel="noopener">https://www.youtube.com/watch?v=KcC0W5LP9GM&amp;feature=youtu.be</a></p>
 <p>Binder具有4个核心组件 (或者应该说主要是前三个吧):</p>
 <ul>
 <li><p>repo2docker</p>
@@ -385,10 +387,10 @@
 <p>generates user sessions that serve these containers</p>
 </li>
 <li><p>BinderHub</p>
-<p>提供接口,让用户能够创建,使用,分享这些Jupyter会话(文档?)</p>
+<p>部署binder的工具,提供接口,让用户能够创建,使用,分享这些Jupyter会话(文档?)</p>
 </li>
 <li><p>mybinder.org</p>
-<p>将以上作为一个免费的服务提供出去? 通过这个网站</p>
+<p>将以上作为一个免费的服务提供出去? 通过这个网站提供BinderHub的服务(不止这一个网站,不过这个应该是Binder开发团队提供的那个,因为Binder是开源的,所以实际上所有组织和个人可以开发自己的私有的/企业局域的网站来实现Binder的功能.(<strong>我的任务是不是也是做一个这样的网站呢?</strong>)</p>
 <p>demonstrates the above as a free public service/tech demo</p>
 <p>用户在这个mybinder.org注册后,可以把自己的binder挂在这个网站上(可以分享给所有人来点击这个链接),然后别人就可以使用你的GitHub repository生成的容器,在Jupyter上查看和执行你的可执行代码文档.</p>
 </li>
@@ -412,6 +414,11 @@
 <p>Kubernetes是自动部署，扩展和管理容器化应用程序的开源系统,binder中使用了Kubernetes来辅助JupyterHub</p>
 <h2 id="BinderHub"><a href="#BinderHub" class="headerlink" title="BinderHub"></a>BinderHub</h2><p>运行在Kubernetes上,提供UI和web API(用户在这里指定自己想要建立的repo,填写参数,提交)</p>
 <p> BinderHub对用户binder进行管理,①与repo2docker进行通信,实际建立用户请求的image;②与JupyterHub进行通信,实际为用户运行这个image(在JupyterHub上);③与用户端通信,用户通过浏览器与之交互?(不太确定)</p>
+<h2 id="mybinder-org"><a href="#mybinder-org" class="headerlink" title="mybinder.org"></a>mybinder.org</h2><p>…</p>
+<h1 id="Binder-实例"><a href="#Binder-实例" class="headerlink" title="Binder 实例"></a>Binder 实例</h1><p><a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python" target="_blank" rel="noopener">https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python</a></p>
+<p>这是Binder使用文档中给的一个实例,运行一下试试.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python</span><br></pre></td></tr></table></figure>
+<p>直接点击这个在mybinder.org上的链接,就会在网页上加载这个docker镜像,你的本机不需要搭建环境就可以直接使用Jupyter了(正常情况下需要安装python,Jupyter)</p>
 
       
     </div>
@@ -592,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#旧-java-IDE-运行"><span class="nav-number">1.</span> <span class="nav-text">旧 java IDE 运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binder"><span class="nav-number">2.</span> <span class="nav-text">Binder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#repo2docker"><span class="nav-number">2.1.</span> <span class="nav-text">repo2docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JpyterHub"><span class="nav-number">2.2.</span> <span class="nav-text">JpyterHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BinderHub"><span class="nav-number">2.3.</span> <span class="nav-text">BinderHub</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#旧-java-IDE-运行"><span class="nav-number">1.</span> <span class="nav-text">旧 java IDE 运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binder"><span class="nav-number">2.</span> <span class="nav-text">Binder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#repo2docker"><span class="nav-number">2.1.</span> <span class="nav-text">repo2docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JpyterHub"><span class="nav-number">2.2.</span> <span class="nav-text">JpyterHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BinderHub"><span class="nav-number">2.3.</span> <span class="nav-text">BinderHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybinder-org"><span class="nav-number">2.4.</span> <span class="nav-text">mybinder.org</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binder-实例"><span class="nav-number">3.</span> <span class="nav-text">Binder 实例</span></a></li></ol></div>
             
 
           </div>
