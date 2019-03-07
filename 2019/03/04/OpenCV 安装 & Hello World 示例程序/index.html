@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T12:16:31.415Z">
+<meta property="og:updated_time" content="2019-03-07T06:28:25.572Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 安装 &amp; Hello World 示例程序">
 <meta name="twitter:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T20:16:31+08:00">
-                2019-03-05
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-07T14:28:25+08:00">
+                2019-03-07
               </time>
             
           </span>
@@ -370,8 +370,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which python</span><br><span class="line">which python3</span><br></pre></td></tr></table></figure>
 <p>看一下指向的是不是你自己新安装的python,即路径应该是<code>/usr/local/bin/python</code> and <code>/usr/local/bin/python3</code> 否则如果是<code>/usr/bin/...</code>下的那你用的依然是系统的python</p>
 <h3 id="安装OpenCV-1"><a href="#安装OpenCV-1" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h3><p>其实简单的方法只要<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure></p>
-<p>就好了,这种方法默认是装的python2.7的OpenCV. 但是安装的时候它显示安装的OpenCV版本是4.0.1 就导致我很confused<br>因为老师说了要求3.x.x版本,所以我以为不行<br>确实也可以自己手动指定安装版本的,但是后来我才发现,其实这个安装的就是3.4.4版本…可能这两个是不同含义的版本号? ==please tell me==<br>另外直接安装的话使用的python2.7版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python #进入python2命令行</span><br><span class="line">import cv2 #import刚刚安装的库,如果没有报错则安装成功了</span><br><span class="line">cv2.__version__ #就是这里它告诉它是3.4.4版本</span><br></pre></td></tr></table></figure>
+<p>就好了,这种方法默认是装的python3的OpenCV. </p>
+<p>安装的时候它显示安装的OpenCV版本是4.0.1 就导致我很confused<br>因为老师说了要求3.x.x版本,所以我以为不行<br>确实也可以自己手动指定安装版本的,但是后来我才发现,其实这个安装的就是3.4.4版本…可能这两个是不同含义的版本号? ==please tell me==</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 #进入python3命令行</span><br><span class="line">import cv2 #import刚刚安装的库,如果没有报错则安装成功了</span><br><span class="line">cv2.__version__ #就是这里它告诉它是3.4.4版本</span><br></pre></td></tr></table></figure>
 <h3 id="HelloWorld示例程序"><a href="#HelloWorld示例程序" class="headerlink" title="HelloWorld示例程序"></a>HelloWorld示例程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="comment">#导入OpenCV</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#死循环</span></span><br><span class="line">    ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    cv2.imshow(<span class="string">'hello world'</span>,img)</span><br><span class="line">    key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">    	<span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">        <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
 <p>效果就是打开一个窗口显示摄像头-按帧显示<br>但是我的程序接收不到键盘的输入,就是按了ESC后只会在命令行中显示ESC键值,但不会实际退出,有人能告诉我为啥吗?==😂sorry啦发现我写blog其实是求助了吧==<br>==解决啦== 需要鼠标点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</p>
 
