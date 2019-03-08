@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-07T06:38:55.872Z">
+<meta property="og:updated_time" content="2019-03-08T08:38:03.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV 安装 &amp; Hello World 示例程序">
 <meta name="twitter:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-07T14:38:55+08:00">
-                2019-03-07
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-08T16:38:03+08:00">
+                2019-03-08
               </time>
             
           </span>
@@ -365,7 +365,7 @@
 <p>The next step is to install the Homebrew versions of Python 2.7 and Python 3. It is considered bad form to develop against the system Python as your main interpreter. The system version of Python should serve exactly that.<br><a href="https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/</a></p>
 </blockquote>
 <p>所以还是乖乖安装新的吧<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python python3</span><br></pre></td></tr></table></figure></p>
-<p>这个指令应该是能同时安装python2 和 python3的,但是在我的Mac就是只安装了Python3…所以我用的是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 python3</span><br></pre></td></tr></table></figure></p>
+<p>这个指令应该是能同时安装python2 和 python3的,但是在我的Mac就是只安装了Python3…所以我用的是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 python3 </span><br><span class="line"><span class="meta">#</span>or</span><br><span class="line">brew install python python@2</span><br></pre></td></tr></table></figure></p>
 <p>但是这样装完以后,我看brew管理的包的文件夹下面有<code>python</code> <code>python2</code> <code>python3</code>三种,然后brew现在指定<code>python</code>默指的是<code>python3</code> 我不知道这是重复安装了还是必须要有个<code>python</code>的文件夹? ==please inform me if you know==<br>安装完成后</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which python</span><br><span class="line">which python3</span><br></pre></td></tr></table></figure>
 <p>看一下指向的是不是你自己新安装的python,即路径应该是<code>/usr/local/bin/python</code> and <code>/usr/local/bin/python3</code> 否则如果是<code>/usr/bin/...</code>下的那你用的依然是系统的python</p>
@@ -491,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
