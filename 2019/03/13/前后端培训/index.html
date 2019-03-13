@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
+<meta name="description" content="##  @  配置?@stateless 如果 单例模式-正常new 依赖注入 反射-方法  MVC ORM框架 JPA lombot-自动生成查询的代码函数 object类可以直接用注解-检查前端数据格式 数据库表-扩展-用ID关联另一张表-key(对应每个需要添加的属性)-value java+MVC model view control  controler - 接收输入-调用不同servi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jupyter Kernel 开发">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/13/JupyterKernel开发/index.html">
+<meta property="og:title" content="前后端培训">
+<meta property="og:url" content="https://oliveds.github.io/2019/03/13/前后端培训/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
+<meta property="og:description" content="##  @  配置?@stateless 如果 单例模式-正常new 依赖注入 反射-方法  MVC ORM框架 JPA lombot-自动生成查询的代码函数 object类可以直接用注解-检查前端数据格式 数据库表-扩展-用ID关联另一张表-key(对应每个需要添加的属性)-value java+MVC model view control  controler - 接收输入-调用不同servi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-13T10:20:39.584Z">
+<meta property="og:updated_time" content="2019-03-13T13:39:42.999Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jupyter Kernel 开发">
-<meta name="twitter:description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
+<meta name="twitter:title" content="前后端培训">
+<meta name="twitter:description" content="##  @  配置?@stateless 如果 单例模式-正常new 依赖注入 反射-方法  MVC ORM框架 JPA lombot-自动生成查询的代码函数 object类可以直接用注解-检查前端数据格式 数据库表-扩展-用ID关联另一张表-key(对应每个需要添加的属性)-value java+MVC model view control  controler - 接收输入-调用不同servi">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/13/JupyterKernel开发/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/03/13/前后端培训/">
 
 
 
 
 
-  <title>Jupyter Kernel 开发 | OliveDS's Study Bar</title>
+  <title>前后端培训 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/13/JupyterKernel开发/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/13/前后端培训/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Jupyter Kernel 开发</h1>
+          <h1 class="post-title" itemprop="name headline">前后端培训</h1>
         
 
         <div class="post-meta">
@@ -265,7 +265,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T17:50:09+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T21:33:59+08:00">
                 2019-03-13
               </time>
             
@@ -281,7 +281,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-13T18:20:39+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-13T21:39:42+08:00">
                 2019-03-13
               </time>
             
@@ -300,8 +300,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jupyter/" itemprop="url" rel="index">
-                    <span itemprop="name">Jupyter</span>
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
                   </a>
                 </span>
 
@@ -318,8 +318,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/13/JupyterKernel开发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/13/JupyterKernel开发/" itemprop="commentCount"></span>
+                <a href="/2019/03/13/前后端培训/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/13/前后端培训/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +327,7 @@
 
           
           
-             <span id="/2019/03/13/JupyterKernel开发/" class="leancloud_visitors" data-flag-title="Jupyter Kernel 开发">
+             <span id="/2019/03/13/前后端培训/" class="leancloud_visitors" data-flag-title="前后端培训">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,13 +358,37 @@
       
 
       
-        <h2 id="引言"><a href="#引言" class="headerlink" title="# 引言"></a># 引言</h2><p>一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929</p>
-<p>今天跟蔡博聊过之后感觉…emmm,有不懂的问题真的要直接提问,赶紧问,不要怕丢脸,真的,不要端着,人笨就要多提问,我要赶紧改正太在意别人怎么看我的缺点,我天下第一笨,还有就是别人其实根本没想那么多,是我overthink,以后一定要做最笨的人+最不要脸的人,其实学长们都很好的</p>
-<h1 id="IJAVA-Kernel-安装"><a href="#IJAVA-Kernel-安装" class="headerlink" title="IJAVA Kernel 安装"></a>IJAVA Kernel 安装</h1><h2 id="双-JDK安装"><a href="#双-JDK安装" class="headerlink" title="(双)JDK安装"></a>(双)JDK安装</h2><p>首先需要JDK&gt;9的环境,我别的开发需要JDK7不想卸,参考⤵️</p>
-<p><a href="https://www.jianshu.com/p/913b5168ed6e" target="_blank" rel="noopener">https://www.jianshu.com/p/913b5168ed6e</a></p>
-<p>亲测好使,随时切换</p>
-<h2 id="IJAVA-Kernel-安装-1"><a href="#IJAVA-Kernel-安装-1" class="headerlink" title="IJAVA Kernel 安装"></a>IJAVA Kernel 安装</h2><p><a href="https://github.com/SpencerPark/IJava" target="_blank" rel="noopener">https://github.com/SpencerPark/IJava</a></p>
-<p>后多种安装方式,我用的是Install pre-built binary,装在<code>~/jukernels</code>下了</p>
+        <p>## </p>
+<p>@  配置?@stateless 如果</p>
+<p>单例模式-正常new 依赖注入 反射-方法 </p>
+<p>MVC ORM框架 JPA lombot-自动生成查询的代码函数</p>
+<p>object类可以直接用注解-检查前端数据格式</p>
+<p>数据库表-扩展-用ID关联另一张表-key(对应每个需要添加的属性)-value</p>
+<p>java+MVC</p>
+<p>model view control </p>
+<p>controler - 接收输入-调用不同service</p>
+<p>servlet(底层 IP端口 根据请求路径自己解析e.g. if switch)-分发用户请求给不同service,将结果发给同一view对象,进行渲染</p>
+<p>现在 分布式controlor- 对应不同API-不同路径,进行routing -交给servlet</p>
+<p>新加功能-新建controlor-service具体执行逻辑</p>
+<p>Dao 数据库接口</p>
+<p>RestFUL API 一种规范</p>
+<p>Web1.0-&gt;2.0 静态-&gt;动态 用书数据接收 MVC </p>
+<p>(后端-JSPhtml模板中,整个页面刷新,更新HTML) Ajax-与后端通信,可以实现局部刷新</p>
+<p>HTML 是XML 扩展,浪费空间资源</p>
+<p>Json更节省</p>
+<p>Json DOM树-发现变的内容-更新</p>
+<p>JQuery框架</p>
+<p>MVVM-前端框架-对变量的操作反映到DOM数</p>
+<p>VUE 以前Backbone</p>
+<p>VUE中有很多现成的组件,先制作组件,再组装网页</p>
+<p>Backbone支持MVVM</p>
+<p>Npm 类似maven,管理前端的库,包</p>
+<p>模板需要build成JavaScript</p>
+<p>js-交互逻辑</p>
+<p>hbs-文档结构</p>
+<p>scss-样式</p>
+<p>前端调后端接口,访问云端,访问代理,</p>
+<p>学习能力**:算法(准备) 操作系统等基础,项目其实是次要的(homebrew)</p>
 
       
     </div>
@@ -389,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/13/Kubernetes/" rel="next" title="Kubernetes">
-                <i class="fa fa-chevron-left"></i> Kubernetes
+              <a href="/2019/03/13/JupyterKernel开发/" rel="next" title="Jupyter Kernel 开发">
+                <i class="fa fa-chevron-left"></i> Jupyter Kernel 开发
               </a>
             
           </div>
@@ -398,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/13/前后端培训/" rel="prev" title="前后端培训">
-                前后端培训 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -456,17 +476,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,22 +550,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text"># 引言</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number"></span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
