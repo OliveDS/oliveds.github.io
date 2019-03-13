@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Please contact me about any legal issues. 引言之前写了一篇在Linux虚拟机中的配置😄然而终于服软明明是想消费了买了MacBook Pro所以，本文再在Mac上配置一次～反正之前Linux上没有成功，这波不亏😂 给Mac开光😂这个说法是实验室大佬给的参考他的Blog如何给码农👨‍💻‍的Mac开光-乌云压顶是吧注意安装zsh的时候几个问题  用流量">
+<meta name="description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android API MacOS 开发平台部署">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/05/Android-API-MacOS-开发平台/index.html">
+<meta property="og:title" content="Jupyter Kernel 开发">
+<meta property="og:url" content="https://oliveds.github.io/2019/03/13/JupyterKernel开发/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="Please contact me about any legal issues. 引言之前写了一篇在Linux虚拟机中的配置😄然而终于服软明明是想消费了买了MacBook Pro所以，本文再在Mac上配置一次～反正之前Linux上没有成功，这波不亏😂 给Mac开光😂这个说法是实验室大佬给的参考他的Blog如何给码农👨‍💻‍的Mac开光-乌云压顶是吧注意安装zsh的时候几个问题  用流量">
+<meta property="og:description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T12:35:37.762Z">
+<meta property="og:updated_time" content="2019-03-13T10:20:39.584Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android API MacOS 开发平台部署">
-<meta name="twitter:description" content="Please contact me about any legal issues. 引言之前写了一篇在Linux虚拟机中的配置😄然而终于服软明明是想消费了买了MacBook Pro所以，本文再在Mac上配置一次～反正之前Linux上没有成功，这波不亏😂 给Mac开光😂这个说法是实验室大佬给的参考他的Blog如何给码农👨‍💻‍的Mac开光-乌云压顶是吧注意安装zsh的时候几个问题  用流量">
+<meta name="twitter:title" content="Jupyter Kernel 开发">
+<meta name="twitter:description" content="# 引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/05/Android-API-MacOS-开发平台/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/03/13/JupyterKernel开发/">
 
 
 
 
 
-  <title>Android API MacOS 开发平台部署 | OliveDS's Study Bar</title>
+  <title>Jupyter Kernel 开发 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/05/Android-API-MacOS-开发平台/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/13/JupyterKernel开发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android API MacOS 开发平台部署</h1>
+          <h1 class="post-title" itemprop="name headline">Jupyter Kernel 开发</h1>
         
 
         <div class="post-meta">
@@ -265,8 +265,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T16:28:58+08:00">
-                2019-03-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T17:50:09+08:00">
+                2019-03-13
               </time>
             
 
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T20:35:37+08:00">
-                2019-03-05
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-13T18:20:39+08:00">
+                2019-03-13
               </time>
             
           </span>
@@ -300,8 +300,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Jupyter/" itemprop="url" rel="index">
+                    <span itemprop="name">Jupyter</span>
                   </a>
                 </span>
 
@@ -318,8 +318,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/05/Android-API-MacOS-开发平台/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/05/Android-API-MacOS-开发平台/" itemprop="commentCount"></span>
+                <a href="/2019/03/13/JupyterKernel开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/13/JupyterKernel开发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +327,7 @@
 
           
           
-             <span id="/2019/03/05/Android-API-MacOS-开发平台/" class="leancloud_visitors" data-flag-title="Android API MacOS 开发平台部署">
+             <span id="/2019/03/13/JupyterKernel开发/" class="leancloud_visitors" data-flag-title="Jupyter Kernel 开发">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,37 +358,13 @@
       
 
       
-        <p>Please contact me about any legal issues.</p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>之前写了一篇在Linux虚拟机中的配置😄然而终于服软<del>明明是想消费了</del>买了MacBook Pro<br>所以，本文再在Mac上配置一次～<br><del>反正之前Linux上没有成功，这波不亏😂</del></p>
-<h2 id="给Mac开光"><a href="#给Mac开光" class="headerlink" title="给Mac开光"></a>给Mac开光</h2><p>😂<br>这个说法是实验室大佬给的<br>参考他的Blog<br><a href="https://wyydsb.xin/other/terminal.html#app" target="_blank" rel="noopener">如何给码农👨‍💻‍的Mac开光-乌云压顶是吧</a><br>注意安装zsh的时候几个问题</p>
-<ol>
-<li><p>用流量安装😢<br>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span><br></pre></td></tr></table></figure>
-<p>时Could not resolve host或者速度超慢……大佬说用cellular诚不欺我👹<br>参考下面这个博客<br><a href="https://www.jianshu.com/p/f10ea7b96825" target="_blank" rel="noopener">https://www.jianshu.com/p/f10ea7b96825</a></p>
-</li>
-<li><p>安装brew</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/local --strip</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="3">
-<li>设置 syntax highlighting 时要sudo<h2 id="jdk-安装"><a href="#jdk-安装" class="headerlink" title="jdk 安装"></a>jdk 安装</h2>首先，学长给的环境手册要求的是jdk1.7环境，所以首先需要去<br><a href="https://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html" target="_blank" rel="noopener">Oracle jdk1.7 Download</a><br>下载适用于MacOS的dmg安装程序。（注意jdk1.8之前的版本下载都是需要登录的……我本来想用wget直接下载，但是提醒需要username&amp;password，我就干脆用Chrome直接打开下载的）<br>安装好后需要配置环境变量：</li>
-<li>确认本机所使用的shell是哪个：zsh/bash<br>在命令行中输入<code>echo $SHELL</code> ，<br>如果输出/bin/bash则为bash，<br>如果输出结果为 /bin/zsh则为zsh。</li>
-<li>根据上面不同的结果修改不同的shell配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># for bash</span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"># for zsh</span><br><span class="line">vim ~/.zshrc</span><br><span class="line"># 添加路径</span><br><span class="line">export JAVA_HOME=$(/usr/libexec/java_home)</span><br><span class="line"># for bash</span><br><span class="line">source .bash_profile </span><br><span class="line"># for zsh </span><br><span class="line">source .zshrc。</span><br><span class="line"># 检验安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="SDK-安装"><a href="#SDK-安装" class="headerlink" title="SDK 安装"></a>SDK 安装</h2><blockquote>
-<p>SDK:(software development kit) 软件开发工具包。<br>一般是一些被软件工程师用于为特定的软件包、软件框架、硬件平台、操作系统等建立应用软件的开发工具的集合。<br>The Android SDK provides you the API libraries and developer tools necessary to build, test, and debug apps for Android.(Android SDK提供了你的API函数库和开发工具，建立，测试和调试Android应用程序。)</p>
-</blockquote>
-<p>就是说我们开发Android不一定要装完整的Android Studio，有Android SDK就够了（==correct  me if I’m wrong==）<br>学长直接给了Mac的platform-tools这个包,直接打开,加入.zshrc中的PATH,就可以直接执行adb这个可执行文件了~</p>
-<blockquote>
-<p>Mac系统的环境变量，加载顺序为：<br>/etc/profile<br>/etc/paths<br>~/.bash_profile<br>~/.bash_login<br>~/.profile<br>注意: ~/.bashrc/etc/profile和/etc/paths是系统级别的，系统启动后就会加载。后面几个是当前用户级的环境变量。<br>如果~/.bash_profile存在，后面几个文件就会忽略不读，不存在时，才会以此类推读取后面的文件。<br>~/.bashrc没有上述规则，他始终加载，他是在bash shell打开的时候载入的。<br>在安装了oh my zsh后， .bash_profile 文件中的环境变量就无法起到作用，因为终端默认启动的是zsh，而不是bash shell，所以无法加载。<br>解决方法1：<br>在~/.zshrc配置文件中，增加对.bash_profile的引用：<br><code>source ~/.bash_profile</code><br>解决方法2:<br>可以使用zsh的方法进行配置：<br>（1）可以直接在~/.zshrc中添加path或者环境变量<br>（2）在目录~/oh-my-zsh/custom文件夹下的任何.zsh文件中的环境变量都将会加载。<br>来源: <a href="https://hao5743.github.io/2017/06/28/2017-06-28/" target="_blank" rel="noopener">https://hao5743.github.io/2017/06/28/2017-06-28/</a></p>
-</blockquote>
-<h2 id="JD-GUI-安装"><a href="#JD-GUI-安装" class="headerlink" title="JD GUI 安装"></a>JD GUI 安装</h2><p>JD-GUI就是java反编译的工具啦</p>
-<blockquote>
-<p>JD-GUI is a standalone graphical utility that displays Java source codes of “.class” files. You can browse the reconstructed source code with the JD-GUI for instant access to methods and fields.</p>
-</blockquote>
-<p>至于为什么不是安装 JD-eclipse plugin我也不知道哇，下载链接是：<br><a href="http://jd.benow.ca/" target="_blank" rel="noopener">http://jd.benow.ca/</a><br>同样的，下载mac版本，解压……然后把JD-GUI那个可执行文件拖到Finder里的Applications里面,就可以直接打开使用了~</p>
-<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>在Mac上安装真是so easy…不知道为啥我之前在Ubuntu上安装的时候怎么那么多情况🐷</p>
+        <h2 id="引言"><a href="#引言" class="headerlink" title="# 引言"></a># 引言</h2><p>一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929</p>
+<p>今天跟蔡博聊过之后感觉…emmm,有不懂的问题真的要直接提问,赶紧问,不要怕丢脸,真的,不要端着,人笨就要多提问,我要赶紧改正太在意别人怎么看我的缺点,我天下第一笨,还有就是别人其实根本没想那么多,是我overthink,以后一定要做最笨的人+最不要脸的人,其实学长们都很好的</p>
+<h1 id="IJAVA-Kernel-安装"><a href="#IJAVA-Kernel-安装" class="headerlink" title="IJAVA Kernel 安装"></a>IJAVA Kernel 安装</h1><h2 id="双-JDK安装"><a href="#双-JDK安装" class="headerlink" title="(双)JDK安装"></a>(双)JDK安装</h2><p>首先需要JDK&gt;9的环境,我别的开发需要JDK7不想卸,参考⤵️</p>
+<p><a href="https://www.jianshu.com/p/913b5168ed6e" target="_blank" rel="noopener">https://www.jianshu.com/p/913b5168ed6e</a></p>
+<p>亲测好使,随时切换</p>
+<h2 id="IJAVA-Kernel-安装-1"><a href="#IJAVA-Kernel-安装-1" class="headerlink" title="IJAVA Kernel 安装"></a>IJAVA Kernel 安装</h2><p><a href="https://github.com/SpencerPark/IJava" target="_blank" rel="noopener">https://github.com/SpencerPark/IJava</a></p>
+<p>后多种安装方式,我用的是Install pre-built binary,装在<code>~/jukernels</code>下了</p>
 
       
     </div>
@@ -413,8 +389,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/04/OpenCV3-绘制立方体-Python2/" rel="next" title="OpenCV3 绘制立方体 Python2">
-                <i class="fa fa-chevron-left"></i> OpenCV3 绘制立方体 Python2
+              <a href="/2019/03/13/Kubernetes/" rel="next" title="Kubernetes">
+                <i class="fa fa-chevron-left"></i> Kubernetes
               </a>
             
           </div>
@@ -422,10 +398,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/05/Python-Jupyter-使用/" rel="prev" title="Python Jupyter 使用">
-                Python Jupyter 使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给Mac开光"><span class="nav-number">2.</span> <span class="nav-text">给Mac开光</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk-安装"><span class="nav-number">3.</span> <span class="nav-text">jdk 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDK-安装"><span class="nav-number">4.</span> <span class="nav-text">SDK 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JD-GUI-安装"><span class="nav-number">5.</span> <span class="nav-text">JD GUI 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感想"><span class="nav-number">6.</span> <span class="nav-text">感想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text"># 引言</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number"></span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li></div>
             
 
           </div>

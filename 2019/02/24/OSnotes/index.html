@@ -88,7 +88,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026165444864.bmp?q-sign-algorithm=sha1&q-ak=AKIDcfowjZ3QQXxQLOuGEQfKgF4yslRo26Lb&q-sign-time=1551764724;1551766524&q-key-time=1551764724;1551766524&q-header-list=&q-url-param-list=&q-signature=ed134d0e138d05a9b8fcec7a644c4100aad093ac&x-cos-security-token=d726e95e40868c76ff1bff29d38c7b20dca1121610001">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/20151026170356243.bmp?q-sign-algorithm=sha1&q-ak=AKIDy3EGv5wi5qyfi9aAjBnDCkiqKixDuFqK&q-sign-time=1551764756;1551766556&q-key-time=1551764756;1551766556&q-header-list=&q-url-param-list=&q-signature=482117859aec765ff9e3c380b8f066f8904eeeb2&x-cos-security-token=c7cc50ed43f05fe4351fc5ef616bd68f455dc34a10001">
-<meta property="og:updated_time" content="2019-03-05T12:36:13.852Z">
+<meta property="og:updated_time" content="2019-03-11T10:07:04.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统高级课程-笔记">
 <meta name="twitter:description" content="This is my notes on OS course, if there’s any kind of privacy issues or legal problems, please contact me to take it down. 引言Course Introduction operating systems advanced class会比本科的操作系统更难，进阶建议本科没学过操作">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-05T20:36:13+08:00">
-                2019-03-05
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-11T18:07:04+08:00">
+                2019-03-11
               </time>
             
           </span>
@@ -588,7 +588,87 @@
 <p>排队&gt;300时间周期 平衡集管理器(还有其他工作)1s写一次,扫描一次就绪队列,将优先级提到最高15,时间配额为正常值*4,用完时间配额后优先级恢复原状</p>
 </li>
 </ol>
-<h3 id="Linux-CFS"><a href="#Linux-CFS" class="headerlink" title="Linux CFS"></a>Linux CFS</h3><h1 id="Nachos"><a href="#Nachos" class="headerlink" title="Nachos"></a>Nachos</h1><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>规定了依赖关系,顺序,把Makefile基本看懂</p>
+<h3 id="Linux-CFS"><a href="#Linux-CFS" class="headerlink" title="Linux CFS"></a>Linux CFS</h3><h1 id="中断-异常"><a href="#中断-异常" class="headerlink" title="中断/异常"></a>中断/异常</h1><p>态: </p>
+<p>用户态/内核态</p>
+<p>在x86中对应R0/R3(操作系统只需要两个,可能虚拟机等需要…)</p>
+<p>中断向量表:</p>
+<p>操作系统</p>
+<ul>
+<li>对下 依据硬件 物理机器界面</li>
+<li>对上 提供接口 虚拟机器界面</li>
+</ul>
+<h2 id="异常控制流-ECF"><a href="#异常控制流-ECF" class="headerlink" title="异常控制流 ECF"></a>异常控制流 ECF</h2><p>指令上CPU后就会顺序执行,传统程序都是顺序的,后来加入分支/循环-均属于异常控制流,再后来加入函数调用-就是控制流改变</p>
+<p>ECF是使整个系统转起来的关键,理解整个系统如何工作</p>
+<p>用户应用程序不断调用OS(系统调用)完成任务,在再返回</p>
+<p>异常/中断有区别</p>
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>平时声明的变量是内存-用寄存器更快</p>
+<p>寄存器:用户可见/控制和状态(仅OS可用</p>
+<p>硬件机制:防止OS具有所有权限? CPU需要支持特权状态(硬件机制)</p>
+<p>CPU的不同状态2/3/4 PSW中的一位 </p>
+<p>e.g. x86中EFLAGS寄存器 IO PL记录特权级, IF TF辅助位</p>
+<p>操作系统只需要两个态:用户态,内核态</p>
+<p>开关中断,内存清零,修改程序状态字都是特权指令</p>
+<p><strong>仿管指令=陷入指令(maybe int/trap/syscall/…)</strong>,提供给用户程序的接口,用于调用OS的功能重要但是都需要访问? 非特权指令</p>
+<h2 id="状态转换"><a href="#状态转换" class="headerlink" title="状态转换"></a>状态转换</h2><p><strong>中断/异常/陷入机制</strong> 用户态进入内核态的<strong>唯一</strong>路径</p>
+<p>调度(决定是否需要换状态),<strong>设置程序状态字PSW</strong> 用内核态回用户态</p>
+<h2 id="中断-异常机制"><a href="#中断-异常机制" class="headerlink" title="中断/异常机制"></a>中断/异常机制</h2><ul>
+<li><p>中断,为了支持CPU和设备之间的并行操作(CPU启动设备后,设备可以独立工作</p>
+</li>
+<li><p>异常:CPU执行指令时本身出现的问题,<strong>系统调用,page fault,…</strong></p>
+</li>
+</ul>
+<p>(也可能分别叫外中断/内中断)</p>
+<p>通过硬件与软件结合实现</p>
+<p>现在应该叫<strong>中断/异常机制</strong> CPU对系统发生的某个事件作出的一种反应,保留现场,自动转去(<strong>硬件</strong>的机制实现-OS与硬件紧密结合的约定)执行相应的事件的处理程序,处理完后返回<del>断点继续执行</del>调度,在以后某个时刻,等待被调度上后继续执行</p>
+<h3 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h3><p>陷入trap: 返回到下一条</p>
+<p>故障fault: 返回原指令?</p>
+<p>执行完一条指令,(会对中断进行检查,若有中断将中断码送入PSW相应位,设置中断向量),在响应下一条指令前-响应中断,响应后(被重新调度后)回到下一条指令</p>
+<h3 id="中断向量"><a href="#中断向量" class="headerlink" title="中断向量"></a>中断向量</h3><p>内存单元,放入中断处理程序的入口地址和程序运行所需的处理机状态字,指向一段对应的中断处理程序</p>
+<p>硬件完成-按中断码,找中断向量表(一般在内存低地址位置-硬件知晓)(linux中系统调用在128)</p>
+<h3 id="中断响应"><a href="#中断响应" class="headerlink" title="中断响应"></a>中断响应</h3><p>栈分为 用户栈,内核栈-只有一个栈指针,出于什么态就指向哪里</p>
+<p>硬件将中断先放入中断装置中,CPU在执行完指令后检查中断,</p>
+<p>硬件保存现场(发生中断时,硬件将PSW和PC推入栈中,其他的由软件负责推入栈)</p>
+<p>硬件根据中断码查表,PC变为处理程序的入口地址,把中断处理程序…硬件将CPU控制权交给中断处理程序 </p>
+<p>中断处理程序由<strong>软件</strong>(前面都是硬件)完成</p>
+<p>…</p>
+<h3 id="中断处理程序"><a href="#中断处理程序" class="headerlink" title="中断处理程序"></a>中断处理程序</h3><p>(设计OS时就编写好的)</p>
+<p>保存相关寄存器信息(堆栈),分析原因(根据状态码),执行处理,恢复现场继续执行(要等调度后,若直接调度到-从栈中取/若没被调度,放入PCB)</p>
+<p>I/O中断:正常(完成)/异常(错误)</p>
+<h2 id="x86的中断处理"><a href="#x86的中断处理" class="headerlink" title="x86的中断处理"></a>x86的中断处理</h2><p>中断:硬件信号引发的 <strong>有中断码</strong>,异步处理</p>
+<p>异常:指令执行引发的 <strong>无编码</strong>,但x86中对有些异常会产生硬件出错码</p>
+<p>中断向量/中断描述符/门描述符(-linux,只用中断门()进来后禁止中断,关门)&amp;陷阱门(不会关门))都是数据结构,相似东西</p>
+<p>系统调用:异常的一种,用户态进入内核态的唯一入口</p>
+<p>保护模式:寻址-全局描述符表中段描述符中的基地址+中断描述符中(16+16)偏移量???</p>
+<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>用户编程时可以调用的操作系统的功能,从用户态-&gt;内核态</p>
+<p>应用程序可以直接调系统调用,也可以通过库函数/API调用系统调用</p>
+<p>内核函数:可能对应多个系统调用</p>
+<p>e.g. printf()-&gt;系统调用的write()</p>
+<p>可能有很多系统调用,但都通过中断向量表中的某一行进入-选择一条特殊指令作为陷入指令-每个系统调用具有编号和参数-每个系统调用的服务代码有入口地址,位于</p>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
+<li><p>只有一个指令进入系统调用,由这个陷入指令携带的参数长度有限</p>
+</li>
+<li><p>所以用通用寄存器-用户可见寄存器,用户内核可访问,<strong>好方法</strong></p>
+</li>
+<li><p>内存中开辟专门堆栈区-麻烦</p>
+</li>
+</ul>
+<p>编号放在一个专用寄存器中,eax存放,还有其他参数推入寄存器</p>
+<ol>
+<li><p>int $0x80 特殊陷入指令:<strong>硬件</strong>保护现场,硬件查<strong>中断向量表</strong>-其中填写的是系统调用的总入口程序</p>
+</li>
+<li><p>系统调用总入口程序:<strong>软件</strong>保护现场(内核堆栈) 根据eax查<strong>系统调用表</strong></p>
+</li>
+<li>执行系统调用</li>
+<li>恢复现场…</li>
+</ol>
+<p>15 陷阱门,不关门,还可以进来新的系统调用</p>
+<p>3 </p>
+<p>栈指针,四级,每级都有SS ESP栈指针,用哪级就从TSS中装哪个</p>
+<p>system_call 系统调用总入口,</p>
+<p>eax回去的时候存返回值</p>
+<p>crl+C 中断 其实就是向进程发信号-Q(uit)</p>
+<p>need_resched 是否需要重新调度-信号</p>
+<h1 id="Nachos"><a href="#Nachos" class="headerlink" title="Nachos"></a>Nachos</h1><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>规定了依赖关系,顺序,把Makefile基本看懂</p>
 <h2 id="Nachos框架"><a href="#Nachos框架" class="headerlink" title="Nachos框架"></a>Nachos框架</h2><ol>
 <li>内核几部分-全局变量</li>
 <li>添加HelloWorld测试?</li>
@@ -709,7 +789,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -720,7 +800,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -777,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Course-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Course Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统能力培养"><span class="nav-number">1.1.1.</span> <span class="nav-text">系统能力培养</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三个层次："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">三个层次：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题："><span class="nav-number">1.1.1.2.</span> <span class="nav-text">问题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教学目的："><span class="nav-number">1.1.2.</span> <span class="nav-text">教学目的：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教学计划："><span class="nav-number">1.1.3.</span> <span class="nav-text">教学计划：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课程环节："><span class="nav-number">1.1.4.</span> <span class="nav-text">课程环节：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考书："><span class="nav-number">1.1.5.</span> <span class="nav-text">参考书：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nachos操作系统"><span class="nav-number">1.2.</span> <span class="nav-text">Nachos操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#e-g-线程切换"><span class="nav-number">1.2.1.</span> <span class="nav-text">e.g. 线程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nachos体系结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">Nachos体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实习要求"><span class="nav-number">1.2.3.</span> <span class="nav-text">实习要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nachos系统源代码树结构"><span class="nav-number">1.2.4.</span> <span class="nav-text">Nachos系统源代码树结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XV6"><span class="nav-number">1.3.</span> <span class="nav-text">XV6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程目标"><span class="nav-number">1.4.</span> <span class="nav-text">课程目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型名词术语"><span class="nav-number">1.4.1.</span> <span class="nav-text">典型名词术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高速缓存-vs-TLB-vs-块高速缓存-Linux-文件缓存-Windows"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">高速缓存 vs TLB vs 块高速缓存(Linux)/文件缓存(Windows)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它典型名词术语-E-G"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">其它典型名词术语 E.G.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回顾知识点"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">回顾知识点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地位"><span class="nav-number">1.5.1.</span> <span class="nav-text">地位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称"><span class="nav-number">1.5.2.</span> <span class="nav-text">名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Helloworld-程序运行时操作系统作用"><span class="nav-number">1.5.3.</span> <span class="nav-text">Helloworld 程序运行时操作系统作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">1.6.</span> <span class="nav-text">作业</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器调度"><span class="nav-number">2.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三个层次"><span class="nav-number">2.1.</span> <span class="nav-text">三个层次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器调度-1"><span class="nav-number">2.2.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU调度时机"><span class="nav-number">2.2.1.</span> <span class="nav-text">CPU调度时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程切换"><span class="nav-number">2.2.2.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.2.3.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换开销"><span class="nav-number">2.2.4.</span> <span class="nav-text">上下文切换开销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法"><span class="nav-number">2.2.5.</span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级和优先数"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">优先级和优先数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#就绪队列组织"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">就绪队列组织</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抢占-amp-非抢占"><span class="nav-number">2.2.5.3.</span> <span class="nav-text">抢占&amp;非抢占</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O密集型-CPU密集型进程"><span class="nav-number">2.2.5.4.</span> <span class="nav-text">I/O密集型/CPU密集型进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片"><span class="nav-number">2.2.5.5.</span> <span class="nav-text">时间片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同调度算法"><span class="nav-number">2.2.6.</span> <span class="nav-text">不同调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级反转-反置"><span class="nav-number">2.2.6.1.</span> <span class="nav-text">优先级反转/反置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.2.6.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列"><span class="nav-number">2.2.6.3.</span> <span class="nav-text">多级反馈队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个例子"><span class="nav-number">2.2.6.4.</span> <span class="nav-text">一个例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型系统"><span class="nav-number">2.3.</span> <span class="nav-text">典型系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.3.1.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程优先级"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">线程优先级:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度策略"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">调度策略:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级提升-amp-时间配额调整"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">优先级提升&amp;时间配额调整</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-CFS"><span class="nav-number">2.3.2.</span> <span class="nav-text">Linux CFS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nachos"><span class="nav-number">3.</span> <span class="nav-text">Nachos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">3.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nachos框架"><span class="nav-number">3.2.</span> <span class="nav-text">Nachos框架</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Course-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Course Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统能力培养"><span class="nav-number">1.1.1.</span> <span class="nav-text">系统能力培养</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三个层次："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">三个层次：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题："><span class="nav-number">1.1.1.2.</span> <span class="nav-text">问题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教学目的："><span class="nav-number">1.1.2.</span> <span class="nav-text">教学目的：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#教学计划："><span class="nav-number">1.1.3.</span> <span class="nav-text">教学计划：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课程环节："><span class="nav-number">1.1.4.</span> <span class="nav-text">课程环节：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考书："><span class="nav-number">1.1.5.</span> <span class="nav-text">参考书：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nachos操作系统"><span class="nav-number">1.2.</span> <span class="nav-text">Nachos操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#e-g-线程切换"><span class="nav-number">1.2.1.</span> <span class="nav-text">e.g. 线程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nachos体系结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">Nachos体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实习要求"><span class="nav-number">1.2.3.</span> <span class="nav-text">实习要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nachos系统源代码树结构"><span class="nav-number">1.2.4.</span> <span class="nav-text">Nachos系统源代码树结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XV6"><span class="nav-number">1.3.</span> <span class="nav-text">XV6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程目标"><span class="nav-number">1.4.</span> <span class="nav-text">课程目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型名词术语"><span class="nav-number">1.4.1.</span> <span class="nav-text">典型名词术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高速缓存-vs-TLB-vs-块高速缓存-Linux-文件缓存-Windows"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">高速缓存 vs TLB vs 块高速缓存(Linux)/文件缓存(Windows)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它典型名词术语-E-G"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">其它典型名词术语 E.G.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回顾知识点"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">回顾知识点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.5.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地位"><span class="nav-number">1.5.1.</span> <span class="nav-text">地位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称"><span class="nav-number">1.5.2.</span> <span class="nav-text">名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Helloworld-程序运行时操作系统作用"><span class="nav-number">1.5.3.</span> <span class="nav-text">Helloworld 程序运行时操作系统作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">1.6.</span> <span class="nav-text">作业</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器调度"><span class="nav-number">2.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三个层次"><span class="nav-number">2.1.</span> <span class="nav-text">三个层次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理器调度-1"><span class="nav-number">2.2.</span> <span class="nav-text">处理器调度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU调度时机"><span class="nav-number">2.2.1.</span> <span class="nav-text">CPU调度时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程切换"><span class="nav-number">2.2.2.</span> <span class="nav-text">进程切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.2.3.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换开销"><span class="nav-number">2.2.4.</span> <span class="nav-text">上下文切换开销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度算法"><span class="nav-number">2.2.5.</span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级和优先数"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">优先级和优先数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#就绪队列组织"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">就绪队列组织</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抢占-amp-非抢占"><span class="nav-number">2.2.5.3.</span> <span class="nav-text">抢占&amp;非抢占</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O密集型-CPU密集型进程"><span class="nav-number">2.2.5.4.</span> <span class="nav-text">I/O密集型/CPU密集型进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间片"><span class="nav-number">2.2.5.5.</span> <span class="nav-text">时间片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同调度算法"><span class="nav-number">2.2.6.</span> <span class="nav-text">不同调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级反转-反置"><span class="nav-number">2.2.6.1.</span> <span class="nav-text">优先级反转/反置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决"><span class="nav-number">2.2.6.2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多级反馈队列"><span class="nav-number">2.2.6.3.</span> <span class="nav-text">多级反馈队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一个例子"><span class="nav-number">2.2.6.4.</span> <span class="nav-text">一个例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#典型系统"><span class="nav-number">2.3.</span> <span class="nav-text">典型系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.3.1.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程优先级"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">线程优先级:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度策略"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">调度策略:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级提升-amp-时间配额调整"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">优先级提升&amp;时间配额调整</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-CFS"><span class="nav-number">2.3.2.</span> <span class="nav-text">Linux CFS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断-异常"><span class="nav-number">3.</span> <span class="nav-text">中断/异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常控制流-ECF"><span class="nav-number">3.1.</span> <span class="nav-text">异常控制流 ECF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">3.2.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换"><span class="nav-number">3.3.</span> <span class="nav-text">状态转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断-异常机制"><span class="nav-number">3.4.</span> <span class="nav-text">中断/异常机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断"><span class="nav-number">3.4.1.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断向量"><span class="nav-number">3.4.2.</span> <span class="nav-text">中断向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断响应"><span class="nav-number">3.4.3.</span> <span class="nav-text">中断响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断处理程序"><span class="nav-number">3.4.4.</span> <span class="nav-text">中断处理程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x86的中断处理"><span class="nav-number">3.5.</span> <span class="nav-text">x86的中断处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用"><span class="nav-number">3.6.</span> <span class="nav-text">系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">3.6.1.</span> <span class="nav-text">参数传递</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nachos"><span class="nav-number">4.</span> <span class="nav-text">Nachos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile"><span class="nav-number">4.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nachos框架"><span class="nav-number">4.2.</span> <span class="nav-text">Nachos框架</span></a></li></ol></li></ol></div>
             
 
           </div>
