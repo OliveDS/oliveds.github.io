@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta name="description" content="Texture Analyse 纹理提取LBP一种常用的纹理提取方法是LBP(Local Binary Pattern),它是一种描述图像特征像素点与各个像素点之间的灰度关系的局部特征的非参数算法. 灰度不变性基本LBP算法通过用一个8-bit数表示像素点与周围8个像素点之间灰度大小关系,能够将具有相同灰度变化趋势的区域用同样的颜色表示出来,从来显示出图像的纹理特征. 可以使用Python的ski">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenCV 安装 &amp; Hello World 示例程序">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/index.html">
+<meta property="og:title" content="OpenCV Texture 纹理处理">
+<meta property="og:url" content="https://oliveds.github.io/2019/03/15/OpenCV-texture/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta property="og:description" content="Texture Analyse 纹理提取LBP一种常用的纹理提取方法是LBP(Local Binary Pattern),它是一种描述图像特征像素点与各个像素点之间的灰度关系的局部特征的非参数算法. 灰度不变性基本LBP算法通过用一个8-bit数表示像素点与周围8个像素点之间灰度大小关系,能够将具有相同灰度变化趋势的区域用同样的颜色表示出来,从来显示出图像的纹理特征. 可以使用Python的ski">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-08T08:38:03.626Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-original.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-gray.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-lbp.png">
+<meta property="og:updated_time" content="2019-03-15T12:26:35.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenCV 安装 &amp; Hello World 示例程序">
-<meta name="twitter:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta name="twitter:title" content="OpenCV Texture 纹理处理">
+<meta name="twitter:description" content="Texture Analyse 纹理提取LBP一种常用的纹理提取方法是LBP(Local Binary Pattern),它是一种描述图像特征像素点与各个像素点之间的灰度关系的局部特征的非参数算法. 灰度不变性基本LBP算法通过用一个8-bit数表示像素点与周围8个像素点之间灰度大小关系,能够将具有相同灰度变化趋势的区域用同样的颜色表示出来,从来显示出图像的纹理特征. 可以使用Python的ski">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-original.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/03/15/OpenCV-texture/">
 
 
 
 
 
-  <title>OpenCV 安装 & Hello World 示例程序 | OliveDS's Study Bar</title>
+  <title>OpenCV Texture 纹理处理 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/15/OpenCV-texture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +257,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OpenCV 安装 & Hello World 示例程序</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV Texture 纹理处理</h1>
         
 
         <div class="post-meta">
@@ -265,8 +269,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-04T10:02:54+08:00">
-                2019-03-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-15T18:25:09+08:00">
+                2019-03-15
               </time>
             
 
@@ -281,8 +285,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-08T16:38:03+08:00">
-                2019-03-08
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-15T20:26:35+08:00">
+                2019-03-15
               </time>
             
           </span>
@@ -318,8 +322,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/04/OpenCV 安装 & Hello World 示例程序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/OpenCV 安装 & Hello World 示例程序/" itemprop="commentCount"></span>
+                <a href="/2019/03/15/OpenCV-texture/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/15/OpenCV-texture/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +331,7 @@
 
           
           
-             <span id="/2019/03/04/OpenCV 安装 & Hello World 示例程序/" class="leancloud_visitors" data-flag-title="OpenCV 安装 & Hello World 示例程序">
+             <span id="/2019/03/15/OpenCV-texture/" class="leancloud_visitors" data-flag-title="OpenCV Texture 纹理处理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,23 +362,21 @@
       
 
       
-        <h2 id="安装OpenCV"><a href="#安装OpenCV" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h2><h3 id="安装-Xcode"><a href="#安装-Xcode" class="headerlink" title="安装 Xcode"></a>安装 Xcode</h3><p>直接在APP Store中下载安装即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo xcodebuild -license</span><br><span class="line">sudo xcode-select --install</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><p>≈Mac上的apt-get<br>参考 Mac API那篇文章,那里已经安装了<br>安装完可以用<code>brew doctor</code>检查一下<br>如果有Warning的话根据提示执行一下就好了</p>
-<h3 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h3><p>其实Mac上已经有Python 2.7<br>但是看了一篇文章这样讲的</p>
-<blockquote>
-<p>The next step is to install the Homebrew versions of Python 2.7 and Python 3. It is considered bad form to develop against the system Python as your main interpreter. The system version of Python should serve exactly that.<br><a href="https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/</a></p>
-</blockquote>
-<p>所以还是乖乖安装新的吧<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python python3</span><br></pre></td></tr></table></figure></p>
-<p>这个指令应该是能同时安装python2 和 python3的,但是在我的Mac就是只安装了Python3…所以我用的是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 python3 </span><br><span class="line"><span class="meta">#</span>or</span><br><span class="line">brew install python python@2</span><br></pre></td></tr></table></figure></p>
-<p>但是这样装完以后,我看brew管理的包的文件夹下面有<code>python</code> <code>python2</code> <code>python3</code>三种,然后brew现在指定<code>python</code>默指的是<code>python3</code> 我不知道这是重复安装了还是必须要有个<code>python</code>的文件夹? ==please inform me if you know==<br>安装完成后</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which python</span><br><span class="line">which python3</span><br></pre></td></tr></table></figure>
-<p>看一下指向的是不是你自己新安装的python,即路径应该是<code>/usr/local/bin/python</code> and <code>/usr/local/bin/python3</code> 否则如果是<code>/usr/bin/...</code>下的那你用的依然是系统的python</p>
-<h3 id="安装OpenCV-1"><a href="#安装OpenCV-1" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h3><p>其实简单的方法只要<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure></p>
-<p>就好了.如果你装的是python2.7,那它就会给你装opencv3.4.5(current version); 如果你装了python3,那么brew认为默认的python是python3,给你装的就是opencv4.0.1</p>
-<p>我当时写这篇文章的时候只装好了Python2,所以:装的python2.7的OpenCV. 但是安装的时候它显示安装的OpenCV版本是4.0.1 就导致我很confused<br>因为老师说了要求3.x.x版本,所以我以为不行<br>确实也可以自己手动指定安装版本的,但是后来我才发现,其实这个安装的就是3.4.4版本…可能这两个是不同含义的版本号? ==please tell me==<br>另外直接安装的话使用的python2.7版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python #进入python2命令行</span><br><span class="line">import cv2 #import刚刚安装的库,如果没有报错则安装成功了</span><br><span class="line">cv2.__version__ #就是这里它告诉它是3.4.4版本</span><br></pre></td></tr></table></figure>
-<h3 id="HelloWorld示例程序"><a href="#HelloWorld示例程序" class="headerlink" title="HelloWorld示例程序"></a>HelloWorld示例程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="comment">#导入OpenCV</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#死循环</span></span><br><span class="line">    ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    cv2.imshow(<span class="string">'hello world'</span>,img)</span><br><span class="line">    key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">    	<span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">        <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
-<p>效果就是打开一个窗口显示摄像头-按帧显示<br>但是我的程序接收不到键盘的输入,就是按了ESC后只会在命令行中显示ESC键值,但不会实际退出,有人能告诉我为啥吗?==😂sorry啦发现我写blog其实是求助了吧==<br>==解决啦== 需要鼠标点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</p>
+        <h1 id="Texture-Analyse-纹理提取"><a href="#Texture-Analyse-纹理提取" class="headerlink" title="Texture Analyse 纹理提取"></a>Texture Analyse 纹理提取</h1><h2 id="LBP"><a href="#LBP" class="headerlink" title="LBP"></a>LBP</h2><p>一种常用的纹理提取方法是<strong>LBP(Local Binary Pattern)</strong>,它是一种描述图像特征像素点与各个像素点之间的灰度关系的局部特征的非参数算法.</p>
+<p><strong>灰度不变性基本LBP算法</strong>通过用一个8-bit数表示像素点与周围8个像素点之间灰度大小关系,能够将具有相同灰度变化趋势的区域用同样的颜色表示出来,从来显示出图像的纹理特征.</p>
+<p>可以使用Python的<code>skimage</code>库中的<code>local_binary_pattern()</code>函数方便地实施LBP</p>
+<p>这里我们使用比较原始的方法对每个像素进行检测</p>
+<h3 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">infmg=cv2.imread(<span class="string">"woods.png"</span>,<span class="number">1</span>)<span class="comment"># flags&gt;0,以BGR格式读入,忽略透明度的channel</span></span><br><span class="line">cv2.imshow(<span class="string">"Original"</span>,infmg)<span class="comment"># 显示图像</span></span><br><span class="line">grayimg=cv2.cvtColor(infmg,cv2.COLOR_BGR2GRAY)<span class="comment"># 转换为灰度图像</span></span><br><span class="line">cv2.imshow(<span class="string">"Gray Image"</span>,grayimg)<span class="comment"># 显示图像</span></span><br><span class="line">rows,cols,channels=infmg.shape<span class="comment"># 获取图像尺寸及通道(BGR三通道)</span></span><br><span class="line">lbpmem=np.zeros((rows,cols,<span class="number">1</span>),np.uint8)<span class="comment"># 新建存储纹理的灰度图像</span></span><br><span class="line">tmp=np.zeros((<span class="number">8</span>,<span class="number">1</span>,<span class="number">1</span>),np.uint8)<span class="comment"># 存储8-bit值</span></span><br><span class="line"><span class="comment"># 图像最边缘一周的像素不具有8个neighbor,忽略</span></span><br><span class="line"><span class="comment"># 依次确定像素边缘一周的取值</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,rows<span class="number">-1</span>):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,cols<span class="number">-1</span>):</span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i<span class="number">-1</span>,j<span class="number">-1</span>]):</span><br><span class="line">		   tmp[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i<span class="number">-1</span>,j]):</span><br><span class="line">		   tmp[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">1</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i<span class="number">-1</span>,j+<span class="number">1</span>]):</span><br><span class="line">		   tmp[<span class="number">2</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">2</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i,j+<span class="number">1</span>]):</span><br><span class="line">		   tmp[<span class="number">3</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">3</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i+<span class="number">1</span>,j+<span class="number">1</span>]):</span><br><span class="line">		   tmp[<span class="number">4</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">4</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i+<span class="number">1</span>,j]):</span><br><span class="line">		   tmp[<span class="number">5</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">5</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i+<span class="number">1</span>,j<span class="number">-1</span>]):</span><br><span class="line">		   tmp[<span class="number">6</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		   tmp[<span class="number">6</span>]=<span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span>(grayimg[i,j]&lt;grayimg[i,j<span class="number">-1</span>]):</span><br><span class="line">		   tmp[<span class="number">7</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">		  tmp[<span class="number">7</span>]=<span class="number">0</span>  </span><br><span class="line">		<span class="comment"># 计算灰度值           </span></span><br><span class="line">		lbpmem[i,j]=tmp[<span class="number">7</span>]*<span class="number">128</span>+tmp[<span class="number">6</span>]*<span class="number">64</span>+tmp[<span class="number">5</span>]*<span class="number">32</span>+tmp[<span class="number">4</span>]*<span class="number">16</span>+tmp[<span class="number">3</span>]*<span class="number">8</span>+tmp[<span class="number">2</span>]*<span class="number">4</span>+tmp[<span class="number">1</span>]*<span class="number">2</span>+tmp[<span class="number">0</span>]</span><br><span class="line">		<span class="comment"># print(lbpmem)</span></span><br><span class="line">cv2.imshow(<span class="string">"LBP Image"</span>,lbpmem)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#关闭窗口/键盘ESC退出</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><h4 id="原始图像"><a href="#原始图像" class="headerlink" title="原始图像"></a>原始图像</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-original.png" alt></p>
+<h4 id="灰度图像"><a href="#灰度图像" class="headerlink" title="灰度图像"></a>灰度图像</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-gray.png" alt></p>
+<h4 id="LBP图像"><a href="#LBP图像" class="headerlink" title="LBP图像"></a>LBP图像</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-lbp.png" alt></p>
+<h2 id="边缘提取"><a href="#边缘提取" class="headerlink" title="边缘提取"></a>边缘提取</h2><p>可以使用Python的<code>skimage</code>库中的<code>filters.sobel()</code>函数方便地进行边缘提取</p>
+<h1 id="Texture-Synthesis-纹理合成"><a href="#Texture-Synthesis-纹理合成" class="headerlink" title="Texture Synthesis 纹理合成"></a>Texture Synthesis 纹理合成</h1><p>有以下几种方法:</p>
+<ol>
+<li>Pyramid-based</li>
+<li>Non-parametric Sampling</li>
+<li>Deep Learning</li>
+</ol>
 
       
     </div>
@@ -399,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/大数据专题notes/" rel="next" title="大数据专题-笔记">
-                <i class="fa fa-chevron-left"></i> 大数据专题-笔记
+              <a href="/2019/03/14/软件工程-黄罡讲座/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -408,10 +410,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/04/OpenCV3-绘制立方体-Python2/" rel="prev" title="OpenCV3 绘制立方体 Python2">
-                OpenCV3 绘制立方体 Python2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -559,7 +557,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装OpenCV"><span class="nav-number">1.</span> <span class="nav-text">安装OpenCV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Xcode"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Xcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Homebrew"><span class="nav-number">1.2.</span> <span class="nav-text">安装Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Python"><span class="nav-number">1.3.</span> <span class="nav-text">安装Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装OpenCV-1"><span class="nav-number">1.4.</span> <span class="nav-text">安装OpenCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld示例程序"><span class="nav-number">1.5.</span> <span class="nav-text">HelloWorld示例程序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Analyse-纹理提取"><span class="nav-number">1.</span> <span class="nav-text">Texture Analyse 纹理提取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LBP"><span class="nav-number">1.1.</span> <span class="nav-text">LBP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序代码"><span class="nav-number">1.1.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">运行结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始图像"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">原始图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#灰度图像"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">灰度图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LBP图像"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">LBP图像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边缘提取"><span class="nav-number">1.2.</span> <span class="nav-text">边缘提取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Synthesis-纹理合成"><span class="nav-number">2.</span> <span class="nav-text">Texture Synthesis 纹理合成</span></a></li></ol></div>
             
 
           </div>

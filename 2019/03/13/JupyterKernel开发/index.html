@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-14T01:56:12.295Z">
+<meta property="og:updated_time" content="2019-03-15T03:52:04.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter Kernel 开发">
 <meta name="twitter:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-14T09:56:12+08:00">
-                2019-03-14
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-15T11:52:04+08:00">
+                2019-03-15
               </time>
             
           </span>
@@ -377,7 +377,82 @@
 <p><code>If you are interested in building your own kernel that runs on the JVM check out the related project that this kernel is build on</code></p>
 <p>另外这个<code>jvm-basekernel</code>解决的是<code>aims to cover the messaging protocol alone</code>部分的问题,程序员至少需要将<code>evl</code>部分写好,才能完成一个kernel的基本工作.</p>
 <p>也就是说其实我开发的Kernel可以在这个基础上添加内容就可以了?下载下来和IJAVA源码对比看后,发现其实IJAVA就也是基于它做的,所以我可以两个对比,看看代码到底是怎样写的.</p>
-<h2 id="IJAVA-vs-Jupyter-JVM-BaseKernel"><a href="#IJAVA-vs-Jupyter-JVM-BaseKernel" class="headerlink" title="IJAVA vs Jupyter JVM BaseKernel"></a>IJAVA vs Jupyter JVM BaseKernel</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 左对齐标题 | 右对齐标题 | 居中对齐标题 |</span><br><span class="line">| :------| ------: | :------: |</span><br><span class="line">| 短文本 | 中等文本 | 稍微长一点的文本 |</span><br></pre></td></tr></table></figure>
+<h2 id="IJAVA-vs-Jupyter-JVM-BaseKernel"><a href="#IJAVA-vs-Jupyter-JVM-BaseKernel" class="headerlink" title="IJAVA vs Jupyter JVM BaseKernel"></a>IJAVA vs Jupyter JVM BaseKernel</h2><blockquote>
+<p> gradle是一个项目<a href="https://link.zhihu.com/?target=http%3A//zh.wikipedia.org/wiki/%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E5%25BB%25BA%25E6%25A7%258B" target="_blank" rel="noopener">自动化建构</a>工具.</p>
+<ul>
+<li>差异管理:可实现静态级的差异控制,避免了针对不同设备产生的冗余代码</li>
+<li>依赖管理:自动装载到~/.gradle/下,完成classpath等配置</li>
+<li>…</li>
+</ul>
+<p>Gradle通过编写一个名为build.gradle的脚本文件对项目进行设置，再根据这个脚本对项目进行构建（复杂的项目也有其他文件）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Item</th>
+<th>IJAVA</th>
+<th>JVM Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setting.gradle</td>
+<td>rootProject.name</td>
+<td>Ijava</td>
+<td>jupyter-jvm-basekernel</td>
+</tr>
+<tr>
+<td>gradlew.bat</td>
+<td>Gradle startup script for Windows</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Gradlew</td>
+<td>Gradle start up script for UN*X</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>build.gradle</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>原本预想对对两者进行一个比较,找出需要修改的地方,直接开始码代码,结果发现文件结构差异还是挺大的,直接开始刚代码有点困难(无从下手),所以还是先了解一下原理吧~</p>
+<h1 id="iPython-Kernel"><a href="#iPython-Kernel" class="headerlink" title="iPython Kernel"></a>iPython Kernel</h1>
       
     </div>
     
@@ -493,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -561,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-源码"><span class="nav-number">3.</span> <span class="nav-text">IJAVA Kernel 源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-vs-Jupyter-JVM-BaseKernel"><span class="nav-number">3.1.</span> <span class="nav-text">IJAVA vs Jupyter JVM BaseKernel</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-源码"><span class="nav-number">3.</span> <span class="nav-text">IJAVA Kernel 源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-vs-Jupyter-JVM-BaseKernel"><span class="nav-number">3.1.</span> <span class="nav-text">IJAVA vs Jupyter JVM BaseKernel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">iPython Kernel</span></a></li></ol></div>
             
 
           </div>
