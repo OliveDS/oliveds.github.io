@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-original.png">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-gray.png">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-lbp.png">
-<meta property="og:updated_time" content="2019-03-15T12:26:35.707Z">
+<meta property="og:updated_time" content="2019-03-16T01:27:54.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV Texture 纹理处理">
 <meta name="twitter:description" content="Texture Analyse 纹理提取LBP一种常用的纹理提取方法是LBP(Local Binary Pattern),它是一种描述图像特征像素点与各个像素点之间的灰度关系的局部特征的非参数算法. 灰度不变性基本LBP算法通过用一个8-bit数表示像素点与周围8个像素点之间灰度大小关系,能够将具有相同灰度变化趋势的区域用同样的颜色表示出来,从来显示出图像的纹理特征. 可以使用Python的ski">
@@ -285,8 +285,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-15T20:26:35+08:00">
-                2019-03-15
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-16T09:27:54+08:00">
+                2019-03-16
               </time>
             
           </span>
@@ -371,12 +371,24 @@
 <h4 id="灰度图像"><a href="#灰度图像" class="headerlink" title="灰度图像"></a>灰度图像</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-gray.png" alt></p>
 <h4 id="LBP图像"><a href="#LBP图像" class="headerlink" title="LBP图像"></a>LBP图像</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/woods-lbp.png" alt></p>
 <h2 id="边缘提取"><a href="#边缘提取" class="headerlink" title="边缘提取"></a>边缘提取</h2><p>可以使用Python的<code>skimage</code>库中的<code>filters.sobel()</code>函数方便地进行边缘提取</p>
-<h1 id="Texture-Synthesis-纹理合成"><a href="#Texture-Synthesis-纹理合成" class="headerlink" title="Texture Synthesis 纹理合成"></a>Texture Synthesis 纹理合成</h1><p>有以下几种方法:</p>
-<ol>
-<li>Pyramid-based</li>
-<li>Non-parametric Sampling</li>
-<li>Deep Learning</li>
+<h1 id="Texture-Synthesis-纹理合成"><a href="#Texture-Synthesis-纹理合成" class="headerlink" title="Texture Synthesis 纹理合成"></a>Texture Synthesis 纹理合成</h1><p>通常采用Deep Learning能够取得比较好的效果,这块我暂时没有时间深入地进行学习,所以暂时略过</p>
+<h1 id="Texture-Transfer-纹理迁移"><a href="#Texture-Transfer-纹理迁移" class="headerlink" title="Texture Transfer 纹理迁移"></a>Texture Transfer 纹理迁移</h1><p>主要步骤:</p>
+<ul>
+<li>选择目标区域：<ol>
+<li>颜色检测</li>
+<li>灰度检测</li>
+<li>纹理检测</li>
+<li>边缘检测</li>
 </ol>
+</li>
+<li>确定纹理迁移方法：<ol>
+<li>直接替换</li>
+<li>有条件替换</li>
+<li>直接合成</li>
+<li>有条件合成</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
@@ -557,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Analyse-纹理提取"><span class="nav-number">1.</span> <span class="nav-text">Texture Analyse 纹理提取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LBP"><span class="nav-number">1.1.</span> <span class="nav-text">LBP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序代码"><span class="nav-number">1.1.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">运行结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始图像"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">原始图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#灰度图像"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">灰度图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LBP图像"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">LBP图像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边缘提取"><span class="nav-number">1.2.</span> <span class="nav-text">边缘提取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Synthesis-纹理合成"><span class="nav-number">2.</span> <span class="nav-text">Texture Synthesis 纹理合成</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Analyse-纹理提取"><span class="nav-number">1.</span> <span class="nav-text">Texture Analyse 纹理提取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LBP"><span class="nav-number">1.1.</span> <span class="nav-text">LBP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序代码"><span class="nav-number">1.1.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">运行结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始图像"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">原始图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#灰度图像"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">灰度图像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LBP图像"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">LBP图像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边缘提取"><span class="nav-number">1.2.</span> <span class="nav-text">边缘提取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Synthesis-纹理合成"><span class="nav-number">2.</span> <span class="nav-text">Texture Synthesis 纹理合成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Texture-Transfer-纹理迁移"><span class="nav-number">3.</span> <span class="nav-text">Texture Transfer 纹理迁移</span></a></li></ol></div>
             
 
           </div>
