@@ -86,10 +86,13 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-15T03:52:04.707Z">
+<meta property="og:image" content="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/images/ipython.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/basekernel-index.png">
+<meta property="og:updated_time" content="2019-03-17T02:39:38.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter Kernel 开发">
 <meta name="twitter:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
+<meta name="twitter:image" content="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/images/ipython.png">
 
 
 
@@ -281,8 +284,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-15T11:52:04+08:00">
-                2019-03-15
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-17T10:39:38+08:00">
+                2019-03-17
               </time>
             
           </span>
@@ -371,13 +374,12 @@
 <p>再次在命令行中</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
 <p>发现kernel选项中多了java的选择,可以输入一个<code>System.out.println(&quot;Hello World&quot;)</code>测试,然后<code>Shift+Enter</code>执行,发现打印成功就证明安装地没问题</p>
-<h1 id="IJAVA-Kernel-源码"><a href="#IJAVA-Kernel-源码" class="headerlink" title="IJAVA Kernel 源码"></a>IJAVA Kernel 源码</h1><p><a href="https://github.com/SpencerPark/IJava" target="_blank" rel="noopener">https://github.com/SpencerPark/IJava</a></p>
-<p>👆GitHub上的地址</p>
-<p>可以看到它还提供了一个<code>jupyter-jvm-basekernel</code>,解释说</p>
-<p><code>If you are interested in building your own kernel that runs on the JVM check out the related project that this kernel is build on</code></p>
-<p>另外这个<code>jvm-basekernel</code>解决的是<code>aims to cover the messaging protocol alone</code>部分的问题,程序员至少需要将<code>evl</code>部分写好,才能完成一个kernel的基本工作.</p>
-<p>也就是说其实我开发的Kernel可以在这个基础上添加内容就可以了?下载下来和IJAVA源码对比看后,发现其实IJAVA就也是基于它做的,所以我可以两个对比,看看代码到底是怎样写的.</p>
-<h2 id="IJAVA-vs-Jupyter-JVM-BaseKernel"><a href="#IJAVA-vs-Jupyter-JVM-BaseKernel" class="headerlink" title="IJAVA vs Jupyter JVM BaseKernel"></a>IJAVA vs Jupyter JVM BaseKernel</h2><blockquote>
+<h1 id="JVM-BaseKernel-安装"><a href="#JVM-BaseKernel-安装" class="headerlink" title="JVM BaseKernel 安装"></a>JVM BaseKernel 安装</h1><p>在GitHub上的源码地址👇</p>
+<p><a href="https://github.com/SpencerPark/jupyter-jvm-basekernel" target="_blank" rel="noopener">https://github.com/SpencerPark/jupyter-jvm-basekernel</a></p>
+<p>因为后面需要对它进行修改,所以先能够把它build成功跑起来,就成功了一半(哈?give or take…🤷‍♀️)</p>
+<p>可以使用<code>gradle</code>或<code>Maven</code>来build这个project</p>
+<p>这里我们使用<code>gradle</code>(比Maven功能更加强大)</p>
+<blockquote>
 <p> gradle是一个项目<a href="https://link.zhihu.com/?target=http%3A//zh.wikipedia.org/wiki/%25E8%2587%25AA%25E5%258B%2595%25E5%258C%2596%25E5%25BB%25BA%25E6%25A7%258B" target="_blank" rel="noopener">自动化建构</a>工具.</p>
 <ul>
 <li>差异管理:可实现静态级的差异控制,避免了针对不同设备产生的冗余代码</li>
@@ -386,7 +388,15 @@
 </ul>
 <p>Gradle通过编写一个名为build.gradle的脚本文件对项目进行设置，再根据这个脚本对项目进行构建（复杂的项目也有其他文件）</p>
 </blockquote>
-<table>
+<p>如果使用IDEA来编译这个project,那么IDEA已经自带Gradle包,没有必要重新安装了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install gradle</span><br></pre></td></tr></table></figure>
+<h1 id="IJAVA-Kernel-源码"><a href="#IJAVA-Kernel-源码" class="headerlink" title="IJAVA Kernel 源码"></a>IJAVA Kernel 源码</h1><p><a href="https://github.com/SpencerPark/IJava" target="_blank" rel="noopener">https://github.com/SpencerPark/IJava</a></p>
+<p>👆GitHub上的地址</p>
+<p>可以看到它还提供了一个<code>jupyter-jvm-basekernel</code>,解释说</p>
+<p><code>If you are interested in building your own kernel that runs on the JVM check out the related project that this kernel is build on</code></p>
+<p>另外这个<code>jvm-basekernel</code>解决的是<code>aims to cover the messaging protocol alone</code>部分的问题,程序员至少需要将<code>evl</code>部分写好,才能完成一个kernel的基本工作.</p>
+<p>也就是说其实我开发的Kernel可以在这个基础上添加内容就可以了?下载下来和IJAVA源码对比看后,发现其实IJAVA就也是基于它做的,所以我可以两个对比,看看代码到底是怎样写的.</p>
+<h2 id="IJAVA-vs-Jupyter-JVM-BaseKernel"><a href="#IJAVA-vs-Jupyter-JVM-BaseKernel" class="headerlink" title="IJAVA vs Jupyter JVM BaseKernel"></a>IJAVA vs Jupyter JVM BaseKernel</h2><table>
 <thead>
 <tr>
 <th>File</th>
@@ -452,7 +462,16 @@
 </tbody>
 </table>
 <p>原本预想对对两者进行一个比较,找出需要修改的地方,直接开始码代码,结果发现文件结构差异还是挺大的,直接开始刚代码有点困难(无从下手),所以还是先了解一下原理吧~</p>
-<h1 id="iPython-Kernel"><a href="#iPython-Kernel" class="headerlink" title="iPython Kernel"></a>iPython Kernel</h1>
+<h1 id="iPython-Kernel"><a href="#iPython-Kernel" class="headerlink" title="iPython Kernel"></a>iPython Kernel</h1><p>IPython提供了5个接口,与Jupyter前端页面进行信息交换;另外,Kernel背靠Python engine,将用户指令发给engine执行然后获取运行结果返回给用户.</p>
+<p><strong>(我浅显的理解,如果有误请纠正)</strong></p>
+<p><img src="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/images/ipython.png" alt></p>
+<h1 id="JVM-BaseKernel"><a href="#JVM-BaseKernel" class="headerlink" title="JVM BaseKernel"></a>JVM BaseKernel</h1><p>是一个提供了通信(messaging)和基本操作(还包括代码检查补全)功能的BASE(名副其实)</p>
+<p>而<code>example</code>文件夹是利用这个Base实现的一个实际Kernel(<code>Nashorn Kernel</code>) ,其中起到功能作用的代码只有<code>INashornJS.java</code>和<code>NashornKernel.java</code>这两个文件(🤔看起来好像不难改)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/basekernel-index.png" alt></p>
+<h2 id="INashornJS-java"><a href="#INashornJS-java" class="headerlink" title="INashornJS.java"></a>INashornJS.java</h2><p>主要是对文件进行检查,创建Handler,然后与Jupyter建立连接. </p>
+<p>这个代码可以直接使用在新写的Kernel中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.github.spencerpark.jupyter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.github.spencerpark.jupyter.channels.JupyterConnection;</span><br><span class="line"><span class="keyword">import</span> io.github.spencerpark.jupyter.channels.JupyterSocket;</span><br><span class="line"><span class="keyword">import</span> io.github.spencerpark.jupyter.kernel.KernelConnectionProperties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Path;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Paths;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Level;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个文件可以直接照搬,只需要改类名</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">INashornJS</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (args.length &lt; <span class="number">1</span>) <span class="comment">//需要传文件名 谁调用?</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Missing connection file argument"</span>);</span><br><span class="line"></span><br><span class="line">        Path connectionFile = Paths.get(args[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!Files.isRegularFile(connectionFile))<span class="comment">//对文件进行检查</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Connection file '"</span> + connectionFile + <span class="string">"' isn't a file."</span>);</span><br><span class="line"></span><br><span class="line">        String contents = <span class="keyword">new</span> String(Files.readAllBytes(connectionFile));<span class="comment">//读取文件内容</span></span><br><span class="line"></span><br><span class="line">        JupyterSocket.JUPYTER_LOGGER.setLevel(Level.WARNING);<span class="comment">//java内置Logger,日志</span></span><br><span class="line"></span><br><span class="line">        KernelConnectionProperties connProps = KernelConnectionProperties.parse(contents);<span class="comment">//根据文件设置IP ports</span></span><br><span class="line">        JupyterConnection connection = <span class="keyword">new</span> JupyterConnection(connProps);<span class="comment">//建立连接</span></span><br><span class="line"></span><br><span class="line">        String envEngineArgs = System.getenv(<span class="string">"JS_ENGINE_ARGS"</span>);<span class="comment">//系统环境?运行时?</span></span><br><span class="line">        <span class="keyword">if</span> (envEngineArgs == <span class="keyword">null</span>)</span><br><span class="line">            envEngineArgs = <span class="string">"-scripting"</span>;</span><br><span class="line"></span><br><span class="line">        String[] engineArgs = envEngineArgs.split(<span class="string">" "</span>);</span><br><span class="line"></span><br><span class="line">        NashornKernel kernel = <span class="keyword">new</span> NashornKernel(engineArgs);</span><br><span class="line">        kernel.becomeHandlerForConnection(connection);<span class="comment">//与Jupyter建立的连接作为Handler使用?</span></span><br><span class="line"></span><br><span class="line">        connection.connect();</span><br><span class="line">        connection.waitUntilClose();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -636,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-源码"><span class="nav-number">3.</span> <span class="nav-text">IJAVA Kernel 源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-vs-Jupyter-JVM-BaseKernel"><span class="nav-number">3.1.</span> <span class="nav-text">IJAVA vs Jupyter JVM BaseKernel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">iPython Kernel</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel-安装"><span class="nav-number">3.</span> <span class="nav-text">JVM BaseKernel 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-源码"><span class="nav-number">4.</span> <span class="nav-text">IJAVA Kernel 源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-vs-Jupyter-JVM-BaseKernel"><span class="nav-number">4.1.</span> <span class="nav-text">IJAVA vs Jupyter JVM BaseKernel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iPython-Kernel"><span class="nav-number">5.</span> <span class="nav-text">iPython Kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel"><span class="nav-number">6.</span> <span class="nav-text">JVM BaseKernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INashornJS-java"><span class="nav-number">6.1.</span> <span class="nav-text">INashornJS.java</span></a></li></ol></li></ol></div>
             
 
           </div>
