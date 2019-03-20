@@ -89,7 +89,9 @@
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/INashornJS.png">
 <meta property="og:image" content="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/images/ipython.png">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/basekernel-index.png">
-<meta property="og:updated_time" content="2019-03-18T03:33:56.309Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/notebook-package-json.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/jupyter-dev.png">
+<meta property="og:updated_time" content="2019-03-20T06:15:53.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter Kernel 开发">
 <meta name="twitter:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
@@ -285,8 +287,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-18T11:33:56+08:00">
-                2019-03-18
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-20T14:15:53+08:00">
+                2019-03-20
               </time>
             
           </span>
@@ -444,6 +446,19 @@
 <li>build.gradle中Jupyter字段中一系列Kernel name…改名</li>
 </ol>
 <h1 id="ContractManager-使用"><a href="#ContractManager-使用" class="headerlink" title="ContractManager 使用"></a>ContractManager 使用</h1><p>ContractManager虽然包含在SmartContract下,但是可以单独运行,所以具有一个main函数(创建一个对象即可运行) 在我的</p>
+<p>问题:学长的ContractManager是直接执行一个JS脚本;Jupyter Kernel是每次获取String类型的代码执行然后返回结果的String.并且我们还需要改jupyter的界面,所以应该直接改Jupyter Notebook</p>
+<h1 id="Jupyter-Notebook-开发"><a href="#Jupyter-Notebook-开发" class="headerlink" title="Jupyter Notebook 开发"></a>Jupyter Notebook 开发</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> pip3 install --upgrade setuptools pip3 这句我其实没有执行,应该需要都改成pip3吧(新版本jupyter需要Python3)</span><br><span class="line">git clone https://github.com/jupyter/notebook</span><br><span class="line">cd notebook</span><br><span class="line">pip3 install -e .</span><br><span class="line"><span class="meta">#</span> 每次修改后 Rebuilding JavaScript and CSS</span><br><span class="line">npm run build</span><br><span class="line"><span class="meta">#</span> 或</span><br><span class="line">npm run build:watch</span><br></pre></td></tr></table></figure>
+<p>我执行<code>npm run build</code>指令后报错,原因是系统默认<code>Python</code>为2.7版本,而在Jupyter需要3.x,所以需要将这个指令修改为<code>python3 …</code></p>
+<p>可以通过下面这个指令查看npm可以执行的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ npm run</span><br><span class="line">Scripts available in jupyter-notebook-deps via `npm run-script`:</span><br><span class="line">  bower</span><br><span class="line">    bower install</span><br><span class="line">  build</span><br><span class="line">    python setup.py js css</span><br><span class="line">  build:watch</span><br><span class="line">    set -e; while true; do npm run build; sleep 3; done</span><br></pre></td></tr></table></figure>
+<p>npm是<code>Node.js</code>提供的包管理工具,它自动化得执行当前路径下的<code>package.json</code>文档中的指令(也就是上面查看到的),找到<code>notebook</code>中的<code>package.json</code>文件,将python修改为<code>python3</code>就可以了</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/notebook-package-json.png" alt></p>
+<p>然后就可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
+<p>运行你的开发模式的jupyter notebook了</p>
+<p>(怎么确认你运行的是开发模式的而不是之前安装的普通用户模式的呢,在运行起来的jupyter界面中点<code>Help</code>-&gt;<code>About</code>-&gt;查看版本中是否包含<code>dev</code>)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/jupyter-dev.png" alt></p>
+<p>可以看到包含<code>dev</code>,没问题了</p>
 
       
     </div>
@@ -628,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel-使用"><span class="nav-number">3.</span> <span class="nav-text">JVM BaseKernel 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">IPython Kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INachornJS-Kernel"><span class="nav-number">5.</span> <span class="nav-text">INachornJS Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INashornJS-java"><span class="nav-number">5.1.</span> <span class="nav-text">INashornJS.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NashornKernel-java"><span class="nav-number">5.2.</span> <span class="nav-text">NashornKernel.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyKernel"><span class="nav-number">6.</span> <span class="nav-text">MyKernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Kernel-Name"><span class="nav-number">6.1.</span> <span class="nav-text">修改Kernel Name</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ContractManager-使用"><span class="nav-number">7.</span> <span class="nav-text">ContractManager 使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel-使用"><span class="nav-number">3.</span> <span class="nav-text">JVM BaseKernel 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">IPython Kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INachornJS-Kernel"><span class="nav-number">5.</span> <span class="nav-text">INachornJS Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INashornJS-java"><span class="nav-number">5.1.</span> <span class="nav-text">INashornJS.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NashornKernel-java"><span class="nav-number">5.2.</span> <span class="nav-text">NashornKernel.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyKernel"><span class="nav-number">6.</span> <span class="nav-text">MyKernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Kernel-Name"><span class="nav-number">6.1.</span> <span class="nav-text">修改Kernel Name</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ContractManager-使用"><span class="nav-number">7.</span> <span class="nav-text">ContractManager 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter-Notebook-开发"><span class="nav-number">8.</span> <span class="nav-text">Jupyter Notebook 开发</span></a></li></ol></div>
             
 
           </div>
