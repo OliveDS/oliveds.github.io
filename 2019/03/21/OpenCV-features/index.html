@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/olive-appletouch.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/olive-logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Features Analysis 特征分析特征提取在图像特征比对过程中,首先需要对进行比对的两张图进行分别的特征提取. 顶点提取 Harris Detector选取特征点时很自然地想到要提取角的顶点.不过究竟是为什么呢?其实是因为两张图上点之间的对应关系很好确定;如果是边上的点,只能确定边的方向关系,而两张图的尺度(缩放)却无法确定;如果选取的是平面中的任意一点,则方向和尺度都无法确定. 那么如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV Features Analysis">
+<meta property="og:url" content="https://oliveds.github.io/2019/03/21/OpenCV-features/index.html">
+<meta property="og:site_name" content="OliveDS&#39;s Study Bar">
+<meta property="og:description" content="Features Analysis 特征分析特征提取在图像特征比对过程中,首先需要对进行比对的两张图进行分别的特征提取. 顶点提取 Harris Detector选取特征点时很自然地想到要提取角的顶点.不过究竟是为什么呢?其实是因为两张图上点之间的对应关系很好确定;如果是边上的点,只能确定边的方向关系,而两张图的尺度(缩放)却无法确定;如果选取的是平面中的任意一点,则方向和尺度都无法确定. 那么如">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/building-original.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/harris-cornor.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sift-features.png">
+<meta property="og:image" content="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/math/8b16fa3dc8f81011e6879225ae665c6eec78b8e4.png">
+<meta property="og:image" content="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/math/e3f69f1bb3159048a10a158203e519cc0609d32d.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-100.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-200.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-300.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-300-low.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-200-low.png">
+<meta property="og:image" content="https://www.cnblogs.com/xingnie/p/10230278.html">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/stitch2.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/matching-points.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/stitched-big.png">
+<meta property="og:updated_time" content="2019-03-23T04:38:51.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV Features Analysis">
+<meta name="twitter:description" content="Features Analysis 特征分析特征提取在图像特征比对过程中,首先需要对进行比对的两张图进行分别的特征提取. 顶点提取 Harris Detector选取特征点时很自然地想到要提取角的顶点.不过究竟是为什么呢?其实是因为两张图上点之间的对应关系很好确定;如果是边上的点,只能确定边的方向关系,而两张图的尺度(缩放)却无法确定;如果选取的是平面中的任意一点,则方向和尺度都无法确定. 那么如">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/building-original.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://oliveds.github.io/2019/03/21/OpenCV-features/">
+
+
+
+
+
+  <title>OpenCV Features Analysis | OliveDS's Study Bar</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OliveDS's Study Bar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个小小码农的学习分享</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/21/OpenCV-features/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="OliveDS">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OliveDS's Study Bar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenCV Features Analysis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-21T20:03:18+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-23T12:38:51+08:00">
+                2019-03-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/21/OpenCV-features/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/21/OpenCV-features/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/21/OpenCV-features/" class="leancloud_visitors" data-flag-title="OpenCV Features Analysis">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Features-Analysis-特征分析"><a href="#Features-Analysis-特征分析" class="headerlink" title="Features Analysis 特征分析"></a>Features Analysis 特征分析</h1><h2 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h2><p>在图像<strong>特征比对</strong>过程中,首先需要对进行比对的两张图进行分别的<strong>特征提取</strong>.</p>
+<h3 id="顶点提取-Harris-Detector"><a href="#顶点提取-Harris-Detector" class="headerlink" title="顶点提取 Harris Detector"></a>顶点提取 Harris Detector</h3><p>选取特征点时很自然地想到要提取<strong>角的顶点</strong>.不过究竟是为什么呢?其实是因为两张图上点之间的对应关系很好确定;如果是边上的点,只能确定边的方向关系,而两张图的尺度(缩放)却无法确定;如果选取的是平面中的任意一点,则方向和尺度都无法确定.</p>
+<p>那么如何让计算机检测到这些特殊点呢?</p>
+<p>比较常用的方法是<code>Harris Detector</code>,具体原理见老师PPT😈.<code>OpenCV</code>中给我提供了<code>CornerHarris</code>函数实现这个功能</p>
+<h4 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img=cv2.imread(<span class="string">"building.png"</span>,<span class="number">1</span>)<span class="comment"># flags&gt;0,以BGR格式读入,忽略透明度的channel 0-grayscale</span></span><br><span class="line">cv2.imshow(<span class="string">"Original"</span>,img)<span class="comment"># 显示图像</span></span><br><span class="line">gray = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY) </span><br><span class="line">chess_32 = np.float32(gray)</span><br><span class="line">harris = cv2.cornerHarris(chess_32,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0.04</span>)<span class="comment">#blockSize(区域大小),kSize(求导窗口),经验参数α</span></span><br><span class="line"><span class="comment">#result is dilated for marking the corners, not important</span></span><br><span class="line">dst = cv2.dilate(harris,<span class="literal">None</span>)</span><br><span class="line"><span class="comment"># Threshold for an optimal value, it may vary depending on the image.</span></span><br><span class="line">img[dst&gt;<span class="number">0.01</span>*dst.max()]=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>]</span><br><span class="line">cv2.imshow(<span class="string">"Harris Cornor Detector"</span>,img)<span class="comment"># Harris</span></span><br></pre></td></tr></table></figure>
+<h4 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h4><p>运行后发现效果并不是很好,调整blockSize,kSize,可以获得更好一点的效果</p>
+<p>原始图像</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/building-original.png" alt></p>
+<p>Harris Detector图像</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/harris-cornor.png" alt></p>
+<h3 id="SIFT-尺度不变的特征变换"><a href="#SIFT-尺度不变的特征变换" class="headerlink" title="SIFT 尺度不变的特征变换"></a>SIFT 尺度不变的特征变换</h3><p>提取两张图片中的同一特征时,我们通常理所应当地认为,同一区域中的均值和最大值应当是一致的,但实际上,当两张图片的尺度差异很大时,选取某一scale后,计算得到的分布结果可能会有较大的差别.</p>
+<p>通过<strong>拉普拉斯变换</strong>输出最强的值来确定合适尺度是一种较好的方法</p>
+<p>SIFT则是将图像切分成4×4块,分别计算每块在8个方向上的梯度,形成直方图,能较大程度地克服旋转和光照的影响.它在不同的尺度下用高斯滤波器(Gaussian filters)进行卷积(convolved)，然后利用连续高斯模糊化影像差异来找出关键点.</p>
+<p>OpenCV中给出了直接建立SIFT detector检测特征点的函数(注意:opencv-contrib-python==3.4.2.17库而opencv-python库中没有这个模块)</p>
+<h4 id="程序代码-1"><a href="#程序代码-1" class="headerlink" title="程序代码"></a>程序代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接前面代码</span></span><br><span class="line">detector = cv2.xfeatures2d.SIFT_create() <span class="comment"># 创建detector</span></span><br><span class="line">kps,des = detector.detectAndCompute(gray,<span class="literal">None</span>) <span class="comment"># 计算-矩阵</span></span><br><span class="line">img=cv2.drawKeypoints(gray,kps,img) <span class="comment">#将标记点绘制到原图像上</span></span><br><span class="line">cv2.imshow(<span class="string">"Features"</span>,img)<span class="comment"># 显示图像</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#关闭窗口/键盘ESC退出</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-1"><a href="#运行结果-1" class="headerlink" title="运行结果"></a>运行结果</h4><p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sift-features.png" alt></p>
+<h2 id="Hough-Transform-直线检测"><a href="#Hough-Transform-直线检测" class="headerlink" title="Hough Transform 直线检测"></a>Hough Transform 直线检测</h2><p><code>OpenCV</code>中提供了<code>cv2.HoughLines</code>函数进行Hough变换.</p>
+<p>关于Hough Transform的原理,可以参看下面这个网页.实际上Hough不止能够检测直线,只要是能用数学形式表达的形状都可以进行检测.</p>
+<p><a href="https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_houghlines/py_houghlines.html" target="_blank" rel="noopener">https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_houghlines/py_houghlines.html</a></p>
+<p>在HoughLines函数中,直线采用 </p>
+<p><img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/math/8b16fa3dc8f81011e6879225ae665c6eec78b8e4.png" alt="\rho = x \cos \theta + y \sin \theta"></p>
+<p>的形式表示,其返回值为 <img src="https://opencv-python-tutroals.readthedocs.io/en/latest/_images/math/e3f69f1bb3159048a10a158203e519cc0609d32d.png" alt="(\rho, \theta)"> 构成的数组</p>
+<h4 id="程序代码-2"><a href="#程序代码-2" class="headerlink" title="程序代码"></a>程序代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'building.png'</span>,<span class="number">1</span>)<span class="comment"># 读取为BGR</span></span><br><span class="line">gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)<span class="comment">#转化为灰度图像</span></span><br><span class="line">edges = cv2.Canny(gray,<span class="number">50</span>,<span class="number">150</span>,apertureSize = <span class="number">3</span>)<span class="comment"># 边缘检测Canny Edge Detection</span></span><br><span class="line">cv2.imshow(<span class="string">"Canny"</span>,edges)<span class="comment"># 显示Canny图像</span></span><br><span class="line">lines = cv2.HoughLines(edges,<span class="number">2</span>,np.pi/<span class="number">90</span>,<span class="number">200</span>)<span class="comment"># 1-距离精度 np.pi/180-角度精度 100-识别为线的阈值(minimum length of line)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(lines)):</span><br><span class="line">    <span class="keyword">for</span> rho,theta <span class="keyword">in</span> lines[i]:</span><br><span class="line">        print(rho)</span><br><span class="line">        print(theta)</span><br><span class="line">        <span class="comment"># 计算直线上的点</span></span><br><span class="line">        a = np.cos(theta)</span><br><span class="line">        b = np.sin(theta)</span><br><span class="line">        x0 = a*rho</span><br><span class="line">        y0 = b*rho</span><br><span class="line">        x1 = int(x0 + <span class="number">1000</span>*(-b))</span><br><span class="line">        y1 = int(y0 + <span class="number">1000</span>*(a))</span><br><span class="line">        x2 = int(x0 - <span class="number">1000</span>*(-b))</span><br><span class="line">        y2 = int(y0 - <span class="number">1000</span>*(a))</span><br><span class="line">        <span class="comment"># 绘制直线</span></span><br><span class="line">        cv2.line(img,(x1,y1),(x2,y2),(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 生成新图像</span></span><br><span class="line">cv2.imwrite(<span class="string">'houghlines.png'</span>,img)</span><br><span class="line">hough = cv2.imread(<span class="string">'houghlines.png'</span>,<span class="number">1</span>)</span><br><span class="line">cv2.imshow(<span class="string">"Hough Lines"</span>,hough)<span class="comment"># 显示Hough图像</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#关闭窗口/键盘ESC退出</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h4 id="运行结果-2"><a href="#运行结果-2" class="headerlink" title="运行结果"></a>运行结果</h4><p>阈值100,精度(1,1°)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-100.png" alt></p>
+<p>阈值200,精度(1,1°)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-200.png" alt></p>
+<p>阈值300,精度(1,1°)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-300.png" alt></p>
+<p>阈值300,精度(2,2°)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-300-low.png" alt></p>
+<p>阈值200,精度(2,2°)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/hough-200-low.png" alt></p>
+<h2 id="Image-Stitching-图像拼接"><a href="#Image-Stitching-图像拼接" class="headerlink" title="Image Stitching 图像拼接"></a>Image Stitching 图像拼接</h2><p>对两幅图像分别进行(稳定一致的)特征提取后,可以根据特征点的比对进行图像拼接的工作,具体步骤包括:</p>
+<ol>
+<li>特征检测 SIFT</li>
+<li>特征匹配</li>
+<li>确定对应关系</li>
+<li>图像几何变换</li>
+<li>图像拼接</li>
+</ol>
+<p>比较详细的教程可以参考</p>
+<p><a href="https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_matcher/py_matcher.html" target="_blank" rel="noopener">https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_feature2d/py_matcher/py_matcher.html</a></p>
+<p><a href="https://www.cnblogs.com/xingnie/p/10230278.html" target="_blank" rel="noopener">https://www.cnblogs.com/xingnie/p/10230278.html</a></p>
+<h3 id="程序代码-3"><a href="#程序代码-3" class="headerlink" title="程序代码"></a>程序代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3><p>图像1</p>
+<p><img src="https://www.cnblogs.com/xingnie/p/10230278.html" alt></p>
+<p>图像2</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/stitch2.png" alt></p>
+<p>特征点匹配</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/matching-points.png" alt></p>
+<p>拼接图像</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/stitched-big.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/OpenCV-texture/" rel="next" title="OpenCV Texture 纹理处理">
+                <i class="fa fa-chevron-left"></i> OpenCV Texture 纹理处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">OliveDS</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/OliveDS" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:dengs1996@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/OliveDS" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Features-Analysis-特征分析"><span class="nav-number">1.</span> <span class="nav-text">Features Analysis 特征分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征提取"><span class="nav-number">1.1.</span> <span class="nav-text">特征提取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顶点提取-Harris-Detector"><span class="nav-number">1.1.1.</span> <span class="nav-text">顶点提取 Harris Detector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序代码"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">运行结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SIFT-尺度不变的特征变换"><span class="nav-number">1.1.2.</span> <span class="nav-text">SIFT 尺度不变的特征变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序代码-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hough-Transform-直线检测"><span class="nav-number">1.2.</span> <span class="nav-text">Hough Transform 直线检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序代码-2"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行结果-2"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">运行结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Stitching-图像拼接"><span class="nav-number">1.3.</span> <span class="nav-text">Image Stitching 图像拼接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序代码-3"><span class="nav-number">1.3.1.</span> <span class="nav-text">程序代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行效果"><span class="nav-number">1.3.2.</span> <span class="nav-text">运行效果</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OliveDS</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'uaU7K98rSYcLih6bDPXI5vbf-gzGzoHsz',
+        appKey: 'lfonkoBe1cGLNBLsjTuWaae9',
+        placeholder: '请给菜鸡小码农一点意见和建议吧ε٩(๑> ₃ <)۶з',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("uaU7K98rSYcLih6bDPXI5vbf-gzGzoHsz", "lfonkoBe1cGLNBLsjTuWaae9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
