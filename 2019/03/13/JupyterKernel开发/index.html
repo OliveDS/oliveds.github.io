@@ -91,7 +91,8 @@
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/basekernel-index.png">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/notebook-package-json.png">
 <meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/jupyter-dev.png">
-<meta property="og:updated_time" content="2019-03-22T11:36:06.702Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/button-run.png">
+<meta property="og:updated_time" content="2019-03-27T07:22:43.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter Kernel 开发">
 <meta name="twitter:description" content="引言一直深受搭环境的困扰,今天鼓起勇气找蔡博讨论了一下,结果发现之前的方向其实是错误的,现在的任务其实是IDE的重新开发,只需要重新写个kernel,后端依然使用旧IDE的,因为以后平台需要跑在JDK8上,所以先看IJAVA kernel的代码,然后看一下怎么把kernel和现在IDE的后端连接起来.还有就是不能直接使用Jupyter的界面,要包个壳,起码要换个配色,#882929 今天跟蔡博聊过">
@@ -287,8 +288,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-22T19:36:06+08:00">
-                2019-03-22
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-27T15:22:43+08:00">
+                2019-03-27
               </time>
             
           </span>
@@ -490,6 +491,71 @@
 <p>运行后发现有两个模块的测试不成功,报错如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Dengs-MacBook-Pro% python3 -m notebook.jstest</span><br><span class="line"></span><br><span class="line">Test group: selenium</span><br><span class="line">Running tests with notebook directory &apos;/var/folders/wg/_3cvvz5n7955vdyv_d3g0t380000gn/T/tmplgo2n3_i&apos;</span><br><span class="line">No test file found in /Users/oliveds/Documents/Jupyter-Kernel/notebook/notebook/tests/selenium, terminating.</span><br><span class="line"></span><br><span class="line">Test group: mockextension</span><br><span class="line">Running tests with notebook directory &apos;/var/folders/wg/_3cvvz5n7955vdyv_d3g0t380000gn/T/tmp2o9m1atv&apos;</span><br><span class="line">Test file: /Users/oliveds/Documents/Jupyter-Kernel/notebook/notebook/tests/mockextension/index.js</span><br><span class="line">z</span><br><span class="line">^CInterrupted</span><br><span class="line">______________________________________________________________________</span><br><span class="line">Test suite completed for system with the following information:</span><br><span class="line">Python version: 3.7.2 (default, Feb 12 2019, 08:15:36) [Clang 10.0.0 (clang-1000.11.45.5)]</span><br><span class="line">sys.executable: /usr/local/opt/python/bin/python3.7</span><br><span class="line">Platform      : Darwin-18.2.0-x86_64-i386-64bit</span><br><span class="line"></span><br><span class="line">Tools and libraries available at test time:</span><br><span class="line">   casperjs phantomjs slimerjs</span><br><span class="line"></span><br><span class="line">Status: ERROR - 2 out of 5 test groups failed (selenium, mockextension). Took 61.624s.</span><br><span class="line"></span><br><span class="line">You may wish to rerun these, with:</span><br><span class="line">  python -m notebook.jstest selenium mockextension</span><br></pre></td></tr></table></figure>
 <p><code>selenium</code>是找不到测试文件,<code>mockextension</code>是一直卡住被我强制<code>ctl+C</code>退出了.不知道是否是我这边安装的问题(也有可能是没写测试代码就不能测试,这个我以后再解决)</p>
+<h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><p>我之前只用Django开发过一个比较简单的网页,主要都是按照教程follow the steps,所以并没有大型项目的开发经验.看到Jupyter Notebook的源码后,头很大😥连怎么找到需要的代码都不知道…所以打算不要着急,把基础知识补一补.</p>
+<p><a href="https://docs.python-guide.org/writing/structure/" target="_blank" rel="noopener">https://docs.python-guide.org/writing/structure/</a></p>
+<p>这个网页比较好地介绍了Python工程应该如何布局</p>
+<p>但是看完之后还是没法看懂<code>Jupyter</code>的代码结构,可能是因为Jupyter是网页编程,并且用了很多别的模块,项目比较复杂吧🤷‍♀️</p>
+<p>网页编程的话,我想我其实只需要知道按钮的执行函数就可以入手了,想起我之前编Django框架下的Python程序的时候,是对每个行为<code>def xxx</code>,然后关联到一个对应的<code>html</code>网页上.<code>Jupyter</code>这个工程中我没有看到大量的<code>html</code>文件<del>,可能是完全用<code>js</code>取代了<code>HTML</code>? <code>Correct me if I&#39;m wrong!</code></del>No,在<code>notebook/templates</code>下!</p>
+<h3 id="CodeMirror"><a href="#CodeMirror" class="headerlink" title="CodeMirror"></a>CodeMirror</h3><blockquote>
+<p> CodeMirror is a versatile text editor implemented in JavaScript for the browser. </p>
+</blockquote>
+<p>在JS中可以调用,作为代码编辑框,可以设置显示格式,规定粘贴选型,实现代码自动补全等等功能</p>
+<p>官方文档: <a href="https://codemirror.net/doc/manual.html#usage" target="_blank" rel="noopener">https://codemirror.net/doc/manual.html#usage</a></p>
+<h3 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h3><blockquote>
+<p>Babel is a JavaScript compiler</p>
+<p>Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. </p>
+</blockquote>
+<p>官方文档: <a href="https://babeljs.io/docs/en/" target="_blank" rel="noopener">https://babeljs.io/docs/en/</a></p>
+<p>主目录下的<code>./babelrc</code>是babel的configuration file</p>
+<h3 id="Bower"><a href="#Bower" class="headerlink" title="Bower"></a>Bower</h3><p>网页的包管理器</p>
+<blockquote>
+<p>Bower can manage components that contain HTML, CSS, JavaScript, fonts or even image files. Bower doesn’t concatenate or minify code or do anything else - it just installs the right versions of the packages you need and their dependencies.</p>
+</blockquote>
+<p>官方文档: <a href="https://bower.io/" target="_blank" rel="noopener">https://bower.io/</a></p>
+<h3 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h3><p>用来编译JavaScript,提前知晓代码是否能够正常运行的工具</p>
+<blockquote>
+<p>A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease.</p>
+<p>JavaScript, being a dynamic and loosely-typed language, is especially prone to developer error. Without the benefit of a compilation process, JavaScript code is typically executed in order to find syntax or other errors. Linting tools like ESLint allow developers to discover problems with their JavaScript code without executing it.</p>
+</blockquote>
+<p>官方文档: <a href="https://eslint.org/docs/about/" target="_blank" rel="noopener">https://eslint.org/docs/about/</a></p>
+<h3 id="Travis-CI"><a href="#Travis-CI" class="headerlink" title="Travis CI"></a>Travis CI</h3><p>GitHub的辅助工具,push后自动检查代码是否能够正常工作</p>
+<p>持续集成: Continuous Integration solution</p>
+<blockquote>
+<p>Travis CI is a hosted, distributed continuous integration service used to build and test projects hosted at GitHub. Travis CI automatically detects when a commit has been made and pushed to a GitHub repository that is using Travis CI, and each time this happens, it will try to build the project and run tests. This includes commits to all branches, not just to the master branch.</p>
+</blockquote>
+<p>如何理解: <a href="https://stackoverflow.com/questions/22587148/trying-to-understand-what-travis-ci-does-and-when-it-should-be-used" target="_blank" rel="noopener">https://stackoverflow.com/questions/22587148/trying-to-understand-what-travis-ci-does-and-when-it-should-be-used</a></p>
+<h3 id="AppVeyor-CI"><a href="#AppVeyor-CI" class="headerlink" title="AppVeyor CI"></a>AppVeyor CI</h3><p>类似Travis CI,也是持续集成工具,跑在Windows上</p>
+<p>官网: <a href="https://www.appveyor.com/" target="_blank" rel="noopener">https://www.appveyor.com/</a></p>
+<h3 id="CodeCov"><a href="#CodeCov" class="headerlink" title="CodeCov"></a>CodeCov</h3><p>有一个管理代码的工具,没仔细看了</p>
+<blockquote>
+<p> Improve your code review workflow and quality. Codecov provides highly integrated tools to group, merge, archive, and compare coverage reports.</p>
+</blockquote>
+<p><a href="https://codecov.io/" target="_blank" rel="noopener">https://codecov.io/</a></p>
+<p>Python Egg</p>
+<blockquote>
+<p>The <code>.egg</code> file is a distribution format for Python packages. It’s just an alternative to a source code distribution or Windows <code>exe</code>. But note that for pure <code>Python</code>, the <code>.egg</code> file is completely cross-platform.</p>
+<p>The <code>.egg</code> file itself is essentially a <code>.zip</code> file. If you change the extension to “<code>zip</code>”, you can see that it will have folders inside the archive.</p>
+</blockquote>
+<hr>
+<p>已经确定源码都是在notebook文件夹下,那么下面就耐心地看一下每个文件做了什么吧…</p>
+<h3 id="init-py"><a href="#init-py" class="headerlink" title="_init_.py"></a>_init_.py</h3><p>如果需要建立一个python模块让其他地方可以导入并且使用,就需要有这个文件,主要是为了防止包的重名?<code>Correct me if I&#39;m wrong</code></p>
+<p>可以在里面<code>import xxx</code>或初始化对象,这样整个包都具有了这些内容,但通常不建议这样做,容易造成冗余</p>
+<blockquote>
+<p>The <code>__init__.py</code> files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name, such as <code>string</code>, from unintentionally hiding valid modules that occur later (deeper) on the module search path. In the simplest case, <code>__init__.py</code> can just be an empty file, but it can also execute initialization code for the package or set the <code>__all__</code> variable, described later.</p>
+</blockquote>
+<h3 id="main-py"><a href="#main-py" class="headerlink" title="_main_.py"></a>_main_.py</h3><p>通常Python都是直接执行一个<code>.py</code>文件如果想要直接执行一个包(文件夹),那么就会先执行<code>_main_.py</code>这个文件(后<code>_init_.py</code>再后其他文件)</p>
+<hr>
+<h1 id="修改Button功能"><a href="#修改Button功能" class="headerlink" title="修改Button功能"></a>修改Button功能</h1><ol>
+<li><p>在<code>Chrome</code>中查看jupyter页面的<code>Elements</code>,找到<code>Run</code>按钮元素的名字为<code>run-cell-and-select-next</code></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/web-pics/button-run.png" alt></p>
+<p>我的想法是,按钮一定会关联到一个函数(点击按钮执行Python的一个函数/js脚本),所以我在工程(notebook)中搜索这个button的名字,试图找到关联的函数</p>
+</li>
+<li><p>定位到了<code>notebook/static/notebook/js/action.js</code> 这个js文件中定义了一堆actions,并规定了它们的Handler,以其中一个action为例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'run-cell'</span>:&#123;</span><br><span class="line">            cmd: i18n.msg._(<span class="string">'run selected cells'</span>),</span><br><span class="line">            help    : i18n.msg._(<span class="string">'run selected cells'</span>),</span><br><span class="line">            help_index : <span class="string">'bb'</span>,</span><br><span class="line">            handler : <span class="function"><span class="keyword">function</span> (<span class="params">env</span>) </span>&#123;</span><br><span class="line">                env.notebook.execute_selected_cells();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br></pre></td></tr></table></figure>
+<p>所以如果我现在规定一个按钮的action是<code>run-cell</code>,那么会调用的函数就是<code>execute_selected_cells()</code>.我查看一下这个函数,发现有两个该函数的声明,分别在<code>notebook/static/notebook/js/main.min.js</code>和<code>notebook/static/notebook/js/notebook.js</code></p>
+<p>我看了一下两个文件中的代码,好像差不多,<code>可能main.min.js是提供给windows执行的代码?而notebook.js是Xus执行的?</code></p>
+</li>
+</ol>
 
       
     </div>
@@ -606,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -617,7 +683,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -674,7 +740,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel-使用"><span class="nav-number">3.</span> <span class="nav-text">JVM BaseKernel 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">IPython Kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INachornJS-Kernel"><span class="nav-number">5.</span> <span class="nav-text">INachornJS Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INashornJS-java"><span class="nav-number">5.1.</span> <span class="nav-text">INashornJS.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NashornKernel-java"><span class="nav-number">5.2.</span> <span class="nav-text">NashornKernel.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyKernel"><span class="nav-number">6.</span> <span class="nav-text">MyKernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Kernel-Name"><span class="nav-number">6.1.</span> <span class="nav-text">修改Kernel Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Eclipse开发"><span class="nav-number">6.2.</span> <span class="nav-text">用Eclipse开发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ContractManager-使用"><span class="nav-number">7.</span> <span class="nav-text">ContractManager 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter-Notebook-开发"><span class="nav-number">8.</span> <span class="nav-text">Jupyter Notebook 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter-架构"><span class="nav-number">8.1.</span> <span class="nav-text">Jupyter 架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter-源码"><span class="nav-number">8.2.</span> <span class="nav-text">Jupyter 源码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IJAVA-Kernel-安装"><span class="nav-number">2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#双-JDK安装"><span class="nav-number">2.1.</span> <span class="nav-text">(双)JDK安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IJAVA-Kernel-安装-1"><span class="nav-number">2.2.</span> <span class="nav-text">IJAVA Kernel 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-BaseKernel-使用"><span class="nav-number">3.</span> <span class="nav-text">JVM BaseKernel 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IPython-Kernel"><span class="nav-number">4.</span> <span class="nav-text">IPython Kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#INachornJS-Kernel"><span class="nav-number">5.</span> <span class="nav-text">INachornJS Kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INashornJS-java"><span class="nav-number">5.1.</span> <span class="nav-text">INashornJS.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NashornKernel-java"><span class="nav-number">5.2.</span> <span class="nav-text">NashornKernel.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyKernel"><span class="nav-number">6.</span> <span class="nav-text">MyKernel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Kernel-Name"><span class="nav-number">6.1.</span> <span class="nav-text">修改Kernel Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用Eclipse开发"><span class="nav-number">6.2.</span> <span class="nav-text">用Eclipse开发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ContractManager-使用"><span class="nav-number">7.</span> <span class="nav-text">ContractManager 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter-Notebook-开发"><span class="nav-number">8.</span> <span class="nav-text">Jupyter Notebook 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter-架构"><span class="nav-number">8.1.</span> <span class="nav-text">Jupyter 架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter-源码"><span class="nav-number">8.2.</span> <span class="nav-text">Jupyter 源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码结构"><span class="nav-number">8.3.</span> <span class="nav-text">源码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeMirror"><span class="nav-number">8.3.1.</span> <span class="nav-text">CodeMirror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Babel"><span class="nav-number">8.3.2.</span> <span class="nav-text">Babel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bower"><span class="nav-number">8.3.3.</span> <span class="nav-text">Bower</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESLint"><span class="nav-number">8.3.4.</span> <span class="nav-text">ESLint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Travis-CI"><span class="nav-number">8.3.5.</span> <span class="nav-text">Travis CI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AppVeyor-CI"><span class="nav-number">8.3.6.</span> <span class="nav-text">AppVeyor CI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeCov"><span class="nav-number">8.3.7.</span> <span class="nav-text">CodeCov</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#init-py"><span class="nav-number">8.3.8.</span> <span class="nav-text">_init_.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-py"><span class="nav-number">8.3.9.</span> <span class="nav-text">_main_.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改Button功能"><span class="nav-number">9.</span> <span class="nav-text">修改Button功能</span></a></li></ol></div>
             
 
           </div>
