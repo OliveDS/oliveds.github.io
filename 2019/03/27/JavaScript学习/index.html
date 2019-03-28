@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
 <meta property="og:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用\在标签中间直接写JS代码  var a=10;   \引用js文件,标签中间不能加内容  用\ 在a标签中执行JavaScript内容  比较好的是方法二,模块化,利于后期修改 JavaScript引用HTML内容 直接通过标签中的id名字 JavaScript中内置一个对象document,表示整个HT">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-27T10:33:19.352Z">
+<meta property="og:updated_time" content="2019-03-28T00:35:03.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习">
 <meta name="twitter:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用\在标签中间直接写JS代码  var a=10;   \引用js文件,标签中间不能加内容  用\ 在a标签中执行JavaScript内容  比较好的是方法二,模块化,利于后期修改 JavaScript引用HTML内容 直接通过标签中的id名字 JavaScript中内置一个对象document,表示整个HT">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-27T18:33:19+08:00">
-                2019-03-27
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-28T08:35:03+08:00">
+                2019-03-28
               </time>
             
           </span>
@@ -388,6 +388,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementsByName(<span class="string">"name"</span>)<span class="comment">//同样可以length,[0]</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>获取对象后.可以直接.xxx属性对其进行修改等操作 比如修改class(.className=”newclassname”/ .id=”newid”)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inp = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"inp"</span>)[<span class="number">0</span>];<span class="comment">//&lt;input&gt;类型</span></span><br><span class="line">inp.onkeyup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//键盘每次抬起都打印log</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>用<code>var</code>声明,无初始值则默认undefined</p>
 <p>可以通过.innerXXX修改其内容</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">"idname"</span>);</span><br><span class="line">a.innerHTML = <span class="string">"Hello&lt;a href=\"http://baidu.com\"&gt;跳转百度&lt;/a&gt;"</span>;</span><br><span class="line">a.innerText = <span class="string">"Hello"</span>;</span><br><span class="line">a.innerText +=<span class="string">"hello"</span>;<span class="comment">//添加内容而不是覆盖</span></span><br></pre></td></tr></table></figure>
@@ -412,6 +414,9 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">box.onClick = f1;<span class="comment">//不加括号-否则会执行</span></span><br><span class="line">则<span class="keyword">this</span>-&gt;box</span><br></pre></td></tr></table></figure>
 <p>若没有用一个变量调用,则this指向<code>window</code></p>
 <h2 id="定义和执行"><a href="#定义和执行" class="headerlink" title="定义和执行"></a>定义和执行</h2><p>var和function都是定义,js执行时先定义后执行/赋值;函数作用域优先于外部定义域(在函数定义域内同样是先定义后执行赋值操作,但注意是边编译边执行,只有运行到function时才会声明函数作用域内的变量)</p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> f2;</span><br><span class="line"><span class="comment">//直接将函数return回去,子函数f2可以访问父函数的变量,所以外界接收到后也可以访问父级变量了</span></span><br></pre></td></tr></table></figure>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>可选逗号结尾,可以在最后多一个逗号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [ , , ]<span class="comment">//认为length=2</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>([]);<span class="comment">//空数组</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);<span class="comment">//只有一个值:Length0</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//元素(非长度)</span></span><br><span class="line"><span class="keyword">var</span> arr2 = <span class="built_in">Array</span>.of(<span class="number">5</span>)<span class="comment">//只有一个元素5(非长度)</span></span><br></pre></td></tr></table></figure>
 </script></p></li></ol>
       
     </div>
