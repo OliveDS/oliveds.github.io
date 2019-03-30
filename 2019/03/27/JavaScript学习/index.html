@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用\在标签中间直接写JS代码  var a=10;   \引用js文件,标签中间不能加内容  用\ 在a标签中执行JavaScript内容  比较好的是方法二,模块化,利于后期修改 JavaScript引用HTML内容 直接通过标签中的id名字 JavaScript中内置一个对象document,表示整个HT">
+<meta name="description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用&amp;lt;script&amp;gt;在标签中间直接写JS代码 &amp;lt;script&amp;gt; var a=10; &amp;lt;/script&amp;gt;  &amp;lt;script src=&amp;quot;test.js&amp;quot;&amp;gt;引用js文件,标签中间不能加内容  用&amp;lt;a href=&amp;quot;javascript:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript学习">
 <meta property="og:url" content="https://oliveds.github.io/2019/03/27/JavaScript学习/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用\在标签中间直接写JS代码  var a=10;   \引用js文件,标签中间不能加内容  用\ 在a标签中执行JavaScript内容  比较好的是方法二,模块化,利于后期修改 JavaScript引用HTML内容 直接通过标签中的id名字 JavaScript中内置一个对象document,表示整个HT">
+<meta property="og:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用&amp;lt;script&amp;gt;在标签中间直接写JS代码 &amp;lt;script&amp;gt; var a=10; &amp;lt;/script&amp;gt;  &amp;lt;script src=&amp;quot;test.js&amp;quot;&amp;gt;引用js文件,标签中间不能加内容  用&amp;lt;a href=&amp;quot;javascript:">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-28T00:35:03.748Z">
+<meta property="og:updated_time" content="2019-03-30T08:25:42.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习">
-<meta name="twitter:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用\在标签中间直接写JS代码  var a=10;   \引用js文件,标签中间不能加内容  用\ 在a标签中执行JavaScript内容  比较好的是方法二,模块化,利于后期修改 JavaScript引用HTML内容 直接通过标签中的id名字 JavaScript中内置一个对象document,表示整个HT">
+<meta name="twitter:description" content="Js 是边编译边执行的语言,弱类型,严格区分大小写 在HTML中引用JavaScript 用&amp;lt;script&amp;gt;在标签中间直接写JS代码 &amp;lt;script&amp;gt; var a=10; &amp;lt;/script&amp;gt;  &amp;lt;script src=&amp;quot;test.js&amp;quot;&amp;gt;引用js文件,标签中间不能加内容  用&amp;lt;a href=&amp;quot;javascript:">
 
 
 
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-28T08:35:03+08:00">
-                2019-03-28
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-30T16:25:42+08:00">
+                2019-03-30
               </time>
             
           </span>
@@ -360,12 +360,12 @@
       
         <p>Js 是边编译边执行的语言,弱类型,严格区分大小写</p>
 <h1 id="在HTML中引用JavaScript"><a href="#在HTML中引用JavaScript" class="headerlink" title="在HTML中引用JavaScript"></a>在HTML中引用JavaScript</h1><ol>
-<li><p>用\<script>在标签中间直接写JS代码</p>
-<script> var a=10; </script>
-</p></li>
-<li><p>\<script src="test.js">引用js文件,标签中间不能加内容</p>
+<li><p>用<code>&lt;script&gt;</code>在标签中间直接写JS代码</p>
+<p><code>&lt;script&gt; var a=10; &lt;/script&gt;</code></p>
 </li>
-<li>用\<a href="javascript: void(0);" onclick="alert('显示提醒')"> 在a标签中执行JavaScript内容</li>
+<li><p><code>&lt;script src=&quot;test.js&quot;&gt;</code>引用js文件,标签中间不能加内容</p>
+</li>
+<li>用<code>&lt;a href=&quot;javascript: void(0);&quot; onclick=&quot;alert(&#39;显示提醒&#39;)&quot;&gt;</code>在a标签中执行JavaScript内容</li>
 </ol>
 <p>比较好的是方法二,模块化,利于后期修改</p>
 <h1 id="JavaScript引用HTML内容"><a href="#JavaScript引用HTML内容" class="headerlink" title="JavaScript引用HTML内容"></a>JavaScript引用HTML内容</h1><ol>
@@ -408,6 +408,7 @@
 <p>null是正确的空值-关键字,undefined是错误空值-预先声明的全局变量</p>
 </li>
 </ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx <span class="keyword">instanceof</span> XXX <span class="comment">//判断类型 true/false</span></span><br></pre></td></tr></table></figure>
 <h1 id="function"><a href="#function" class="headerlink" title="function"></a>function</h1><p>函数需要通过变量引用</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">var1,var2</span>) </span>&#123; ... &#125;<span class="comment">//函数名为f1</span></span><br><span class="line"><span class="comment">//调用收所有传进来的参数可以用 arguments[0]读取(存在该数组中)</span></span><br><span class="line"><span class="comment">//**即使函数声明时没有写形参,也能进行接收**</span></span><br><span class="line"><span class="comment">//定义- 函数表达式</span></span><br><span class="line"><span class="keyword">var</span> fvar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; ... &#125;<span class="comment">//匿名函数</span></span><br><span class="line"><span class="keyword">var</span> fvar = <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123; ... &#125;<span class="comment">//正常函数,但是已经有变量(接收返回值)指向这个函数了,所以没必要给函数命名</span></span><br><span class="line"><span class="comment">//匿名函数不能单独出现,但可以作为及时函数立马执行</span></span><br><span class="line"><span class="comment">//及时函数可以通过() - + ~表示</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"hello"</span>);&#125;)();</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="number">1</span>)&#125;());</span><br><span class="line"><span class="comment">//fvar用于接收返回值-若无默认undefined</span></span><br></pre></td></tr></table></figure>
 <h2 id="this-关键字"><a href="#this-关键字" class="headerlink" title="this 关键字"></a>this 关键字</h2><p>驱动/调用该函数的对象</p>
@@ -417,7 +418,7 @@
 <h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> f2;</span><br><span class="line"><span class="comment">//直接将函数return回去,子函数f2可以访问父函数的变量,所以外界接收到后也可以访问父级变量了</span></span><br></pre></td></tr></table></figure>
 <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>可选逗号结尾,可以在最后多一个逗号</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [ , , ]<span class="comment">//认为length=2</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>([]);<span class="comment">//空数组</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>);<span class="comment">//只有一个值:Length0</span></span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//元素(非长度)</span></span><br><span class="line"><span class="keyword">var</span> arr2 = <span class="built_in">Array</span>.of(<span class="number">5</span>)<span class="comment">//只有一个元素5(非长度)</span></span><br></pre></td></tr></table></figure>
-</script></p></li></ol>
+
       
     </div>
     
@@ -597,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在HTML中引用JavaScript"><span class="nav-number">1.</span> <span class="nav-text">在HTML中引用JavaScript</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在HTML中引用JavaScript"><span class="nav-number">1.</span> <span class="nav-text">在HTML中引用JavaScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript引用HTML内容"><span class="nav-number">2.</span> <span class="nav-text">JavaScript引用HTML内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">3.1.</span> <span class="nav-text">数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">4.</span> <span class="nav-text">function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#this-关键字"><span class="nav-number">4.1.</span> <span class="nav-text">this 关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义和执行"><span class="nav-number">4.2.</span> <span class="nav-text">定义和执行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">5.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">6.</span> <span class="nav-text">数组</span></a></li></ol></div>
             
 
           </div>
