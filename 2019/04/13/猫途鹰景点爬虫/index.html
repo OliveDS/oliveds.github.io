@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/olive-appletouch.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/olive-logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="先说结果  爬取了🦉猫途鹰网站上34,237个景点的所有中文评论共25,165条 😝基本上我敢肯定景点一定是很全很全的(费了老大劲的);  ☹️评论我查了几个景点,基本也都是全的. 但是我没有IP池,所以后来被反爬了😭但我觉得代码是没问题的,理论上说能爬到所有中文评论   源代码请见  访问我的数据库   IP: 47.93.238.102 Port: 3306 MySQL账号: dsjk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取猫途鹰网站上所有中国景点的数据">
+<meta property="og:url" content="https://oliveds.github.io/2019/04/13/猫途鹰景点爬虫/index.html">
+<meta property="og:site_name" content="OliveDS&#39;s Study Bar">
+<meta property="og:description" content="先说结果  爬取了🦉猫途鹰网站上34,237个景点的所有中文评论共25,165条 😝基本上我敢肯定景点一定是很全很全的(费了老大劲的);  ☹️评论我查了几个景点,基本也都是全的. 但是我没有IP池,所以后来被反爬了😭但我觉得代码是没问题的,理论上说能爬到所有中文评论   源代码请见  访问我的数据库   IP: 47.93.238.102 Port: 3306 MySQL账号: dsjk">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-15%20at%2010.56.56%20AM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/%E5%AE%89%E5%85%A8%E7%BB%84%E8%A7%84%E5%88%99.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/navicat-new-connection.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/navicat-database.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sites_all_url_copy4.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sites_all_review.png">
+<meta property="og:updated_time" content="2019-04-22T14:14:38.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬取猫途鹰网站上所有中国景点的数据">
+<meta name="twitter:description" content="先说结果  爬取了🦉猫途鹰网站上34,237个景点的所有中文评论共25,165条 😝基本上我敢肯定景点一定是很全很全的(费了老大劲的);  ☹️评论我查了几个景点,基本也都是全的. 但是我没有IP池,所以后来被反爬了😭但我觉得代码是没问题的,理论上说能爬到所有中文评论   源代码请见  访问我的数据库   IP: 47.93.238.102 Port: 3306 MySQL账号: dsjk">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-15%20at%2010.56.56%20AM.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://oliveds.github.io/2019/04/13/猫途鹰景点爬虫/">
+
+
+
+
+
+  <title>爬取猫途鹰网站上所有中国景点的数据 | OliveDS's Study Bar</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OliveDS's Study Bar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个小小码农的学习分享</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/04/13/猫途鹰景点爬虫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="OliveDS">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OliveDS's Study Bar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬取猫途鹰网站上所有中国景点的数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-13T16:51:38+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-04-22T22:14:38+08:00">
+                2019-04-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/13/猫途鹰景点爬虫/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/13/猫途鹰景点爬虫/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/13/猫途鹰景点爬虫/" class="leancloud_visitors" data-flag-title="爬取猫途鹰网站上所有中国景点的数据">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>先说结果</strong></p>
+<ul>
+<li><p>爬取了🦉猫途鹰网站上<strong>34,237</strong>个景点的所有中文评论共<strong>25,165</strong>条</p>
+<p>😝基本上我敢肯定景点一定是很全很全的(费了老大劲的); </p>
+<p>☹️评论我查了几个景点,基本也都是全的. 但是我没有IP池,所以后来被反爬了😭但我觉得代码是没问题的,理论上说能爬到所有中文评论</p>
+</li>
+</ul>
+<p><strong>源代码</strong>请见 <a href="https://blog.csdn.net/u010978757/article/details/83409571" target="_blank" rel="noopener"></a></p>
+<p><strong>访问我的数据库</strong> </p>
+<ul>
+<li>IP: 47.93.238.102</li>
+<li>Port: 3306</li>
+<li>MySQL账号: dsjk </li>
+<li><p>MySQL密码: dsjk</p>
+</li>
+<li><p>Database: scrapy_sies</p>
+</li>
+<li>Table: sites_all_url_copy4 (中国所有景点)</li>
+<li>Table: sites_all_review (所有中文景点评论)</li>
+</ul>
+<hr>
+<h1 id="网站分析"><a href="#网站分析" class="headerlink" title="网站分析"></a>网站分析</h1><p>本来以为从 <code>中国</code>-&gt;<code>景点</code>这个页面<a href="https://www.tripadvisor.cn/Attractions-g294211-Activities-China.html" target="_blank" rel="noopener">https://www.tripadvisor.cn/Attractions-g294211-Activities-China.html</a>下应该能找到一个总表,直接爬取即可,但是看了一下才发现并没有这样一个表,而且给出的分类数据十分不全,总共才296个景点(应该都是精华景点吧…)所以肯定不能想着一次把所有景点爬全了</p>
+<p>所以我打算采用的方案是,先从<code>中国</code>-&gt;<code>目的地</code>页面<a href="https://www.tripadvisor.cn/Tourism-g294211-China-Vacations.html" target="_blank" rel="noopener">https://www.tripadvisor.cn/Tourism-g294211-China-Vacations.html</a>把中国所有目的地(按排行)爬下来,再按照目的地把当地所有景点爬取下来,以青岛为例,就是其这个页面<a href="https://www.tripadvisor.cn/Attractions-g297458-Activities-Qingdao_Shandong.html#ATTRACTION_SORT_WRAPPER" target="_blank" rel="noopener">https://www.tripadvisor.cn/Attractions-g297458-Activities-Qingdao_Shandong.html#ATTRACTION_SORT_WRAPPER</a>(同样是按排行)</p>
+<p>推测这样应该能爬到比较完整的数据了</p>
+<h2 id="爬取所有目的地链接"><a href="#爬取所有目的地链接" class="headerlink" title="爬取所有目的地链接"></a>爬取所有目的地链接</h2><p>依然是这个链接<a href="https://www.tripadvisor.cn/TourismChildrenAjax?geo=294211&amp;offset=11&amp;desktop=true" target="_blank" rel="noopener">https://www.tripadvisor.cn/TourismChildrenAjax?geo=294211&amp;offset=11&amp;desktop=true</a>,在<code>受欢迎的目的地</code>标签下有个<code>中国的热门目的地</code>排行榜,虽然榜单只显示了部分内容,但可以点击<code>查看更多中国热门目的地</code>加载,我试了一下,貌似很多很多页,能一直加载下去,目测是包含了所有目的地的</p>
+<p>打开Chrome的<code>开发者工具</code>,点击<code>查看更多中国热门目的地</code>查看页面发送的Request,发现是通过</p>
+<p><img src alt></p>
+<p>这个请求中的<code>offset</code>值在加载新的内容的</p>
+<p><a href="https://www.tripadvisor.cn/TourismChildrenAjax?geo=294211&amp;offset=1&amp;desktop=true" target="_blank" rel="noopener">https://www.tripadvisor.cn/TourismChildrenAjax?geo=294211&amp;offset=1&amp;desktop=true</a></p>
+<p>用浏览器直接打开这个链接,可以发现,<code>offset</code>为1时,加载的就是第七名之后的目的地,所以修改offset就可以获得所有目的地,而1~6在原网页</p>
+<p>我们的任务就是首先爬取所有的中国目的地(的链接),然后再爬目的地页面的景点</p>
+<h1 id="动手"><a href="#动手" class="headerlink" title="动手"></a>动手</h1><h2 id="安装Scrapy"><a href="#安装Scrapy" class="headerlink" title="安装Scrapy"></a>安装Scrapy</h2><p>(已经安装了Python3 &amp; pip3)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install scrapy</span><br></pre></td></tr></table></figure>
+<p>安装完成后可以在所需位置直接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject maotuying</span><br></pre></td></tr></table></figure>
+<p>新建工程</p>
+<h2 id="配置items"><a href="#配置items" class="headerlink" title="配置items"></a>配置items</h2><p>在<code>maotuying</code>-&gt;<code>maotuying</code>-&gt;<code>items.py</code>中配置需要通过Pipeline存储的内容(即爬虫获取的对象)</p>
+<p>先考虑做第一级爬虫(目的地HTML),所以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaotuyingItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    des_name = scrapy.Field()</span><br><span class="line">    des_html = scrapy.Field()</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建爬虫"><a href="#创建爬虫" class="headerlink" title="创建爬虫"></a>创建爬虫</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider sites www.tripadvisor.cn</span><br></pre></td></tr></table></figure>
+<p><code>deshtmls</code>是爬虫任务的名称,<code>www.tripadvisor.cn</code>是domain name</p>
+<blockquote>
+<p>通常domain.name都是不带<code>www</code>的,但是猫途鹰网站的都带,查阅一下论坛发现</p>
+<p>The “www.” convention is redundant, old fashioned and … (IMO) … ugly. Most places who use “<a href="http://www.example.com&quot;" target="_blank" rel="noopener">www.example.com&quot;</a> will also have a server at “example.com”, and one will redirect to the other as appropriate.</p>
+<p>果然尝试一下在浏览器输入<code>http://tripadvisor.cn</code>会直接跳转成<code>https://www.tripadvisor.cn</code></p>
+</blockquote>
+<blockquote>
+<p>另: https的s代表<code>secure</code>,是使用SSL加密传输的HTTP,更加安全(同样的,使用https的网站会自动将<code>http</code>协议更正为<code>https</code>)</p>
+</blockquote>
+<p>建立爬虫后,打开<code>sites.py</code>文件,将<code>start_urls</code>默认为<code>http://www.tripadvisor.cn</code>修改成了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeshtmlsSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'deshtmls'</span></span><br><span class="line">    allowed_domains = [<span class="string">'www.tripadvisor.cn'</span>]</span><br><span class="line">    start_urls = [<span class="string">'https://www.tripadvisor.cn/Tourism-g294211-China-Vacations.html'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="检查所需页面元素"><a href="#检查所需页面元素" class="headerlink" title="检查所需页面元素"></a>检查所需页面元素</h2><p>使用<code>Chrome</code>的<code>Developer Tools</code></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-15%20at%2010.56.56%20AM.png" alt></p>
+<h2 id="尝试爬取"><a href="#尝试爬取" class="headerlink" title="尝试爬取"></a>尝试爬取</h2><p>尝试爬取后发现response为空,使用scrapy shell进行调试,发现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span> scrapy shell 'https://www.tripadvisor.cn/Tourism-g294211-China-Vacations.html' --nolog</span><br><span class="line">[s] Available Scrapy objects:</span><br><span class="line">[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)</span><br><span class="line">[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x1065289e8&gt;</span><br><span class="line">[s]   item       &#123;&#125;</span><br><span class="line">[s]   request    &lt;GET https://www.tripadvisor.cn/Tourism-g294211-China-Vacations.html&gt;</span><br><span class="line">[s]   settings   &lt;scrapy.settings.Settings object at 0x106528748&gt;</span><br><span class="line">[s] Useful shortcuts:</span><br><span class="line">[s]   fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)</span><br><span class="line">[s]   fetch(req)                  Fetch a scrapy.Request and update local objects</span><br><span class="line">[s]   shelp()           Shell help (print this help)</span><br><span class="line">[s]   view(response)    View response in a browser</span><br><span class="line">In [1]: view(response)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">AttributeError                            Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-1-c68f42c3ba27&gt; in &lt;module&gt;</span><br><span class="line"><span class="meta">----&gt;</span> 1 view(response)</span><br><span class="line"></span><br><span class="line">/usr/local/lib/python3.7/site-packages/scrapy/utils/response.py in open_in_browser(response, _openfunc)</span><br><span class="line">     68     from scrapy.http import HtmlResponse, TextResponse</span><br><span class="line">     69     # XXX: this implementation is a bit dirty and could be improved</span><br><span class="line"><span class="meta">---&gt;</span> 70     body = response.body</span><br><span class="line">     71     if isinstance(response, HtmlResponse):</span><br><span class="line">     72         if b'&lt;base' not in body:</span><br><span class="line"></span><br><span class="line">AttributeError: 'NoneType' object has no attribute 'body'</span><br></pre></td></tr></table></figure>
+<p>找到一个解答:</p>
+<p><a href="https://stackoverflow.com/questions/43973898/scrapy-shell-return-without-response" target="_blank" rel="noopener">https://stackoverflow.com/questions/43973898/scrapy-shell-return-without-response</a></p>
+<p>将setting.py中修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROBOTSTXT_OBEY=False</span><br></pre></td></tr></table></figure>
+<p>修改后,可以在shell 爬取的界面中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In [4]: response.xpath(&apos;//div[@class=&quot;popularCities&quot;]/a/@href&apos;).extract()</span><br><span class="line">Out[4]:</span><br><span class="line">[&apos;/Tourism-g294217-Hong_Kong-Vacations.html&apos;,</span><br><span class="line"> &apos;/Tourism-g294212-Beijing-Vacations.html&apos;,</span><br><span class="line"> &apos;/Tourism-g308272-Shanghai-Vacations.html&apos;,</span><br><span class="line"> &apos;/Tourism-g297463-Chengdu_Sichuan-Vacations.html&apos;,</span><br><span class="line"> &apos;/Tourism-g297415-Shenzhen_Guangdong-Vacations.html&apos;,</span><br><span class="line"> &apos;/Tourism-g298557-Xi_an_Shaanxi-Vacations.html&apos;]</span><br></pre></td></tr></table></figure>
+<h1 id="正式爬取"><a href="#正式爬取" class="headerlink" title="正式爬取"></a>正式爬取</h1><h2 id="爬取逻辑"><a href="#爬取逻辑" class="headerlink" title="爬取逻辑"></a>爬取逻辑</h2><ol>
+<li>爬取中国所有景点的URL,并存储到MySQL数据库中</li>
+<li>依次爬取所有景点的中文评论</li>
+</ol>
+<h3 id="爬取中国所有景点的URL"><a href="#爬取中国所有景点的URL" class="headerlink" title="爬取中国所有景点的URL"></a>爬取中国所有景点的URL</h3><p>具体又可以分为:</p>
+<ol>
+<li><p><code>start_requests</code>方法构造初始请求(目的地)的request</p>
+<p>需要设置<code>{offset}</code>值请求所有目的地网页</p>
+</li>
+<li><p><code>parse_des</code>方法解析目的地的URL</p>
+</li>
+<li><p><code>parse_sites_firstpage</code>方法解析目的地的景点列表的页数,并构造下一步请求景点列表的URL</p>
+<p>同样需要设置<code>{pages}</code>值</p>
+</li>
+<li><p><code>parse_sites_1page</code>解析景点的名称和URL,存入MySQL</p>
+</li>
+</ol>
+<p>代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> maotuying.items <span class="keyword">import</span> MaotuyingItem</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SitesSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'sites'</span></span><br><span class="line">    allowed_domains = [<span class="string">'www.tripadvisor.cn'</span>]</span><br><span class="line">    <span class="comment"># start_urls = ['http://www.tripadvisor.cn/']</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    两层爬虫,先爬取所有目的地的URL,再在改URL下爬取所有景点</span></span><br><span class="line"><span class="string">    parse先将目的地html解析出来,然后调用parse_sites</span></span><br><span class="line"><span class="string">    parse_des 将目的地的中的所有景点URL爬取下来</span></span><br><span class="line"><span class="string">    parse_sites 将每个景点的具体内容爬取并存储下来</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    custom_settings = &#123;</span><br><span class="line">        <span class="string">'DUPEFILTER_CLASS'</span>: <span class="string">'scrapy.dupefilters.BaseDupeFilter'</span>,<span class="comment"># 允许爬取重复的页面 因为我的程序中对目的地首页先解析了pages页数,所以会重复一次!!否则爬第一页景点失败</span></span><br><span class="line">        <span class="string">'ITEM_PIPELINES'</span> : &#123;<span class="string">'maotuying.pipelines.MaotuyingPipeline'</span>: <span class="number">300</span>,&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通常情况下给出 start_urls 即可开始爬虫,但此处需要构造,专门设置一个函数确定需要被爬取的URL,存到requests中,逐个被请求</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></span><br><span class="line">        requests = []</span><br><span class="line">        url = <span class="string">'''https://www.tripadvisor.cn/TourismChildrenAjax?geo=294211&amp;offset=&#123;offset&#125;&amp;desktop=true'''</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">212</span>):<span class="comment"># 通过尝试,发现共0~211页 也可以while循环直到没有新的目的地</span></span><br><span class="line">            request = scrapy.Request(url.format(offset=i), callback=self.parse_des)</span><br><span class="line">            <span class="comment"># print(request)</span></span><br><span class="line">            <span class="comment"># print("start_requests",i)</span></span><br><span class="line">            requests.append(request)</span><br><span class="line">        <span class="keyword">return</span> requests</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_des</span><span class="params">(self, response)</span>:</span> <span class="comment"># 解析目的地链接</span></span><br><span class="line">        des_s = response.xpath(<span class="string">'//a/@href'</span>).extract()<span class="comment"># 页面中所有a的数组,即所有目的地</span></span><br><span class="line">        print(<span class="string">"this is parse_des"</span>)</span><br><span class="line">        <span class="keyword">for</span> des <span class="keyword">in</span> des_s:</span><br><span class="line">            des_parts = des.split(<span class="string">'-'</span>) <span class="comment"># e.g. /Tourism-g298559-Hangzhou_Zhejiang-Vacations.html</span></span><br><span class="line">            print(des_parts[<span class="number">2</span>])</span><br><span class="line">            <span class="comment"># https://www.tripadvisor.cn/Attractions-g298559-Activities-Hangzhou_Zhejiang.html</span></span><br><span class="line">            url = <span class="string">'https://www.tripadvisor.cn/Attractions-'</span> + des_parts[<span class="number">1</span>] + <span class="string">'-Activities-'</span> + des_parts[<span class="number">2</span>] + <span class="string">'.html'</span></span><br><span class="line">            print(<span class="string">"parse_des"</span>,url)</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url, self.parse_sites_firstpage)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_sites_firstpage</span><span class="params">(self, response)</span>:</span><span class="comment"># 解析目的地的景点页数</span></span><br><span class="line">        <span class="comment"># url = 'https://www.tripadvisor.cn/Attractions-' + des_parts[1] + '-Activities-oa' + str(i*30) + '-' + des_parts[2] + '.html'</span></span><br><span class="line">        desurl = response.xpath(<span class="string">'//li[@data-element=".masthead-dropdown-attractions"]/a/@href'</span>).extract()<span class="comment"># 页面中所有页码的数组</span></span><br><span class="line">        <span class="comment"># desurl = response.url</span></span><br><span class="line">        <span class="comment"># e.g. /Attractions-g294217-Activities-Hong_Kong.html</span></span><br><span class="line">        print(desurl[<span class="number">0</span>])</span><br><span class="line">        des_parts = desurl[<span class="number">0</span>].split(<span class="string">'-'</span>)</span><br><span class="line">        <span class="comment"># https://www.tripadvisor.cn/Attractions-g294217-Activities-Hong_Kong.html</span></span><br><span class="line">        <span class="comment"># url = 'https://www.tripadvisor.cn/Attractions-' + des_parts[1] + '-Activities-' + des_parts[3] #+ '.html'</span></span><br><span class="line">        <span class="comment"># print("only parse page 1",url)</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            page_s = response.xpath(<span class="string">'//div[@class="pageNumbers"]/a/@data-page-number'</span>).extract()<span class="comment"># 页面中所有页码的数组</span></span><br><span class="line">            pages = int(page_s[<span class="number">-1</span>])<span class="comment"># 最后一个页码就是最大页码</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            pages = <span class="number">1</span>;</span><br><span class="line">        print(<span class="string">"this is parse_sites_pages"</span>) <span class="comment">#,pages</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(pages):</span><br><span class="line">            <span class="comment"># print("this is i in range(pages)",i)</span></span><br><span class="line">            url = <span class="string">'https://www.tripadvisor.cn/Attractions-'</span> + des_parts[<span class="number">1</span>] + <span class="string">'-Activities-oa'</span> + str(i*<span class="number">30</span>) + <span class="string">'-'</span> + des_parts[<span class="number">3</span>] <span class="comment">#+ '.html'</span></span><br><span class="line">            print(<span class="string">"this is i in range(pages)"</span>,i,url)</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url, self.parse_sites_1page)</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_sites_1page</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        site_s = response.xpath(<span class="string">'//div[@class="listing_title "]/a/@href'</span>).extract()<span class="comment"># 页面中所有a的数组</span></span><br><span class="line">        sites_items = []</span><br><span class="line">        print(<span class="string">"this is parse_sites_1page"</span>,site_s)</span><br><span class="line">        <span class="keyword">for</span> site <span class="keyword">in</span> site_s:</span><br><span class="line">            <span class="comment"># for example: /Attraction_Review-g298559-d386917-Reviews-West_Lake_Xi_Hu-Hangzhou_Zhejiang.html</span></span><br><span class="line">            <span class="comment"># /Attraction_Review-g297431-d501536-Reviews-Cangyan_Mountain-Shijiazhuang_Hebei.html</span></span><br><span class="line">            site_parts = site.split(<span class="string">'-'</span>)</span><br><span class="line">            <span class="comment"># if url is not None:</span></span><br><span class="line">            url = <span class="string">'https://www.tripadvisor.cn'</span> + site</span><br><span class="line">            print(site_parts[<span class="number">4</span>],url)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 实现数据库pipeline读写</span></span><br><span class="line">            item = MaotuyingItem()</span><br><span class="line">            item[<span class="string">'site_name'</span>] = site_parts[<span class="number">4</span>]</span><br><span class="line">            item[<span class="string">'site_url'</span>] = url</span><br><span class="line">            <span class="comment"># TypeError: can only concatenate str (not "MaotuyingItem") to str</span></span><br><span class="line">            <span class="comment"># print("this is parse_sites's item" + item['site_url']) # 检查item是否成功生成</span></span><br><span class="line">            sites_items.append(item)</span><br><span class="line">            <span class="comment"># yield scrapy.Request(url, self.parse_site)</span></span><br><span class="line">        <span class="keyword">return</span> sites_items<span class="comment"># 必须return not pass 否则des_s中后续str不执行(for循环只执行一次)</span></span><br></pre></td></tr></table></figure>
+<h3 id="依次爬取所有景点的中文评论"><a href="#依次爬取所有景点的中文评论" class="headerlink" title="依次爬取所有景点的中文评论"></a>依次爬取所有景点的中文评论</h3><p>具体步骤又为:</p>
+<ol>
+<li><p><code>start_requests</code>方法从MySQL中取出景点的URL,构造初始请求</p>
+</li>
+<li><p><code>parse_sites_firstpage</code>解析景点的评论页数,,并构造下一步请求评论页面的URL</p>
+<p>同样需要配置URL中的<code>{pages}</code>值</p>
+</li>
+<li><p><code>parse_site_reviews</code>方法解析评论的详细内容,并存储到数据库中</p>
+</li>
+</ol>
+<p>代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> maotuying.items <span class="keyword">import</span> MaotuyingReviewItem</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SitedSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'sited'</span></span><br><span class="line">    allowed_domains = [<span class="string">'www.tripadvisor.cn'</span>]</span><br><span class="line">    <span class="comment"># start_urls = ['http://www.tripadvisor.cn/']</span></span><br><span class="line"></span><br><span class="line">    custom_settings = &#123;</span><br><span class="line">        <span class="string">'DUPEFILTER_CLASS'</span>: <span class="string">'scrapy.dupefilters.BaseDupeFilter'</span>,<span class="comment"># 允许爬取重复的页面 因为我的程序中对目的地首页先解析了pages页数,所以会重复一次!!否则爬第一页景点失败</span></span><br><span class="line">        <span class="string">'ITEM_PIPELINES'</span> : &#123;<span class="string">'maotuying.pipelines.MaotuyingReviewPipeline'</span>: <span class="number">300</span>,&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 从数据库中找到所有景点的URL</span></span><br><span class="line">        self.connect = pymysql.connect(</span><br><span class="line">            host = <span class="string">'localhost'</span>,</span><br><span class="line">            port = <span class="number">3306</span>,</span><br><span class="line">            user = <span class="string">'dsjk'</span>,</span><br><span class="line">            password = <span class="string">'dsjk'</span>,</span><br><span class="line">            database = <span class="string">'scrapy_sies'</span>,  </span><br><span class="line">            charset=<span class="string">'utf8'</span>,</span><br><span class="line">            use_unicode=<span class="literal">True</span>)</span><br><span class="line">        self.cursor = self.connect.cursor()</span><br><span class="line">        self.connect.autocommit(<span class="literal">True</span>)</span><br><span class="line">        sql = <span class="string">"select site_url from sites_all_url_copy4"</span><span class="comment"># table: sites_all_url_copy4</span></span><br><span class="line">        self.cursor.execute(sql)</span><br><span class="line">        results = self.cursor.fetchall()</span><br><span class="line">        print(len(results),<span class="string">" sites total."</span>)</span><br><span class="line">        requests = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> results:</span><br><span class="line">            <span class="comment"># i += 1</span></span><br><span class="line">            <span class="comment"># print(url[0])</span></span><br><span class="line">            request = scrapy.Request(url[<span class="number">0</span>], callback=self.parse_sites_firstpage)<span class="comment">#Request(url, callback=self.parse_review, meta=&#123;'movieId': movieId&#125;, dont_filter=True)</span></span><br><span class="line">            requests.append(request)</span><br><span class="line">            <span class="comment"># if i &gt; 100:</span></span><br><span class="line">            <span class="comment">#     break</span></span><br><span class="line">        <span class="keyword">return</span> requests</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_sites_firstpage</span><span class="params">(self, response)</span>:</span><span class="comment"># 解析目的地的景点页数</span></span><br><span class="line">        desurl = response.url</span><br><span class="line">        <span class="comment"># print(desurl) #https://www.tripadvisor.cn/Attraction_Review-g298557-d1801584-Reviews---Xiangzi_Temple-Xi_an_Shaanxi.html</span></span><br><span class="line">        des_parts = desurl.split(<span class="string">'-'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            pages = response.xpath(<span class="string">'//div[@class="pageNumbers"]/a/@data-page-number'</span>).extract()<span class="comment"># 页面中所有页码的数组</span></span><br><span class="line">            <span class="comment"># print("pages is",pages)</span></span><br><span class="line">            page = int(pages[<span class="number">-1</span>])</span><br><span class="line">            <span class="comment"># print("transfer pages to int",pages)</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            page = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(page):</span><br><span class="line">            url = des_parts[<span class="number">0</span>] + <span class="string">'-'</span> + des_parts[<span class="number">1</span>] + <span class="string">'-'</span> + des_parts[<span class="number">2</span>] + <span class="string">'-'</span> + des_parts[<span class="number">3</span>] + <span class="string">'-or'</span> + str(i*<span class="number">10</span>) + <span class="string">'-'</span> + des_parts[<span class="number">4</span>] + <span class="string">'-'</span> + des_parts[<span class="number">5</span>]<span class="comment">#+ '.html'</span></span><br><span class="line">            <span class="comment">##print("this is i in range(pages)",i,url)</span></span><br><span class="line"><span class="comment">#             yield scrapy.Request(</span></span><br><span class="line"><span class="comment">#                 url,</span></span><br><span class="line"><span class="comment">#                 formname = language,</span></span><br><span class="line"><span class="comment">#                 formdata = &#123;</span></span><br><span class="line"><span class="comment">#                     'language': 'ALL', # or any other year value</span></span><br><span class="line"><span class="comment">#                 &#125;</span></span><br><span class="line"><span class="comment">#                 callback=self.parse_site_reviews</span></span><br><span class="line"><span class="comment"># )</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url, self.parse_site_reviews)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_site_reviews</span><span class="params">(self, response)</span>:</span> <span class="comment"># 解析目的地详情</span></span><br><span class="line">        desurl = response.url</span><br><span class="line">        <span class="comment"># print(desurl) #https://www.tripadvisor.cn/Attraction_Review-g298557-d1801584-Reviews---Xiangzi_Temple-Xi_an_Shaanxi.html</span></span><br><span class="line">        des_parts = desurl.split(<span class="string">'-'</span>)</span><br><span class="line"></span><br><span class="line">        review_quote = response.xpath(<span class="string">'//span[@class="noQuotes"]'</span>).xpath(<span class="string">'string(.)'</span>).extract()</span><br><span class="line">        review_detail = response.xpath(<span class="string">'//p[@class="partial_entry"]'</span>).xpath(<span class="string">'string(.)'</span>).extract()</span><br><span class="line">        review_user = response.xpath(<span class="string">'//div[@class="info_text"]/div[1]'</span>).xpath(<span class="string">'string(.)'</span>).extract()<span class="comment"># div[1]表示提取其中的第一个div</span></span><br><span class="line">        review_time = response.xpath(<span class="string">'//span[@class="ratingDate"]/@title'</span>).extract()</span><br><span class="line">        review_url = response.xpath(<span class="string">'//div[@class="quote"]/a/@href'</span>).extract()    </span><br><span class="line">        review_items = []</span><br><span class="line">        <span class="comment"># print("this is parse_site_reviews",desurl)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(review_quote)):</span><br><span class="line">            item = MaotuyingReviewItem()</span><br><span class="line">            item[<span class="string">'review_site'</span>] = des_parts[<span class="number">-2</span>]<span class="comment"># 倒数第二为景点名称</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                url_r = review_url[i]</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                url_r = <span class="string">""</span></span><br><span class="line">            item[<span class="string">'review_url'</span>] = url_r</span><br><span class="line">            item[<span class="string">'review_quote'</span>] = review_quote[i]</span><br><span class="line">            item[<span class="string">'review_detail'</span>] = review_detail[i]</span><br><span class="line">            item[<span class="string">'review_user'</span>] = review_user[i]</span><br><span class="line">            item[<span class="string">'review_time'</span>] = review_time[i]</span><br><span class="line">            review_items.append(item)</span><br><span class="line">        <span class="keyword">return</span> review_items<span class="comment"># 必须return not pass 否则des_s中后续str不执行(for循环只执行一次)</span></span><br></pre></td></tr></table></figure>
+<h2 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h2><p>参考这篇教程</p>
+<p><a href="https://www.accordbox.com/blog/scrapy-tutorial-9-how-use-scrapy-item/" target="_blank" rel="noopener">https://www.accordbox.com/blog/scrapy-tutorial-9-how-use-scrapy-item/</a></p>
+<p>注意还需要</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install mysqlclient</span><br></pre></td></tr></table></figure>
+<p>才能执行db_connect()</p>
+<p>其中<code>models.py</code>的内容中的<code>QuoteDB</code>需要修改为自己的DB,然后测试代码中的DB名称和字段也需要根据自己的DB修改. In my case 测试代码和结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from sqlalchemy.orm import sessionmaker</span><br><span class="line">   ...: from maotuying.models import SitesDB, db_connect, create_tab</span><br><span class="line">   ...: le</span><br><span class="line">   ...:</span><br><span class="line">   ...: engine = db_connect()</span><br><span class="line">   ...: create_table(engine)</span><br><span class="line">   ...: Session = sessionmaker(bind=engine)</span><br><span class="line">   ...:</span><br><span class="line">   ...: session = Session()</span><br><span class="line">   ...: quotedb = SitesDB()</span><br><span class="line">   ...: quotedb.sites_name = &quot;test name&quot;</span><br><span class="line">   ...: quotedb.sites_url = &quot;test url&quot;</span><br><span class="line">   ...:</span><br><span class="line">   ...: try:</span><br><span class="line">   ...:     session.add(quotedb)</span><br><span class="line">   ...:     session.commit()</span><br><span class="line">   ...:</span><br><span class="line">   ...:     #query again</span><br><span class="line">   ...:     obj = session.query(SitesDB).first()</span><br><span class="line">   ...:     print(obj.sites_name,obj.sites_url)</span><br><span class="line">   ...: except:</span><br><span class="line">   ...:     session.rollback()</span><br><span class="line">   ...:     raise</span><br><span class="line">   ...: finally:</span><br><span class="line">   ...:     session.close()</span><br><span class="line">   ...:</span><br><span class="line">test name test url</span><br></pre></td></tr></table></figure>
+<p>在执行这段测试程序时,出现了lib <code>ImportError</code>,</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImportError: dlopen(/usr/local/lib/python3.7/site-packages/MySQLdb/_mysql.cpython-37m-darwin.so, 2): Library not loaded: libcrypto.1.0.0.dylib</span><br><span class="line">  Referenced from: /usr/local/lib/python3.7/site-packages/MySQLdb/_mysql.cpython-37m-darwin.so</span><br><span class="line">  Reason: image not found</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span> sudo ln -s /usr/local/mysql-8.0.15-macos10.14-x86_64/lib/libcrypto.1.0.0.dylib /usr/local/lib/libcrypto.1.0.0.dylib</span><br></pre></td></tr></table></figure>
+<p>我的解决方案是把需要的lib逐个link到了<code>/usr/local/lib/</code>下. <del>如果有更好的解决方案,please let me know</del></p>
+<p><em>也可以使用张老师课件上<code>pymysql</code>插件进行连接(需要自己创建数据库表和编写insert语句,稍微麻烦一点)</em></p>
+<p>创建数据库可以使用以下语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table sites_trial(</span><br><span class="line">   id INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">   site_name VARCHAR(100) DEFAULT NULL,</span><br><span class="line">   site_url VARCHAR(300) DEFAULT NULL,</span><br><span class="line">   PRIMARY KEY (id)</span><br><span class="line">)ENGINE=InNoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.tripadvisor.cn/ShowUserReviews-g317092-d1754693-r254761540-ZHCN.html</span><br></pre></td></tr></table></figure>
+<h1 id="MySQL数据库服务器"><a href="#MySQL数据库服务器" class="headerlink" title="MySQL数据库服务器"></a>MySQL数据库服务器</h1><h2 id="阿里云ECS服务器"><a href="#阿里云ECS服务器" class="headerlink" title="阿里云ECS服务器"></a>阿里云ECS服务器</h2><p>因为需要将数据库提供给其他同学访问,需要搭建一个MySQL服务器,我用学生优惠开了一台9.5元/月的ECS云服务器,通过其公网IP,可以远程访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ssh 47.93.238.102</span><br></pre></td></tr></table></figure>
+<p>ECS刚拿到后需要</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">apt undate</span><br></pre></td></tr></table></figure>
+<p>安装MySQL-Server我根据阿里云官方的教程遇到了很多错误,反而后来按照</p>
+<p>官方: <a href="https://yq.aliyun.com/articles/654980" target="_blank" rel="noopener">https://yq.aliyun.com/articles/654980</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br><span class="line">sudo service mysql start # 注意Linux上不是mysqld!!!</span><br><span class="line">ps -ef | grep mysql | grep -v grep # 发现服务已经启动了</span><br></pre></td></tr></table></figure>
+<h2 id="配置安全组规则"><a href="#配置安全组规则" class="headerlink" title="配置安全组规则"></a>配置安全组规则</h2><p>需要给ECS配置允许公网访问其3306端口,如下图所示</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/%E5%AE%89%E5%85%A8%E7%BB%84%E8%A7%84%E5%88%99.png" alt></p>
+<h2 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h2><p>一开始我把数据都存在了本地的MySQL中,所以需要迁移上ECS</p>
+<h3 id="将Database存为-sql文件"><a href="#将Database存为-sql文件" class="headerlink" title="将Database存为 .sql文件"></a>将Database存为 .sql文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u dsjk -p scrapy_sies&gt;scrapy_sies.sql</span><br></pre></td></tr></table></figure>
+<h3 id="将文件上传到ECS"><a href="#将文件上传到ECS" class="headerlink" title="将文件上传到ECS"></a>将文件上传到ECS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /Users/oliveds/Documents/web/maotuying/scrapy_sies.sql root@47.93.238.102:/home/oliveds/</span><br></pre></td></tr></table></figure>
+<p>这个代码在本机执行,前面是<code>源IP</code>(省略)<code>源路径+文件名</code> 后面是<code>目标IP</code>(即ECS的IP) <code>目标路径</code></p>
+<p>果然可以在我的ECS命令行中查找到它了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@...:/home/oliveds# ls</span><br><span class="line">mysql57-community-release-el7-11.noarch.rpm  scrapy_sies.sql</span><br></pre></td></tr></table></figure>
+<h3 id="ECS中恢复Database"><a href="#ECS中恢复Database" class="headerlink" title="ECS中恢复Database"></a>ECS中恢复Database</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create database scrapy_sies; # 创建原名称的数据库</span><br><span class="line">use scrapy_sies; # 进入</span><br><span class="line">source /home/oliveds/scrapy_sies.sql # 恢复</span><br></pre></td></tr></table></figure>
+<h2 id="配置MySQL数据库可被远程访问"><a href="#配置MySQL数据库可被远程访问" class="headerlink" title="配置MySQL数据库可被远程访问"></a>配置MySQL数据库可被远程访问</h2><h3 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h3><p>首先创建一个新用户,提供给同学和老师们使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create user dsjk identified by &apos;dsjk&apos;;</span><br></pre></td></tr></table></figure>
+<p>第一个<code>dsjk</code>为用户名,第二个为密码</p>
+<h3 id="配置用户权限"><a href="#配置用户权限" class="headerlink" title="配置用户权限"></a>配置用户权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; grant all privileges on scrapy_sies.* to dsjk@&apos;%&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
+<p>这里<code>all</code>表示赋予了所有权限,包括<code>SELECT</code>,<code>INSERT</code>,<code>UPDATE`</code>等,也可以只赋予部分</p>
+<p><code>scrapy_sies</code>是database的名称,这里只赋予了此database下所有table(<code>.*</code>表示所有),也可以使用<code>*.*</code>赋予该用户访问所有database的权限,</p>
+<p><code>@&#39;%&#39;</code>中的<code>%</code>表示dsjk可以在任何ip访问,如果想要限制只有某个ip可以访问,将<code>&#39;%&#39;</code>换成那个ip地址(xxx.xxx.xxx.xxx or localhost)就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line"># 注释掉 bind_address 行 或改成0.0.0.0(往下滑,我第一次都没有找到)</span><br></pre></td></tr></table></figure>
+<p>然后重启一下ECS机器</p>
+<h3 id="远程访问-Navicat"><a href="#远程访问-Navicat" class="headerlink" title="远程访问-Navicat"></a>远程访问-Navicat</h3><p>使用<code>Navicat</code>访问远程的数据库比较方便,安装<code>Navicat for MySQL</code>,新建连接,输入ip(也就是MySQL安装机器的IP地址,可以通过<code>ifconfig</code>查看),port(通常是3306),刚才创建的可从任意ip访问的新用户(dsjk)的用户名和密码,即可建立连接</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/navicat-new-connection.png" alt></p>
+<p><code>Open Connection</code>后,可以看到授权了该用户访问的<code>scrapy_sies</code>database中的内容</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/navicat-database.png" alt></p>
+<h1 id="SideNote"><a href="#SideNote" class="headerlink" title="SideNote"></a>SideNote</h1><h2 id="重复页面爬取"><a href="#重复页面爬取" class="headerlink" title="重复页面爬取"></a>重复页面爬取</h2><p>我的程序需要先对目的地页面中的页码页码进行提取(解析目的地的景点首页),然后再解析目的地景点的每个页面,这样就造成目的地的景点首页被scrapy解析了两次,而scrapy是默认去重的,所以我一直没有爬到每个目的地首页的30个景点😭</p>
+<p>这个问题困扰了一整天,因为问题实在不太好找,我又这么混乱,不熟悉,为了找这个bug我凌晨3点才睡…然并卵😡后来才发现是因为被去重了,好蠢😞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">custom_settings = &#123;</span><br><span class="line">        &apos;DUPEFILTER_CLASS&apos;: &apos;scrapy.dupefilters.BaseDupeFilter&apos;,# 允许爬取重复的页面 因为我的程序中对目的地首页先解析了pages页数,所以会重复一次!!否则爬第一页景点失败</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>如上,配置其可以重复爬取</p>
+<h2 id="Chrome读取缓存"><a href="#Chrome读取缓存" class="headerlink" title="Chrome读取缓存"></a>Chrome读取缓存</h2><p>被反爬虫了,但是code还要继续写,这时候访问不了网站了,于是只能先看缓存的内容了</p>
+<p>访问<code>chrome://chrome-urls/</code>,选择<code>chrome://cache</code>,就可以找之前缓存的页面了</p>
+<h2 id="Spider’s-Custom-Settings-妙用"><a href="#Spider’s-Custom-Settings-妙用" class="headerlink" title="Spider’s Custom Settings 妙用"></a>Spider’s Custom Settings 妙用</h2><p>针对不同的spider有不同配置时,分别写在其<code>custom_settings</code>中,而不是写在<code>project</code>-&gt;<code>settings.py</code>,可以避免相互影响,比如两者使用不同Pipeline时,可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">custom_settings = &#123;</span><br><span class="line">        &apos;DUPEFILTER_CLASS&apos;: &apos;scrapy.dupefilters.BaseDupeFilter&apos;,</span><br><span class="line">        &apos;ITEM_PIPELINES&apos; : &#123;&apos;maotuying.pipelines.MaotuyingReviewPipeline&apos;: 300,&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="IP代理"><a href="#IP代理" class="headerlink" title="IP代理"></a>IP代理</h2><p>虽然通过 设置<code>request Header</code>请求头能够在很大程度上防止被反爬,但是数据量太大的时候,依然很容易会被禁</p>
+<p>这时候如果能有一个IP池来不断换IP地址就更加高枕无忧了.当然,免费的IP池里能用的不多,最好还是购买一个IP代理</p>
+<p>配置方法见这个教程:</p>
+<p><a href="https://blog.csdn.net/u010978757/article/details/83409571" target="_blank" rel="noopener">https://blog.csdn.net/u010978757/article/details/83409571</a></p>
+<h1 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h1><p>Table: sites_all_url_copy4 (中国所有景点)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sites_all_url_copy4.png" alt></p>
+<p>Table: sites_all_review (所有中文景点评论)</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/sites_all_review.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/11/OpenCV-segmentation/" rel="next" title="OpenCV Segmentation 区域分割">
+                <i class="fa fa-chevron-left"></i> OpenCV Segmentation 区域分割
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">OliveDS</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/OliveDS" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:dengs1996@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/OliveDS" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网站分析"><span class="nav-number">1.</span> <span class="nav-text">网站分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取所有目的地链接"><span class="nav-number">1.1.</span> <span class="nav-text">爬取所有目的地链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动手"><span class="nav-number">2.</span> <span class="nav-text">动手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Scrapy"><span class="nav-number">2.1.</span> <span class="nav-text">安装Scrapy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置items"><span class="nav-number">2.2.</span> <span class="nav-text">配置items</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建爬虫"><span class="nav-number">2.3.</span> <span class="nav-text">创建爬虫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查所需页面元素"><span class="nav-number">2.4.</span> <span class="nav-text">检查所需页面元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试爬取"><span class="nav-number">2.5.</span> <span class="nav-text">尝试爬取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正式爬取"><span class="nav-number">3.</span> <span class="nav-text">正式爬取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取逻辑"><span class="nav-number">3.1.</span> <span class="nav-text">爬取逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#爬取中国所有景点的URL"><span class="nav-number">3.1.1.</span> <span class="nav-text">爬取中国所有景点的URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依次爬取所有景点的中文评论"><span class="nav-number">3.1.2.</span> <span class="nav-text">依次爬取所有景点的中文评论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接MySQL"><span class="nav-number">3.2.</span> <span class="nav-text">连接MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text"> </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL数据库服务器"><span class="nav-number">4.</span> <span class="nav-text">MySQL数据库服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#阿里云ECS服务器"><span class="nav-number">4.1.</span> <span class="nav-text">阿里云ECS服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置安全组规则"><span class="nav-number">4.2.</span> <span class="nav-text">配置安全组规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库迁移"><span class="nav-number">4.3.</span> <span class="nav-text">数据库迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将Database存为-sql文件"><span class="nav-number">4.3.1.</span> <span class="nav-text">将Database存为 .sql文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文件上传到ECS"><span class="nav-number">4.3.2.</span> <span class="nav-text">将文件上传到ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ECS中恢复Database"><span class="nav-number">4.3.3.</span> <span class="nav-text">ECS中恢复Database</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置MySQL数据库可被远程访问"><span class="nav-number">4.4.</span> <span class="nav-text">配置MySQL数据库可被远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建新用户"><span class="nav-number">4.4.1.</span> <span class="nav-text">创建新用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置用户权限"><span class="nav-number">4.4.2.</span> <span class="nav-text">配置用户权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程访问-Navicat"><span class="nav-number">4.4.3.</span> <span class="nav-text">远程访问-Navicat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SideNote"><span class="nav-number">5.</span> <span class="nav-text">SideNote</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重复页面爬取"><span class="nav-number">5.1.</span> <span class="nav-text">重复页面爬取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome读取缓存"><span class="nav-number">5.2.</span> <span class="nav-text">Chrome读取缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spider’s-Custom-Settings-妙用"><span class="nav-number">5.3.</span> <span class="nav-text">Spider’s Custom Settings 妙用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP代理"><span class="nav-number">5.4.</span> <span class="nav-text">IP代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结果展示"><span class="nav-number">6.</span> <span class="nav-text">结果展示</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OliveDS</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'uaU7K98rSYcLih6bDPXI5vbf-gzGzoHsz',
+        appKey: 'lfonkoBe1cGLNBLsjTuWaae9',
+        placeholder: '请给菜鸡小码农一点意见和建议吧ε٩(๑> ₃ <)۶з',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("uaU7K98rSYcLih6bDPXI5vbf-gzGzoHsz", "lfonkoBe1cGLNBLsjTuWaae9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
