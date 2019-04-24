@@ -79,17 +79,26 @@
 
 
 
-<meta name="description" content="旧 java IDE 运行旧的IDE是放在GitLab上的 题外话 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程… 旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA… 打开后直接bu">
+<meta name="description" content="HDR (High Dynamic Range) 高动态范围图像手机一直开着自动HDR,但是其实不知道它究竟是用来干啥的,也没看出效果究竟在哪(好像只是图像变清晰了😅),上完这节课终于明白了 现在我们的数字彩色图像一般是用24位存储颜色矩阵的,也就是R,G,B各8-bit,但现实中的色域远远不止0-255,所以过亮/过暗的区域在图像中总是不能很好地显示. HDR的工作原理是: 采集多张不同曝光的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Binder IDE 开发 (Jupyter)">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/06/Jupyter-IDE-开发/index.html">
+<meta property="og:title" content="OpenCV Computational Photography 计算摄影">
+<meta property="og:url" content="https://oliveds.github.io/2019/04/24/OpenCV-Computational-Photography/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="旧 java IDE 运行旧的IDE是放在GitLab上的 题外话 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程… 旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA… 打开后直接bu">
+<meta property="og:description" content="HDR (High Dynamic Range) 高动态范围图像手机一直开着自动HDR,但是其实不知道它究竟是用来干啥的,也没看出效果究竟在哪(好像只是图像变清晰了😅),上完这节课终于明白了 现在我们的数字彩色图像一般是用24位存储颜色矩阵的,也就是R,G,B各8-bit,但现实中的色域远远不止0-255,所以过亮/过暗的区域在图像中总是不能很好地显示. HDR的工作原理是: 采集多张不同曝光的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-13T09:50:30.646Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.46%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.51%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.55%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.03%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.07%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.11%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.13%20PM.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.44.32%20PM.png">
+<meta property="og:updated_time" content="2019-04-24T08:51:25.379Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Binder IDE 开发 (Jupyter)">
-<meta name="twitter:description" content="旧 java IDE 运行旧的IDE是放在GitLab上的 题外话 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程… 旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA… 打开后直接bu">
+<meta name="twitter:title" content="OpenCV Computational Photography 计算摄影">
+<meta name="twitter:description" content="HDR (High Dynamic Range) 高动态范围图像手机一直开着自动HDR,但是其实不知道它究竟是用来干啥的,也没看出效果究竟在哪(好像只是图像变清晰了😅),上完这节课终于明白了 现在我们的数字彩色图像一般是用24位存储颜色矩阵的,也就是R,G,B各8-bit,但现实中的色域远远不止0-255,所以过亮/过暗的区域在图像中总是不能很好地显示. HDR的工作原理是: 采集多张不同曝光的">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.46%20PM.png">
 
 
 
@@ -119,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/06/Jupyter-IDE-开发/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/04/24/OpenCV-Computational-Photography/">
 
 
 
 
 
-  <title>Binder IDE 开发 (Jupyter) | OliveDS's Study Bar</title>
+  <title>OpenCV Computational Photography 计算摄影 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/06/Jupyter-IDE-开发/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/04/24/OpenCV-Computational-Photography/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Binder IDE 开发 (Jupyter)</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV Computational Photography 计算摄影</h1>
         
 
         <div class="post-meta">
@@ -265,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T11:21:46+08:00">
-                2019-03-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T10:24:25+08:00">
+                2019-04-24
               </time>
             
 
@@ -281,8 +290,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-13T17:50:30+08:00">
-                2019-03-13
+              <time title="Post modified" itemprop="dateModified" datetime="2019-04-24T16:51:25+08:00">
+                2019-04-24
               </time>
             
           </span>
@@ -300,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jupyter/" itemprop="url" rel="index">
-                    <span itemprop="name">Jupyter</span>
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
                   </a>
                 </span>
 
@@ -318,8 +327,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/06/Jupyter-IDE-开发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/06/Jupyter-IDE-开发/" itemprop="commentCount"></span>
+                <a href="/2019/04/24/OpenCV-Computational-Photography/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/24/OpenCV-Computational-Photography/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +336,7 @@
 
           
           
-             <span id="/2019/03/06/Jupyter-IDE-开发/" class="leancloud_visitors" data-flag-title="Binder IDE 开发 (Jupyter)">
+             <span id="/2019/04/24/OpenCV-Computational-Photography/" class="leancloud_visitors" data-flag-title="OpenCV Computational Photography 计算摄影">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,73 +367,44 @@
       
 
       
-        <h1 id="旧-java-IDE-运行"><a href="#旧-java-IDE-运行" class="headerlink" title="旧 java IDE 运行"></a>旧 java IDE 运行</h1><p>旧的IDE是放在GitLab上的</p>
-<p><em>题外话</em> 为什么使用GitLab? GitHub GitLab都是基于git实现在线代码托管的仓库. 但GitHub上使用私人仓库是需要付费的,所以实验室开发的东西肯定不能公开,所以用GitLab,搭建了一个内网的环境,用来托管项目组的工程…</p>
-<p>旧的IDE是用java编写的,我看学姐是用Eclipse打开的,我装的是IDEA…</p>
-<p>打开后直接build,出现了很多错误,主要是:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error:(10, 21) java: package javax.servlet does not exist</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>这一类的,查了一下,这个是Tomcat包含的库,所以应该安装Tomcat后就可以了吧?</p>
-<p>安装和配置Tomcat的过程参考</p>
-<p><a href="https://blog.csdn.net/github_33304260/article/details/52496653" target="_blank" rel="noopener">https://blog.csdn.net/github_33304260/article/details/52496653</a></p>
-<p>但是我执行 <code>startup.sh</code>后还是有个permission denied错误,在最后,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Dengs-MacBook-Pro% startup.sh</span><br><span class="line">Using CATALINA_BASE:   /Users/oliveds/Library/Tomcat</span><br><span class="line">Using CATALINA_HOME:   /Users/oliveds/Library/Tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /Users/oliveds/Library/Tomcat/temp</span><br><span class="line">Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home</span><br><span class="line">Using CLASSPATH:       /Users/oliveds/Library/Tomcat/bin/bootstrap.jar:/Users/oliveds/Library/Tomcat/bin/tomcat-juli.jar</span><br><span class="line">touch: /Users/oliveds/Library/Tomcat/logs/catalina.out: Permission denied</span><br><span class="line">Tomcat started.</span><br><span class="line">/Users/oliveds/Library/Tomcat/bin/catalina.sh: line 482: /Users/oliveds/Library/Tomcat/logs/catalina.out: Permission denied</span><br></pre></td></tr></table></figure>
-<p><a href="https://stackoverflow.com/questions/4672082/a-lots-of-permission-denied-in-catalina-out" target="_blank" rel="noopener">https://stackoverflow.com/questions/4672082/a-lots-of-permission-denied-in-catalina-out</a></p>
-<p>这里的第二个回答说要把owner改成tomcat,但是我的电脑上没有这个user呀? 我看到要修改权限的那几个文件夹的属主本来就是我,权限都是drwxr-xr-x,于是我把权限改成了775,再次执行后错误解决了…(😌不知道这样做是否妥当?)</p>
-<h1 id="Binder"><a href="#Binder" class="headerlink" title="Binder"></a>Binder</h1><blockquote>
-<p> We are undergoing a dramatic increase in the complexity of techniques for <strong>analyzing data, doing scientific research, and sharing our work with others</strong>. In early 2016, the <a href="https://mybinder.org/" target="_blank" rel="noopener">Binder project</a> was announced, attempting to connect these three components. </p>
-</blockquote>
-<p>Binder是一种开源服务,相当于Jupyter的接口,使用户能够在 web 浏览器中的 GitHub 上使用 Jupyter notebook，无需安装软件或任何编程库。所以我们现在的任务就是学习Binder的架构,利用Binder在我们自己的网页IDE上集成Jupyter.</p>
-<p>以下内容均是基于Binder团队在SCIPy 2018 的演讲,视频链接: </p>
-<p><a href="https://www.youtube.com/watch?v=KcC0W5LP9GM&amp;feature=youtu.be" target="_blank" rel="noopener">https://www.youtube.com/watch?v=KcC0W5LP9GM&amp;feature=youtu.be</a></p>
-<p>Binder具有4个核心组件 (或者应该说主要是前三个吧):</p>
-<ul>
-<li><p>repo2docker</p>
-<p>基于GitHub的repositories生成一个可复用的docker容器</p>
-<p>你需要将依赖文件写在repository的requirements.txt等文件中,Binder会自动搜索,自动建立image</p>
+        <h1 id="HDR-High-Dynamic-Range-高动态范围图像"><a href="#HDR-High-Dynamic-Range-高动态范围图像" class="headerlink" title="HDR (High Dynamic Range) 高动态范围图像"></a>HDR (High Dynamic Range) 高动态范围图像</h1><p><em>手机一直开着自动HDR,但是其实不知道它究竟是用来干啥的,也没看出效果究竟在哪(好像只是图像变清晰了😅),上完这节课终于明白了</em></p>
+<p>现在我们的数字彩色图像一般是用24位存储颜色矩阵的,也就是R,G,B各8-bit,但现实中的色域远远不止0-255,所以过亮/过暗的区域在图像中总是不能很好地显示.</p>
+<p>HDR的<strong>工作原理</strong>是:</p>
+<p>采集多张<code>不同曝光的图像</code>-&gt;<code>HDR</code>-&gt;<code>8-bit图像</code>**</p>
+<p>实现HDR有很多种方法,如Devebec’s，Robertson’s Method 等,还可以使用曝光融合(exposure fusion, mertens, …) </p>
+<h1 id="实践HDR"><a href="#实践HDR" class="headerlink" title="实践HDR"></a>实践HDR</h1><h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><ol>
+<li><p>采集多张图像</p>
+<p>最少3张: underexposed, properly image, overexposed</p>
 </li>
-<li><p>JupyterHub</p>
-<p>创建用户Jupyter会话(/文档?)来运行这些容器?</p>
-<p>generates user sessions that serve these containers</p>
+<li><p>校准图像</p>
 </li>
-<li><p>BinderHub</p>
-<p>部署binder的工具,提供接口,让用户能够创建,使用,分享这些Jupyter会话(文档?)</p>
+<li><p>计算图像响应函数</p>
+<p>由于多张图像采用了不同的曝光时间,故得到图像的值也不同,但是这个值与曝光时间并<strong>不是线性关系</strong>的,所以我们需要估计Camera Response Function (CRF),才能融合图像</p>
 </li>
-<li><p>mybinder.org</p>
-<p>将以上作为一个免费的服务提供出去? 通过这个网站提供BinderHub的服务(不止这一个网站,不过这个应该是Binder开发团队提供的那个,因为Binder是开源的,所以实际上所有组织和个人可以开发自己的私有的/企业局域的网站来实现Binder的功能.(<strong>我的任务是不是也是做一个这样的网站呢?</strong>)</p>
-<p>demonstrates the above as a free public service/tech demo</p>
-<p>用户在这个mybinder.org注册后,可以把自己的binder挂在这个网站上(可以分享给所有人来点击这个链接),然后别人就可以使用你的GitHub repository生成的容器,在Jupyter上查看和执行你的可执行代码文档.</p>
+<li><p>图像融合</p>
+<p>得到HDR图像</p>
 </li>
-</ul>
-<h2 id="repo2docker"><a href="#repo2docker" class="headerlink" title="repo2docker"></a>repo2docker</h2><p>实际上我们在使用一个别人分享的repositories的时候,也是需要根据里面的配置文件自己手动对计算机进行环境的配置,然后执行其中的代码. 那repo2docker就是自动化地完成了这一过程,将这个环境搭成一个docker image.</p>
-<ol>
-<li><p>git clone git@…</p>
-</li>
-<li><p>Identigy requirements</p>
-<p>指定了规则需要写在哪些文件中,或者你也可以直接给出dockerfile</p>
-</li>
-<li><p>Generate Dockerfile</p>
-<p>建立runtime environment,比如需要conda环境或者Julia runtime等等</p>
-<p>组装环境,安装需要的软件</p>
-</li>
-<li><p>build (&amp; push) docker</p>
-<p>生成docker image,用于后期运行,也可以将这个docker image分享出去</p>
+<li><p>将HDR存为8-bit图像</p>
 </li>
 </ol>
-<h2 id="JpyterHub"><a href="#JpyterHub" class="headerlink" title="JpyterHub"></a>JpyterHub</h2><p>在页面上建立notebook,运行docker image</p>
-<p>Kubernetes是自动部署，扩展和管理容器化应用程序的开源系统,binder中使用了Kubernetes来辅助JupyterHub</p>
-<h2 id="BinderHub"><a href="#BinderHub" class="headerlink" title="BinderHub"></a>BinderHub</h2><p>运行在Kubernetes上,提供UI和web API(用户在这里指定自己想要建立的repo,填写参数,提交)</p>
-<p> BinderHub对用户binder进行管理,①与repo2docker进行通信,实际建立用户请求的image;②与JupyterHub进行通信,实际为用户运行这个image(在JupyterHub上);③与用户端通信,用户通过浏览器与之交互?(不太确定)</p>
-<h2 id="mybinder-org"><a href="#mybinder-org" class="headerlink" title="mybinder.org"></a>mybinder.org</h2><p>…</p>
-<h1 id="Binder-实例"><a href="#Binder-实例" class="headerlink" title="Binder 实例"></a>Binder 实例</h1><p><a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python" target="_blank" rel="noopener">https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python</a></p>
-<p>这是Binder使用文档中给的一个实例,运行一下试试.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python</span><br></pre></td></tr></table></figure>
-<p>直接点击这个在mybinder.org上的链接,就会在网页上加载这个docker镜像,你的本机不需要搭建环境就可以直接使用Jupyter了(正常情况下需要安装python,Jupyter)</p>
-<p>感觉确实是很好的学习工具~</p>
-<h1 id="BinderHub-源代码"><a href="#BinderHub-源代码" class="headerlink" title="BinderHub 源代码"></a>BinderHub 源代码</h1><p><a href="https://github.com/jupyterhub/binderhub" target="_blank" rel="noopener">https://github.com/jupyterhub/binderhub</a></p>
-<p>就是这里了</p>
-<p>它是用python3编写的程序,可以通过pip直接进行安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install git+https://github.com/jupyterhub/binderhub</span><br></pre></td></tr></table></figure>
-<p>首先,BinderHub是基于Kubernetes(一个容器管理系统)搭建的,它拥有一个自己的镜像仓库,然后在运行时BinderHub会调用JupyterHub来运行Jupyter的服务,</p>
+<p>以上步骤参考了: </p>
+<p><a href="https://www.learnopencv.com/high-dynamic-range-hdr-imaging-using-opencv-cpp-python/" target="_blank" rel="noopener">https://www.learnopencv.com/high-dynamic-range-hdr-imaging-using-opencv-cpp-python/</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># times = times = np.array([ 1/30.0, 0.25, 2.5, 15.0 ], dtype=np.float32)# 曝光时间</span></span><br><span class="line"><span class="comment"># filenames = ["HDR/images/hdr-image-sequence_01.png", "HDR/images/hdr-image-sequence_02.png", "HDR/images/hdr-image-sequence_03.png", "HDR/images/hdr-image-sequence_04.png"]</span></span><br><span class="line">times = np.array([ <span class="number">1</span>/<span class="number">30.0</span>, <span class="number">1</span>/<span class="number">4.0</span>, <span class="number">1.0</span>, <span class="number">2.5</span>, <span class="number">4.0</span>, <span class="number">8.0</span>, <span class="number">16.0</span> ], dtype=np.float32)<span class="comment"># 曝光时间</span></span><br><span class="line">filenames = [<span class="string">"HDR/1.png"</span>, <span class="string">"HDR/2.png"</span>, <span class="string">"HDR/3.png"</span>, <span class="string">"HDR/4.png"</span>, <span class="string">"HDR/5.png"</span>, <span class="string">"HDR/6.png"</span>, <span class="string">"HDR/7.png"</span>,]</span><br><span class="line">images = []<span class="comment"># 存所有图像</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(filenames)):</span><br><span class="line">    img = cv2.imread(filenames[i])</span><br><span class="line">    cv2.imshow(<span class="string">"Original "</span>+str(i),img)<span class="comment"># 显示图像</span></span><br><span class="line">    images.append(img)</span><br><span class="line"></span><br><span class="line">alignMTB = cv2.createAlignMTB()<span class="comment"># OpenCV提供的图像校准工具 # &lt;AlignMTB 0x100a7c810&gt;</span></span><br><span class="line">print(alignMTB)</span><br><span class="line">aligned_images = []</span><br><span class="line">alignMTB.process(images, aligned_images) <span class="comment"># 生成aligned images</span></span><br><span class="line"><span class="comment"># for i in range(len(aligned_images)):</span></span><br><span class="line"><span class="comment">#     cv2.imshow("aligned_images "+str(i),aligned_images[i])# 显示图像</span></span><br><span class="line">print(aligned_images)<span class="comment"># []</span></span><br><span class="line">calibrateDebevec = cv2.createCalibrateDebevec()<span class="comment"># 确定图像响应函数CRF # &lt;CalibrateDebevec 0x100a7c7b0&gt;</span></span><br><span class="line"><span class="comment"># print(calibrateDebevec)</span></span><br><span class="line">responseDebevec = calibrateDebevec.process(images, times)<span class="comment"># 根据曝光时间估算</span></span><br><span class="line"><span class="comment"># print(responseDebevec)</span></span><br><span class="line"></span><br><span class="line">mergeDebevec = cv2.createMergeDebevec()<span class="comment"># 合成矩阵</span></span><br><span class="line">hdrDebevec = mergeDebevec.process(images, times, responseDebevec)<span class="comment"># 合成HDR</span></span><br><span class="line">cv2.imwrite(<span class="string">"hdrDebevec.hdr"</span>, hdrDebevec)<span class="comment"># 保存HDR图像</span></span><br><span class="line">cv2.imshow(<span class="string">"HDR Image"</span>,hdrDebevec)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#关闭窗口/键盘ESC退出</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h3><ol>
+<li>输入的7张原始图像需要是相同大小的,老师给的图像大小不一致,所以需要在photoshop中修改一下</li>
+<li>曝光时间矩阵需要<code>float32</code>类型的,所以在整数后加<code>.0</code>,否则不会存为浮点数</li>
+</ol>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>原始图像:</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.46%20PM.png" alt="0"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.51%20PM.png" alt="1"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.42.55%20PM.png" alt="2"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.03%20PM.png" alt="3"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.07%20PM.png" alt="4"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.11%20PM.png" alt="5"></p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.43.13%20PM.png" alt="6"></p>
+<p>HDR图像:</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-04-24%20at%204.44.32%20PM.png" alt="HDR"></p>
+<p>可以看到取得了较好的效果</p>
 
       
     </div>
@@ -449,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/Python-Jupyter-使用/" rel="next" title="Python Jupyter 使用">
-                <i class="fa fa-chevron-left"></i> Python Jupyter 使用
+              <a href="/2019/04/23/huawei-dsjk/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -458,10 +438,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/08/BinderHub-环境搭建/" rel="prev" title="BinderHub 环境搭建">
-                BinderHub 环境搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#旧-java-IDE-运行"><span class="nav-number">1.</span> <span class="nav-text">旧 java IDE 运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binder"><span class="nav-number">2.</span> <span class="nav-text">Binder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#repo2docker"><span class="nav-number">2.1.</span> <span class="nav-text">repo2docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JpyterHub"><span class="nav-number">2.2.</span> <span class="nav-text">JpyterHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BinderHub"><span class="nav-number">2.3.</span> <span class="nav-text">BinderHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybinder-org"><span class="nav-number">2.4.</span> <span class="nav-text">mybinder.org</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binder-实例"><span class="nav-number">3.</span> <span class="nav-text">Binder 实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BinderHub-源代码"><span class="nav-number">4.</span> <span class="nav-text">BinderHub 源代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HDR-High-Dynamic-Range-高动态范围图像"><span class="nav-number">1.</span> <span class="nav-text">HDR (High Dynamic Range) 高动态范围图像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践HDR"><span class="nav-number">2.</span> <span class="nav-text">实践HDR</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体步骤"><span class="nav-number">2.1.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.2.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.2.1.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">2.3.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></div>
             
 
           </div>
