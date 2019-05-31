@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta name="description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenCV 安装 &amp; Hello World 示例程序">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/index.html">
+<meta property="og:title" content="OpenCV 视频人体检测">
+<meta property="og:url" content="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta property="og:description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-08T08:38:03.626Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png">
+<meta property="og:updated_time" content="2019-05-30T13:24:09.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenCV 安装 &amp; Hello World 示例程序">
-<meta name="twitter:description" content="安装OpenCV安装 Xcode直接在APP Store中下载安装即可12sudo xcodebuild -licensesudo xcode-select --install 安装Homebrew≈Mac上的apt-get参考 Mac API那篇文章,那里已经安装了安装完可以用brew doctor检查一下如果有Warning的话根据提示执行一下就好了 安装Python其实Mac上已经有Pyth">
+<meta name="twitter:title" content="OpenCV 视频人体检测">
+<meta name="twitter:description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/">
 
 
 
 
 
-  <title>OpenCV 安装 & Hello World 示例程序 | OliveDS's Study Bar</title>
+  <title>OpenCV 视频人体检测 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/04/OpenCV 安装 & Hello World 示例程序/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OpenCV 安装 & Hello World 示例程序</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV 视频人体检测</h1>
         
 
         <div class="post-meta">
@@ -265,8 +267,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-04T10:02:54+08:00">
-                2019-03-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T18:03:13+08:00">
+                2019-05-15
               </time>
             
 
@@ -281,8 +283,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-08T16:38:03+08:00">
-                2019-03-08
+              <time title="Post modified" itemprop="dateModified" datetime="2019-05-30T21:24:09+08:00">
+                2019-05-30
               </time>
             
           </span>
@@ -318,8 +320,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/04/OpenCV 安装 & Hello World 示例程序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/04/OpenCV 安装 & Hello World 示例程序/" itemprop="commentCount"></span>
+                <a href="/2019/05/15/OpeCV-视频物体检测/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/15/OpeCV-视频物体检测/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +329,7 @@
 
           
           
-             <span id="/2019/03/04/OpenCV 安装 & Hello World 示例程序/" class="leancloud_visitors" data-flag-title="OpenCV 安装 & Hello World 示例程序">
+             <span id="/2019/05/15/OpeCV-视频物体检测/" class="leancloud_visitors" data-flag-title="OpenCV 视频人体检测">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,23 +360,72 @@
       
 
       
-        <h2 id="安装OpenCV"><a href="#安装OpenCV" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h2><h3 id="安装-Xcode"><a href="#安装-Xcode" class="headerlink" title="安装 Xcode"></a>安装 Xcode</h3><p>直接在APP Store中下载安装即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo xcodebuild -license</span><br><span class="line">sudo xcode-select --install</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><p>≈Mac上的apt-get<br>参考 Mac API那篇文章,那里已经安装了<br>安装完可以用<code>brew doctor</code>检查一下<br>如果有Warning的话根据提示执行一下就好了</p>
-<h3 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h3><p>其实Mac上已经有Python 2.7<br>但是看了一篇文章这样讲的</p>
-<blockquote>
-<p>The next step is to install the Homebrew versions of Python 2.7 and Python 3. It is considered bad form to develop against the system Python as your main interpreter. The system version of Python should serve exactly that.<br><a href="https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/" target="_blank" rel="noopener">https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/</a></p>
-</blockquote>
-<p>所以还是乖乖安装新的吧<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python python3</span><br></pre></td></tr></table></figure></p>
-<p>这个指令应该是能同时安装python2 和 python3的,但是在我的Mac就是只安装了Python3…所以我用的是<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install python2 python3 </span><br><span class="line"><span class="meta">#</span>or</span><br><span class="line">brew install python python@2</span><br></pre></td></tr></table></figure></p>
-<p>但是这样装完以后,我看brew管理的包的文件夹下面有<code>python</code> <code>python2</code> <code>python3</code>三种,然后brew现在指定<code>python</code>默指的是<code>python3</code> 我不知道这是重复安装了还是必须要有个<code>python</code>的文件夹? ==please inform me if you know==<br>安装完成后</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">which python</span><br><span class="line">which python3</span><br></pre></td></tr></table></figure>
-<p>看一下指向的是不是你自己新安装的python,即路径应该是<code>/usr/local/bin/python</code> and <code>/usr/local/bin/python3</code> 否则如果是<code>/usr/bin/...</code>下的那你用的依然是系统的python</p>
-<h3 id="安装OpenCV-1"><a href="#安装OpenCV-1" class="headerlink" title="安装OpenCV"></a>安装OpenCV</h3><p>其实简单的方法只要<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install opencv</span><br></pre></td></tr></table></figure></p>
-<p>就好了.如果你装的是python2.7,那它就会给你装opencv3.4.5(current version); 如果你装了python3,那么brew认为默认的python是python3,给你装的就是opencv4.0.1</p>
-<p>我当时写这篇文章的时候只装好了Python2,所以:装的python2.7的OpenCV. 但是安装的时候它显示安装的OpenCV版本是4.0.1 就导致我很confused<br>因为老师说了要求3.x.x版本,所以我以为不行<br>确实也可以自己手动指定安装版本的,但是后来我才发现,其实这个安装的就是3.4.4版本…可能这两个是不同含义的版本号? ==please tell me==<br>另外直接安装的话使用的python2.7版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python #进入python2命令行</span><br><span class="line">import cv2 #import刚刚安装的库,如果没有报错则安装成功了</span><br><span class="line">cv2.__version__ #就是这里它告诉它是3.4.4版本</span><br></pre></td></tr></table></figure>
-<h3 id="HelloWorld示例程序"><a href="#HelloWorld示例程序" class="headerlink" title="HelloWorld示例程序"></a>HelloWorld示例程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2 <span class="comment">#导入OpenCV</span></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#死循环</span></span><br><span class="line">    ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    cv2.imshow(<span class="string">'hello world'</span>,img)</span><br><span class="line">    key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">    	<span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">        <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
-<p>效果就是打开一个窗口显示摄像头-按帧显示<br>但是我的程序接收不到键盘的输入,就是按了ESC后只会在命令行中显示ESC键值,但不会实际退出,有人能告诉我为啥吗?==😂sorry啦发现我写blog其实是求助了吧==<br>==解决啦== 需要鼠标点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</p>
+        <h1 id="HOGDescriptor"><a href="#HOGDescriptor" class="headerlink" title="HOGDescriptor"></a>HOGDescriptor</h1><p><code>OpenCV</code>提供了<code>HOGDescriptor</code>函数用于特征提取, 常常被用于做物体检测.</p>
+<p>其参数如下.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_winSize</td>
+<td style="text-align:left">sets winSize with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_blockSize</td>
+<td style="text-align:left">sets blockSize with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_blockStride</td>
+<td style="text-align:left">sets blockStride with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_cellSize</td>
+<td style="text-align:left">sets cellSize with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_nbins</td>
+<td style="text-align:left">sets nbins with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_derivAperture</td>
+<td style="text-align:left">sets derivAperture with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_winSigma</td>
+<td style="text-align:left">sets winSigma with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_histogramNormType</td>
+<td style="text-align:left">sets histogramNormType with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_L2HysThreshold</td>
+<td style="text-align:left">sets L2HysThreshold with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_gammaCorrection</td>
+<td style="text-align:left">sets gammaCorrection with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_nlevels</td>
+<td style="text-align:left">sets nlevels with given value.</td>
+</tr>
+<tr>
+<td style="text-align:left">_signedGradient</td>
+<td style="text-align:left">sets signedGradient with given value.</td>
+</tr>
+</tbody>
+</table>
+<p>默认参数值为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winSize(64,128), blockSize(16,16), blockStride(8,8), cellSize(8,8), nbins(9), derivAperture(1), winSigma(-1), histogramNormType(HOGDescriptor::L2Hys), L2HysThreshold(0.2), gammaCorrection(true), nlevels(HOGDescriptor::DEFAULT_NLEVELS)</span><br></pre></td></tr></table></figure>
+<h1 id="视频人体检测代码"><a href="#视频人体检测代码" class="headerlink" title="视频人体检测代码"></a>视频人体检测代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_inside</span><span class="params">(o, i)</span>:</span><span class="comment"># 判断o是否在i外的函数</span></span><br><span class="line">   ox, oy, ow, oh = o</span><br><span class="line">   ix, iy, iw, ih = i</span><br><span class="line">   <span class="keyword">return</span> ox &gt; ix <span class="keyword">and</span> oy &gt; iy <span class="keyword">and</span> ox + ow &lt; ix + iw <span class="keyword">and</span> oy + oh &lt; iy + ih</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_person</span><span class="params">(image, person)</span>:</span><span class="comment"># 画识别人后框的函数</span></span><br><span class="line">   x, y, w, h = person</span><br><span class="line">   cv2.rectangle(img, (x, y), (x + w, y + h), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#循环</span></span><br><span class="line">   ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">   hog = cv2.HOGDescriptor()<span class="comment"># 创建HOGDescriptor对象</span></span><br><span class="line">   hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())<span class="comment"># 使用OpenCV预训练好的人体识别检测器</span></span><br><span class="line">   found, w = hog.detectMultiScale(img)<span class="comment"># 构造了图像金字塔和滑窗,进行检测</span></span><br><span class="line">   <span class="keyword">print</span> (<span class="string">"w="</span>)</span><br><span class="line">   <span class="keyword">print</span> (w)</span><br><span class="line">   found_filtered = []<span class="comment"># 存储检测目标</span></span><br><span class="line">   <span class="keyword">for</span> ri, r <span class="keyword">in</span> enumerate(found):</span><br><span class="line">      <span class="keyword">for</span> qi, q <span class="keyword">in</span> enumerate(found):</span><br><span class="line">         <span class="keyword">if</span> ri != qi <span class="keyword">and</span> is_inside(r, q):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">            found_filtered.append(r)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> person <span class="keyword">in</span> found_filtered:</span><br><span class="line">      draw_person(img, person)</span><br><span class="line">   cv2.imshow(<span class="string">"Video People Detect"</span>, img)</span><br><span class="line">   <span class="comment">#cv2.imwrite("d_people2.jpg",img)</span></span><br><span class="line">   key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">   <span class="comment"># print key 鼠标需要点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</span></span><br><span class="line">   <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">      <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
+<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><h2 id="视频人体检测"><a href="#视频人体检测" class="headerlink" title="视频人体检测"></a>视频人体检测</h2><p>实时获取摄像头采集的图像并进行人体检测,效果如下.</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png" alt="img"></p>
+<p>发现该程序能够较为准确地检测人体.</p>
 
       
     </div>
@@ -399,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/大数据专题notes/" rel="next" title="大数据专题-笔记">
-                <i class="fa fa-chevron-left"></i> 大数据专题-笔记
+              <a href="/2019/05/08/OpenCV-face-recognition/" rel="next" title="OpenCV Face-Recognition">
+                <i class="fa fa-chevron-left"></i> OpenCV Face-Recognition
               </a>
             
           </div>
@@ -409,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/04/OpenCV3-绘制立方体-Python2/" rel="prev" title="OpenCV3 绘制立方体 Python2">
-                OpenCV3 绘制立方体 Python2 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/31/OpenCV-flow/" rel="prev" title="OpenCV 前景/背景标注">
+                OpenCV 前景/背景标注 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装OpenCV"><span class="nav-number">1.</span> <span class="nav-text">安装OpenCV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Xcode"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Xcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Homebrew"><span class="nav-number">1.2.</span> <span class="nav-text">安装Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Python"><span class="nav-number">1.3.</span> <span class="nav-text">安装Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装OpenCV-1"><span class="nav-number">1.4.</span> <span class="nav-text">安装OpenCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HelloWorld示例程序"><span class="nav-number">1.5.</span> <span class="nav-text">HelloWorld示例程序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HOGDescriptor"><span class="nav-number">1.</span> <span class="nav-text">HOGDescriptor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视频人体检测代码"><span class="nav-number">2.</span> <span class="nav-text">视频人体检测代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行结果"><span class="nav-number">3.</span> <span class="nav-text">运行结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视频人体检测"><span class="nav-number">3.1.</span> <span class="nav-text">视频人体检测</span></a></li></ol></li></ol></div>
             
 
           </div>

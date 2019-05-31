@@ -79,13 +79,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="OliveDS&#39;s Study Bar">
-<meta property="og:url" content="https://oliveds.github.io/categories/Jupyter/index.html">
+<meta name="description" content="光流法原理运动场: 物体在三维真实世界中的运动； 光流场: 运动场在二维图像平面上的投影。  给图像中的每个像素点赋予一个速度矢量，这样就形成了一个运动矢量场。在某一特定时刻，图像上的点与三维物体上的点一一对应，这种对应关系可以通过投影来计算得到。根据各个像素点的速度矢量特征，可以对图像进行动态分析。如果图像中没有运动目标，则光流矢量在整个图像区域是连续变化的。当图像中有运动物体时，目标和背景存在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV 前景&#x2F;背景标注">
+<meta property="og:url" content="https://oliveds.github.io/2019/05/31/OpenCV-flow/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
+<meta property="og:description" content="光流法原理运动场: 物体在三维真实世界中的运动； 光流场: 运动场在二维图像平面上的投影。  给图像中的每个像素点赋予一个速度矢量，这样就形成了一个运动矢量场。在某一特定时刻，图像上的点与三维物体上的点一一对应，这种对应关系可以通过投影来计算得到。根据各个像素点的速度矢量特征，可以对图像进行动态分析。如果图像中没有运动目标，则光流矢量在整个图像区域是连续变化的。当图像中有运动物体时，目标和背景存在">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190531172827.png">
+<meta property="og:updated_time" content="2019-05-31T09:37:28.285Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OliveDS&#39;s Study Bar">
+<meta name="twitter:title" content="OpenCV 前景&#x2F;背景标注">
+<meta name="twitter:description" content="光流法原理运动场: 物体在三维真实世界中的运动； 光流场: 运动场在二维图像平面上的投影。  给图像中的每个像素点赋予一个速度矢量，这样就形成了一个运动矢量场。在某一特定时刻，图像上的点与三维物体上的点一一对应，这种对应关系可以通过投影来计算得到。根据各个像素点的速度矢量特征，可以对图像进行动态分析。如果图像中没有运动目标，则光流矢量在整个图像区域是连续变化的。当图像中有运动物体时，目标和背景存在">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190531172827.png">
 
 
 
@@ -115,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/categories/Jupyter/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/05/31/OpenCV-flow/">
 
 
 
 
 
-  <title>Category: Jupyter | OliveDS's Study Bar</title>
+  <title>OpenCV 前景/背景标注 | OliveDS's Study Bar</title>
   
 
 
@@ -140,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -218,131 +224,258 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Jupyter<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/05/31/OpenCV-flow/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="OliveDS">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OliveDS's Study Bar">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/13/JupyterKernel开发/" itemprop="url">
-              
-                <span itemprop="name">Jupyter Kernel 开发</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">OpenCV 前景/背景标注</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-13T17:50:09+08:00" content="2019-03-13">
-          03-13
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T10:41:11+08:00">
+                2019-05-31
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-05-31T17:37:28+08:00">
+                2019-05-31
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/31/OpenCV-flow/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/OpenCV-flow/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/05/31/OpenCV-flow/" class="leancloud_visitors" data-flag-title="OpenCV 前景/背景标注">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/08/BinderHub-环境搭建/" itemprop="url">
-              
-                <span itemprop="name">BinderHub 环境搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-08T22:05:43+08:00" content="2019-03-08">
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/06/Jupyter-IDE-开发/" itemprop="url">
-              
-                <span itemprop="name">Binder IDE 开发 (Jupyter)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-06T11:21:46+08:00" content="2019-03-06">
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/05/Python-Jupyter-使用/" itemprop="url">
-              
-                <span itemprop="name">Python Jupyter 使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-05T20:23:01+08:00" content="2019-03-05">
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="光流法原理"><a href="#光流法原理" class="headerlink" title="光流法原理"></a>光流法原理</h1><p><strong>运动场</strong>: 物体在三维真实世界中的运动；</p>
+<p><strong>光流场</strong>: 运动场在二维图像平面上的投影。</p>
+<blockquote>
+<p>给图像中的每个像素点赋予一个速度矢量，这样就形成了一个运动矢量场。在某一特定时刻，图像上的点与三维物体上的点一一对应，这种对应关系可以通过投影来计算得到。根据各个像素点的速度矢量特征，可以对图像进行动态分析。如果图像中没有运动目标，则光流矢量在整个图像区域是连续变化的。当图像中有运动物体时，目标和背景存在着相对运动。运动物体所形成的速度矢量必然和背景的速度矢量有所不同，如此便可以计算出运动物体的位置。需要提醒的是，利用光流法进行运动物体检测时，计算量较大，无法保证实时性和实用性。</p>
+</blockquote>
+<p>通常情况下运动物体为图像前景, 静止部分为图像背景, 因此, 可以使用光流法比较方便地区分图像的<strong>前景</strong>和<strong>背景</strong>.</p>
+<h1 id="CalcOpticalFlowFarneback函数"><a href="#CalcOpticalFlowFarneback函数" class="headerlink" title="CalcOpticalFlowFarneback函数"></a>CalcOpticalFlowFarneback函数</h1><p><code>OpenCV</code>提供了<code>CalcOpticalFlowFarneback</code>函数用于计算光流. 具体地是基于Gunnar Farneback的算法计算全局性的稠密光流算法. </p>
+<p>算法包含以下参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># C++</span><br><span class="line">void calcOpticalFlowFarneback(InputArray prevImg, InputArray nextImg, InputOutputArray flow, double pyrScale, int levels, int winsize, int iterations, int polyN, double polySigma, int flags)</span><br><span class="line"># C</span><br><span class="line">void cvCalcOpticalFlowFarneback(const CvArr* prevImg, const CvArr* nextImg, CvArr* flow, double pyrScale, int levels, int winsize, int iterations, int polyN, double polySigma, int flags)</span><br><span class="line"># Python</span><br><span class="line">cv2.calcOpticalFlowFarneback(prevImg, nextImg, pyr_scale, levels, winsize, iterations, poly_n, poly_sigma, flags[, flow]) → flow</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">prevImg</td>
+<td style="text-align:left">输入前一帧图像</td>
+</tr>
+<tr>
+<td style="text-align:left">nextImg</td>
+<td style="text-align:left">输入后一帧图像</td>
+</tr>
+<tr>
+<td style="text-align:left">flow</td>
+<td style="text-align:left">输出的光流</td>
+</tr>
+<tr>
+<td style="text-align:left">pyr_scale</td>
+<td style="text-align:left">金字塔上下两层之间的尺度关系</td>
+</tr>
+<tr>
+<td style="text-align:left">levels</td>
+<td style="text-align:left">金字塔层数</td>
+</tr>
+<tr>
+<td style="text-align:left">winsize</td>
+<td style="text-align:left">均值窗口大小，越大越能denoise并且能够检测快速移动目标，但会引起模糊运动区域</td>
+</tr>
+<tr>
+<td style="text-align:left">iterations</td>
+<td style="text-align:left">迭代次数</td>
+</tr>
+<tr>
+<td style="text-align:left">poly_n</td>
+<td style="text-align:left">像素领域大小，一般为5，7等</td>
+</tr>
+<tr>
+<td style="text-align:left">poly_sigma</td>
+<td style="text-align:left">高斯标注差，一般为1-1.5</td>
+</tr>
+<tr>
+<td style="text-align:left">flags</td>
+<td style="text-align:left">计算方法, 主要包括OPTFLOW_USE_INITIAL_FLOW和OPTFLOW_FARNEBACK_GAUSSIAN</td>
+</tr>
+</tbody>
+</table>
+<p><code>CalcOpticalFlowFarneback</code>函数的功能就是计算图像中每个像素的光流,使得</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190531172827.png" alt="20190531172827.png"></p>
+<p>从而计算出相邻帧之间物体的运动信息.</p>
+<p># </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/OpeCV-视频物体检测/" rel="next" title="OpenCV 视频人体检测">
+                <i class="fa fa-chevron-left"></i> OpenCV 视频人体检测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -350,6 +483,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -370,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -444,6 +593,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#光流法原理"><span class="nav-number">1.</span> <span class="nav-text">光流法原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CalcOpticalFlowFarneback函数"><span class="nav-number">2.</span> <span class="nav-text">CalcOpticalFlowFarneback函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -586,6 +751,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
