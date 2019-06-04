@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="Please contact me about any legal issue. 引言今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就">
+<meta name="description" content="CAMShiftOpenCV提供了CamShift函数用于目标跟踪. 其全称为Continuously Adaptive Meanshift是由Gary Bradsky于1988年提出的,论文为”Computer Vision Face Tracking for Use in a Perceptual User Interface”. CamShift是基于MeanShift算法的,相较MeanS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Jupyter 使用">
-<meta property="og:url" content="https://oliveds.github.io/2019/03/05/Python-Jupyter-使用/index.html">
+<meta property="og:title" content="OpenCV 行人跟踪">
+<meta property="og:url" content="https://oliveds.github.io/2019/06/04/opencv-track-people-camshift/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="Please contact me about any legal issue. 引言今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就">
+<meta property="og:description" content="CAMShiftOpenCV提供了CamShift函数用于目标跟踪. 其全称为Continuously Adaptive Meanshift是由Gary Bradsky于1988年提出的,论文为”Computer Vision Face Tracking for Use in a Perceptual User Interface”. CamShift是基于MeanShift算法的,相较MeanS">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-13T13:46:19.597Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190604113526.png">
+<meta property="og:updated_time" content="2019-06-04T03:39:48.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Jupyter 使用">
-<meta name="twitter:description" content="Please contact me about any legal issue. 引言今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就">
+<meta name="twitter:title" content="OpenCV 行人跟踪">
+<meta name="twitter:description" content="CAMShiftOpenCV提供了CamShift函数用于目标跟踪. 其全称为Continuously Adaptive Meanshift是由Gary Bradsky于1988年提出的,论文为”Computer Vision Face Tracking for Use in a Perceptual User Interface”. CamShift是基于MeanShift算法的,相较MeanS">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190604113526.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/03/05/Python-Jupyter-使用/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/06/04/opencv-track-people-camshift/">
 
 
 
 
 
-  <title>Python Jupyter 使用 | OliveDS's Study Bar</title>
+  <title>OpenCV 行人跟踪 | OliveDS's Study Bar</title>
   
 
 
@@ -236,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/03/05/Python-Jupyter-使用/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/06/04/opencv-track-people-camshift/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -253,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python Jupyter 使用</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV 行人跟踪</h1>
         
 
         <div class="post-meta">
@@ -265,8 +267,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-05T20:23:01+08:00">
-                2019-03-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-04T10:45:34+08:00">
+                2019-06-04
               </time>
             
 
@@ -281,8 +283,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-03-13T21:46:19+08:00">
-                2019-03-13
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-04T11:39:48+08:00">
+                2019-06-04
               </time>
             
           </span>
@@ -300,8 +302,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jupyter/" itemprop="url" rel="index">
-                    <span itemprop="name">Jupyter</span>
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
                   </a>
                 </span>
 
@@ -318,8 +320,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/05/Python-Jupyter-使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/05/Python-Jupyter-使用/" itemprop="commentCount"></span>
+                <a href="/2019/06/04/opencv-track-people-camshift/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/04/opencv-track-people-camshift/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -327,7 +329,7 @@
 
           
           
-             <span id="/2019/03/05/Python-Jupyter-使用/" class="leancloud_visitors" data-flag-title="Python Jupyter 使用">
+             <span id="/2019/06/04/opencv-track-people-camshift/" class="leancloud_visitors" data-flag-title="OpenCV 行人跟踪">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,46 +360,56 @@
       
 
       
-        <p>Please contact me about any legal issue.</p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>今天老师突然说这两周跟X博士做XX老师着急要的一个功能,大概跟我讲了两句,我的大脑只拾取到了Python Jupyter这两个词…这可是我来实验室的第一个任务,老师还跟X博士介绍说我”基础比较好,比较有经验”🤦‍♀️…我一定要加油奠定好自己的地位啊…争取以后被老师重用能有好的发展! 虽然很怕但是加油! 我本来就不差,一定要努力~</p>
-<h1 id="Jupyter"><a href="#Jupyter" class="headerlink" title="Jupyter"></a>Jupyter</h1><h2 id="What-is-Jupyter"><a href="#What-is-Jupyter" class="headerlink" title="What is Jupyter?"></a>What is Jupyter?</h2><blockquote>
-<p>Jupyter Notebook是基于网页的用于交互计算的应用程序。其可被应用于全过程计算：开发、文档编写、运行代码和展示结果。</p>
-</blockquote>
-<p>其实就是一个网页版的IDE吧?🤔你还可以把它当成一个网盘/GitHub来分享你的文档/代码…(<strong>如果我理解的不对请在评论区纠正我呀</strong>)</p>
-<h2 id="Install-Jupyter"><a href="#Install-Jupyter" class="headerlink" title="Install Jupyter"></a>Install Jupyter</h2><p>Jupyter依赖于python环境,但是可支持包含python的40都种语言,所以它应该是用python编写的?😦(<strong>对不对呀</strong>)</p>
-<p>可以选择使用3.3+/2.7版本的python. 说来惭愧,我一直记不清python 2 3的区别,那就先给自己补补课吧</p>
-<blockquote>
-<p>Python3相比python2增加了对utf-8的支持,除法结果自动转换类型,很多新的方法,以及最显著的,print是函数,所以后面一定是跟括号的.</p>
-<p>(看到这里我也知道了CV课老师给的参考代码是python2的,我安装的OpenCV也是基于python2.7的)</p>
-</blockquote>
-<p>这里我选择使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install jupyter</span><br></pre></td></tr></table></figure>
-<p>为python3 安装Jupyter <del>才不是因为python2没安装成功呢才不是不知道为啥timeout了我懒得搞了</del></p>
-<h2 id="Start-Jupyter"><a href="#Start-Jupyter" class="headerlink" title="Start Jupyter"></a>Start Jupyter</h2><p>使用下面指令在默认端口启动Jupyter,会自动打开 <a href="http://localhost:8888" target="_blank" rel="noopener">http://localhost:8888</a>. 注意启动后终端不能关闭,否则会断开与本地服务器的连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
-<p>还有更多启动方式,参考 <a href="https://zhuanlan.zhihu.com/p/33105153" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33105153</a></p>
-<p>启动之后,页面显示的文件目录就是你执行启动命令所在的目录</p>
-<h2 id="Using-Jupyter"><a href="#Using-Jupyter" class="headerlink" title="Using Jupyter"></a>Using Jupyter</h2><p>关于使用,这篇文章说得比较详细了.</p>
-<p><a href="https://blog.csdn.net/DataCastle/article/details/78890469" target="_blank" rel="noopener">https://blog.csdn.net/DataCastle/article/details/78890469</a></p>
-<p>但是我又遇到了一个问题,就是我的code使用 <code>shift+enter</code>执行之后,结果并不会显示在code下方…查资料说可能是</p>
+        <h1 id="CAMShift"><a href="#CAMShift" class="headerlink" title="CAMShift"></a>CAMShift</h1><p><code>OpenCV</code>提供了<code>CamShift</code>函数用于目标跟踪. 其全称为<code>Continuously Adaptive Meanshift</code>是由Gary Bradsky于1988年提出的,论文为”Computer Vision Face Tracking for Use in a Perceptual User Interface”.</p>
+<p><code>CamShift</code>是基于<code>MeanShift</code>算法的,相较<code>MeanShift</code>能够动态调整追踪窗口的大小,将上一帧作为下一帧追踪计算的初始值,效果更好.</p>
+<p><code>CamShift</code>计算前需要首先进行以下步骤:</p>
 <ol>
-<li><p>使用了杀毒/…软件 → 排除,并没有</p>
+<li><p>将RGB图像转换为HSV图像;</p>
 </li>
-<li><p>浏览器问题 → Chrome换成Safari也还是不行(换的时候直接把链接粘贴过去,然后需要你在新的页面输入token,你可以在终端中输入<code>control+C</code>但是不真的退出,就可以看到当前的token了</p>
+<li><p>计算图像直方图,并归一化,得到Color probability Image;</p>
 </li>
-<li><p>在页面上重启kernel → 依然不行</p>
-</li>
-<li><p>something is wrong with your python distribution package → so sad…这是我最怕的</p>
-<p>我把笔记本中的内容通过File→save as→.py保存下来,发现它在文件开头声明使用的是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br></pre></td></tr></table></figure>
-<p>而我的Jupyter是安装在<code>/usr/local/bin/python3</code>下的,我查看Jupyter的path,返回结果为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 在终端执行 jupyter --paths</span><br><span class="line">config:</span><br><span class="line">    /Users/oliveds/.jupyter</span><br><span class="line">    /usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/etc/jupyter</span><br><span class="line">    /usr/local/etc/jupyter</span><br><span class="line">    /etc/jupyter</span><br><span class="line">data:</span><br><span class="line">    /Users/oliveds/Library/Jupyter</span><br><span class="line">    /usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/share/jupyter</span><br><span class="line">    /usr/local/share/jupyter</span><br><span class="line">    /usr/share/jupyter</span><br><span class="line">runtime:</span><br><span class="line">    /Users/oliveds/Library/Jupyter/runtime</span><br><span class="line"></span><br><span class="line"># 在终端执行 jupyter kernelspec list</span><br><span class="line">Available kernels:</span><br><span class="line">  python3    /usr/local/share/jupyter/kernels/python3</span><br></pre></td></tr></table></figure>
-<p>这应该证明我安装的Jupyter确实是在brew安装的python3.7下的</p>
-<p><strong>问题来了</strong> <code>#!/usr/bin/env python</code>到底是Jupyter生成python文件的统一语句还是就是我的Jupyter使用的kernel呢?</p>
-<p>后来我又给Jupyter安装了python2的kernel,结果还是一样的问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip2 install -U ipykernel</span><br></pre></td></tr></table></figure>
+<li><p>设置CamShift参数.</p>
 </li>
 </ol>
+<p>然后在每帧执行以下步骤:</p>
+<ol>
+<li><p>将RGB图像转换为HSV图像;</p>
+</li>
+<li><p>计算BackProject;</p>
+</li>
+<li><p>计算CamShift.</p>
+</li>
+</ol>
+<p><code>CamShift</code>在OpenCV中的函数形式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># C++</span><br><span class="line">RotatedRect CamShift(InputArray probImage, Rect&amp; window, TermCriteria criteria)</span><br><span class="line"># Python</span><br><span class="line">cv2.CamShift(probImage, window, criteria) → retval, window</span><br></pre></td></tr></table></figure>
+<p>其参数如下.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">probImage</td>
+<td style="text-align:left">Back projection of the object histogram. See calcBackProject()</td>
+</tr>
+<tr>
+<td style="text-align:left">window</td>
+<td style="text-align:left">Initial search window</td>
+</tr>
+<tr>
+<td style="text-align:left">criteria</td>
+<td style="text-align:left">Stop criteria for the underlying meanShift()</td>
+</tr>
+</tbody>
+</table>
+<h1 id="人体追踪代码"><a href="#人体追踪代码" class="headerlink" title="人体追踪代码"></a>人体追踪代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_inside</span><span class="params">(o, i)</span>:</span><span class="comment"># 判断o是否在i外的函数</span></span><br><span class="line">   ox, oy, ow, oh = o</span><br><span class="line">   ix, iy, iw, ih = i</span><br><span class="line">   <span class="keyword">return</span> ox &gt; ix <span class="keyword">and</span> oy &gt; iy <span class="keyword">and</span> ox + ow &lt; ix + iw <span class="keyword">and</span> oy + oh &lt; iy + ih</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">detect_person</span><span class="params">(image)</span>:</span><span class="comment"># 检测被追踪的人体的函数</span></span><br><span class="line">    ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    hog = cv2.HOGDescriptor()<span class="comment"># 创建HOGDescriptor对象</span></span><br><span class="line">    hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())<span class="comment"># 使用OpenCV预训练好的人体识别检测器</span></span><br><span class="line">    found, w = hog.detectMultiScale(img)<span class="comment"># 构造了图像金字塔和滑窗,进行检测</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"w="</span>)</span><br><span class="line">    <span class="keyword">print</span> (w)</span><br><span class="line">    found_filtered = []<span class="comment"># 存储检测目标</span></span><br><span class="line">    <span class="keyword">for</span> ri, r <span class="keyword">in</span> enumerate(found):</span><br><span class="line">        <span class="keyword">for</span> qi, q <span class="keyword">in</span> enumerate(found):</span><br><span class="line">            <span class="keyword">if</span> ri != qi <span class="keyword">and</span> is_inside(r, q):</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                found_filtered.append(r)</span><br><span class="line">    <span class="comment"># for person in found_filtered:</span></span><br><span class="line">    <span class="keyword">return</span> found_filtered <span class="comment"># 返回检测到的人体的位置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>): <span class="comment"># 由于有时画面中无法检测出人体,需要循环直到找到人体后再跳出循环</span></span><br><span class="line">    ret, frame = capture.read() <span class="comment">#先获取第一帧 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">    found_filtered = detect_person(frame)</span><br><span class="line">    <span class="keyword">if</span> (len(found_filtered) != <span class="number">0</span> ):</span><br><span class="line">        <span class="keyword">break</span> <span class="comment"># 跳出while 循环</span></span><br><span class="line">c,r,w,h = found_filtered[<span class="number">0</span>] <span class="comment"># 此处仅跟踪了一个人体,实际应该考虑画面中有多个人的情况</span></span><br><span class="line">track_window = c,r,w,h <span class="comment"># 人体在画面中的位置范围</span></span><br><span class="line">roi = frame[r:r+h, c:c+w]</span><br><span class="line">hsv_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) <span class="comment"># 转换为HSV图</span></span><br><span class="line">mask = cv2.inRange(hsv_roi, np.array((<span class="number">100.</span>, <span class="number">30.</span>,<span class="number">32.</span>)),</span><br><span class="line">np.array((<span class="number">180.</span>,<span class="number">120.</span>,<span class="number">255.</span>))) <span class="comment"># 选取色彩范围</span></span><br><span class="line">roi_hist = cv2.calcHist([hsv_roi],[<span class="number">0</span>],mask,[<span class="number">180</span>],[<span class="number">0</span>,<span class="number">180</span>]) <span class="comment"># 计算Histogram</span></span><br><span class="line">cv2.normalize(roi_hist,roi_hist,<span class="number">0</span>,<span class="number">255</span>,cv2.NORM_MINMAX) <span class="comment"># Histogram归一化</span></span><br><span class="line">term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, <span class="number">10</span>, <span class="number">1</span> ) <span class="comment"># 准备CamShift</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">	ret ,frame = capture.read()</span><br><span class="line">	<span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">		hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) <span class="comment"># 转换HSV图</span></span><br><span class="line">		dst = cv2.calcBackProject([hsv],[<span class="number">0</span>],roi_hist,[<span class="number">0</span>,<span class="number">180</span>],<span class="number">1</span>) <span class="comment"># BackProject</span></span><br><span class="line">		ret, track_window = cv2.CamShift(dst, track_window, term_crit)<span class="comment"># Camshift方法-物体追踪</span></span><br><span class="line">		pts = cv2.boxPoints(ret)</span><br><span class="line">		pts = np.int0(pts)</span><br><span class="line">		img2 = cv2.polylines(frame,[pts],<span class="literal">True</span>, <span class="number">255</span>,<span class="number">2</span>)</span><br><span class="line">		cv2.imshow(<span class="string">'Tracked Person'</span>,img2)</span><br><span class="line">	key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">    <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">      <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
+<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><p>识别摄像头采集图像中的人体并实时跟踪,效果如下.</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190604113526.png" alt="20190604113526.png"></p>
+<p>由于人体识别的算法效果一般,且CamShift的跟踪效果也不太好,经常会出现初始人体识别错误导致跟踪的不是人体 或 跟踪一段时间后突然跟踪到其它相邻物体的情况. </p>
+<p>该算法有待进一步改进.</p>
 
       
     </div>
@@ -422,8 +434,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/Android-API-MacOS-开发平台/" rel="next" title="Android API MacOS 开发平台部署">
-                <i class="fa fa-chevron-left"></i> Android API MacOS 开发平台部署
+              <a href="/2019/05/31/OpenCV-flow/" rel="next" title="OpenCV 前景/背景标注">
+                <i class="fa fa-chevron-left"></i> OpenCV 前景/背景标注
               </a>
             
           </div>
@@ -431,10 +443,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/06/Jupyter-IDE-开发/" rel="prev" title="Binder IDE 开发 (Jupyter)">
-                Binder IDE 开发 (Jupyter) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter"><span class="nav-number"></span> <span class="nav-text">Jupyter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Jupyter"><span class="nav-number">1.</span> <span class="nav-text">What is Jupyter?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jupyter"><span class="nav-number">2.</span> <span class="nav-text">Install Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-Jupyter"><span class="nav-number">3.</span> <span class="nav-text">Start Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Jupyter"><span class="nav-number">4.</span> <span class="nav-text">Using Jupyter</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CAMShift"><span class="nav-number">1.</span> <span class="nav-text">CAMShift</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#人体追踪代码"><span class="nav-number">2.</span> <span class="nav-text">人体追踪代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行结果"><span class="nav-number">3.</span> <span class="nav-text">运行结果</span></a></li></ol></div>
             
 
           </div>
