@@ -79,19 +79,21 @@
 
 
 
-<meta name="description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
+<meta name="description" content="StereoSGBMStereoSGBM是OpenCV提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图. create()StereoSGBM类中创建StereoSGBM对象的方法为create() 12345# create() 创建StereoSGBM对象# C++static Ptr&amp;lt;StereoSGBM&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenCV 视频人体检测">
-<meta property="og:url" content="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/index.html">
+<meta property="og:title" content="OpenCV 双目视差图计算">
+<meta property="og:url" content="https://oliveds.github.io/2019/06/06/opencv-stereo/index.html">
 <meta property="og:site_name" content="OliveDS&#39;s Study Bar">
-<meta property="og:description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
+<meta property="og:description" content="StereoSGBMStereoSGBM是OpenCV提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图. create()StereoSGBM类中创建StereoSGBM对象的方法为create() 12345# create() 创建StereoSGBM对象# C++static Ptr&amp;lt;StereoSGBM&amp;">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png">
-<meta property="og:updated_time" content="2019-05-30T13:24:09.723Z">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203456.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203536.png">
+<meta property="og:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203623.png">
+<meta property="og:updated_time" content="2019-06-06T12:39:46.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenCV 视频人体检测">
-<meta name="twitter:description" content="HOGDescriptorOpenCV提供了HOGDescriptor函数用于特征提取, 常常被用于做物体检测. 其参数如下.    参数 含义     _winSize sets winSize with given value.   _blockSize sets blockSize with given value.   _blockStride sets blockStride with">
-<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png">
+<meta name="twitter:title" content="OpenCV 双目视差图计算">
+<meta name="twitter:description" content="StereoSGBMStereoSGBM是OpenCV提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图. create()StereoSGBM类中创建StereoSGBM对象的方法为create() 12345# create() 创建StereoSGBM对象# C++static Ptr&amp;lt;StereoSGBM&amp;">
+<meta name="twitter:image" content="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203456.png">
 
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/">
+  <link rel="canonical" href="https://oliveds.github.io/2019/06/06/opencv-stereo/">
 
 
 
 
 
-  <title>OpenCV 视频人体检测 | OliveDS's Study Bar</title>
+  <title>OpenCV 双目视差图计算 | OliveDS's Study Bar</title>
   
 
 
@@ -238,7 +240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/05/15/OpeCV-视频物体检测/">
+    <link itemprop="mainEntityOfPage" href="https://oliveds.github.io/2019/06/06/opencv-stereo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OliveDS">
@@ -255,7 +257,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OpenCV 视频人体检测</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV 双目视差图计算</h1>
         
 
         <div class="post-meta">
@@ -267,8 +269,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T18:03:13+08:00">
-                2019-05-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-06T11:17:50+08:00">
+                2019-06-06
               </time>
             
 
@@ -283,8 +285,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-05-30T21:24:09+08:00">
-                2019-05-30
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-06T20:39:46+08:00">
+                2019-06-06
               </time>
             
           </span>
@@ -320,8 +322,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/15/OpeCV-视频物体检测/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/15/OpeCV-视频物体检测/" itemprop="commentCount"></span>
+                <a href="/2019/06/06/opencv-stereo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/06/opencv-stereo/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -329,7 +331,7 @@
 
           
           
-             <span id="/2019/05/15/OpeCV-视频物体检测/" class="leancloud_visitors" data-flag-title="OpenCV 视频人体检测">
+             <span id="/2019/06/06/opencv-stereo/" class="leancloud_visitors" data-flag-title="OpenCV 双目视差图计算">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -360,7 +362,9 @@
       
 
       
-        <h1 id="HOGDescriptor"><a href="#HOGDescriptor" class="headerlink" title="HOGDescriptor"></a>HOGDescriptor</h1><p><code>OpenCV</code>提供了<code>HOGDescriptor</code>函数用于特征提取, 常常被用于做物体检测.</p>
+        <h1 id="StereoSGBM"><a href="#StereoSGBM" class="headerlink" title="StereoSGBM"></a>StereoSGBM</h1><p><code>StereoSGBM</code>是<code>OpenCV</code>提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图.</p>
+<h2 id="create"><a href="#create" class="headerlink" title="create()"></a>create()</h2><p><code>StereoSGBM</code>类中创建StereoSGBM对象的方法为<code>create()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># create() 创建StereoSGBM对象</span><br><span class="line"># C++</span><br><span class="line">static Ptr&lt;StereoSGBM&gt; cv::StereoSGBM::create (int minDisparity = 0,int  numDisparities = 16,int 	blockSize = 3,int P1 = 0,int P2 = 0,int disp12MaxDiff = 0,int preFilterCap = 0,int uniquenessRatio = 0,int speckleWindowSize = 0,int speckleRange = 0,int mode = StereoSGBM::MODE_SGBM)</span><br><span class="line"># Python</span><br><span class="line">retval = cv2.StereoSGBM_create([，minDisparity [，numDisparities [，blockSize [，P1 [，P2 [，disp12MaxDiff [，preFilterCap [，uniquenessRatio [，speckleWindowSize [，speckleRange [，mode]]]]]]]]]]]])</span><br></pre></td></tr></table></figure>
 <p>其参数如下.</p>
 <table>
 <thead>
@@ -371,61 +375,85 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">_winSize</td>
-<td style="text-align:left">sets winSize with given value.</td>
+<td style="text-align:left">minDisparity</td>
+<td style="text-align:left">最小可能的差异值。通常情况下，它是零，但有时整流算法可能会改变图像，所以这个参数需要作相应的调整。</td>
 </tr>
 <tr>
-<td style="text-align:left">_blockSize</td>
-<td style="text-align:left">sets blockSize with given value.</td>
+<td style="text-align:left">numDisparities</td>
+<td style="text-align:left">最大差异减去最小差异。该值总是大于零。在当前的实现中，该参数必须可以被16整除。</td>
 </tr>
 <tr>
-<td style="text-align:left">_blockStride</td>
-<td style="text-align:left">sets blockStride with given value.</td>
+<td style="text-align:left">BLOCKSIZE</td>
+<td style="text-align:left">匹配的块大小。它必须是&gt; = 1的奇数。通常情况下，它应该在3..11的范围内。</td>
 </tr>
 <tr>
-<td style="text-align:left">_cellSize</td>
-<td style="text-align:left">sets cellSize with given value.</td>
+<td style="text-align:left">P1</td>
+<td style="text-align:left">控制视差平滑度的第一个参数。</td>
 </tr>
 <tr>
-<td style="text-align:left">_nbins</td>
-<td style="text-align:left">sets nbins with given value.</td>
+<td style="text-align:left">P2</td>
+<td style="text-align:left">第二个参数控制视差平滑度。值越大，差异越平滑。P1是相邻像素之间的视差变化加或减1的惩罚。P2是相邻像素之间的视差变化超过1的惩罚。该算法需要P2&gt; P1。请参见stereo_match.cpp示例，其中显示了一些相当好的P1和P2值（分别为8 <em> number_of_image_channels </em> SADWindowSize <em> SADWindowSize和32 </em> number_of_image_channels <em> SADWindowSize </em> SADWindowSize）。</td>
 </tr>
 <tr>
-<td style="text-align:left">_derivAperture</td>
-<td style="text-align:left">sets derivAperture with given value.</td>
+<td style="text-align:left">disp12MaxDiff</td>
+<td style="text-align:left">左右视差检查中允许的最大差异（以整数像素为单位）。将其设置为非正值以禁用检查。</td>
 </tr>
 <tr>
-<td style="text-align:left">_winSigma</td>
-<td style="text-align:left">sets winSigma with given value.</td>
+<td style="text-align:left">preFilterCap</td>
+<td style="text-align:left">预滤波图像像素的截断值。该算法首先计算每个像素的x导数，并通过[-preFilterCap，preFilterCap]间隔剪切其值。结果值传递给Birchfield-Tomasi像素成本函数。</td>
 </tr>
 <tr>
-<td style="text-align:left">_histogramNormType</td>
-<td style="text-align:left">sets histogramNormType with given value.</td>
+<td style="text-align:left">uniquenessRatio</td>
+<td style="text-align:left">最佳（最小）计算成本函数值应该“赢”第二个最佳值以考虑找到的匹配正确的百分比保证金。通常，5-15范围内的值就足够了。</td>
 </tr>
 <tr>
-<td style="text-align:left">_L2HysThreshold</td>
-<td style="text-align:left">sets L2HysThreshold with given value.</td>
+<td style="text-align:left">speckleWindowSize</td>
+<td style="text-align:left">平滑视差区域的最大尺寸，以考虑其噪声斑点和无效。将其设置为0可禁用斑点过滤。否则，将其设置在50-200的范围内。</td>
 </tr>
 <tr>
-<td style="text-align:left">_gammaCorrection</td>
-<td style="text-align:left">sets gammaCorrection with given value.</td>
+<td style="text-align:left">speckleRange</td>
+<td style="text-align:left">每个连接组件内的最大视差变化。如果你做斑点过滤，将参数设置为正值，它将被隐式乘以16.通常，1或2就足够好了。</td>
 </tr>
 <tr>
-<td style="text-align:left">_nlevels</td>
-<td style="text-align:left">sets nlevels with given value.</td>
-</tr>
-<tr>
-<td style="text-align:left">_signedGradient</td>
-<td style="text-align:left">sets signedGradient with given value.</td>
+<td style="text-align:left">mode</td>
+<td style="text-align:left">将其设置为StereoSGBM :: MODE_HH以运行全尺寸双通道动态编程算法。它将消耗O（W <em> H </em> numDisparities）字节，这对640x480立体声很大，对于HD尺寸的图片很大。默认情况下，它被设置为false。</td>
 </tr>
 </tbody>
 </table>
-<p>默认参数值为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winSize(64,128), blockSize(16,16), blockStride(8,8), cellSize(8,8), nbins(9), derivAperture(1), winSigma(-1), histogramNormType(HOGDescriptor::L2Hys), L2HysThreshold(0.2), gammaCorrection(true), nlevels(HOGDescriptor::DEFAULT_NLEVELS)</span><br></pre></td></tr></table></figure>
-<h1 id="视频人体检测代码"><a href="#视频人体检测代码" class="headerlink" title="视频人体检测代码"></a>视频人体检测代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_inside</span><span class="params">(o, i)</span>:</span><span class="comment"># 判断o是否在i外的函数</span></span><br><span class="line">   ox, oy, ow, oh = o</span><br><span class="line">   ix, iy, iw, ih = i</span><br><span class="line">   <span class="keyword">return</span> ox &gt; ix <span class="keyword">and</span> oy &gt; iy <span class="keyword">and</span> ox + ow &lt; ix + iw <span class="keyword">and</span> oy + oh &lt; iy + ih</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_person</span><span class="params">(image, person)</span>:</span><span class="comment"># 画识别人后框的函数</span></span><br><span class="line">   x, y, w, h = person</span><br><span class="line">   cv2.rectangle(img, (x, y), (x + w, y + h), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">capture = cv2.VideoCapture(<span class="number">0</span>) <span class="comment">#打开视频,参数为路径;参数为0表示打开笔记本的内置摄像头</span></span><br><span class="line"><span class="keyword">print</span> capture.isOpened() <span class="comment">#显示打开是否成功</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>: <span class="comment">#循环</span></span><br><span class="line">   ret, img=capture.read() <span class="comment">#按帧读取视频 ret-帧状态布尔值,img-图像矩阵</span></span><br><span class="line">   hog = cv2.HOGDescriptor()<span class="comment"># 创建HOGDescriptor对象</span></span><br><span class="line">   hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())<span class="comment"># 使用OpenCV预训练好的人体识别检测器</span></span><br><span class="line">   found, w = hog.detectMultiScale(img)<span class="comment"># 构造了图像金字塔和滑窗,进行检测</span></span><br><span class="line">   <span class="keyword">print</span> (<span class="string">"w="</span>)</span><br><span class="line">   <span class="keyword">print</span> (w)</span><br><span class="line">   found_filtered = []<span class="comment"># 存储检测目标</span></span><br><span class="line">   <span class="keyword">for</span> ri, r <span class="keyword">in</span> enumerate(found):</span><br><span class="line">      <span class="keyword">for</span> qi, q <span class="keyword">in</span> enumerate(found):</span><br><span class="line">         <span class="keyword">if</span> ri != qi <span class="keyword">and</span> is_inside(r, q):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">            found_filtered.append(r)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> person <span class="keyword">in</span> found_filtered:</span><br><span class="line">      draw_person(img, person)</span><br><span class="line">   cv2.imshow(<span class="string">"Video People Detect"</span>, img)</span><br><span class="line">   <span class="comment">#cv2.imwrite("d_people2.jpg",img)</span></span><br><span class="line">   key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line">   <span class="comment"># print key 鼠标需要点一下视频窗口,使程序接收键盘输入而不是命令行接收键盘输入</span></span><br><span class="line">   <span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">      <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
-<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><h2 id="视频人体检测"><a href="#视频人体检测" class="headerlink" title="视频人体检测"></a>视频人体检测</h2><p>实时获取摄像头采集的图像并进行人体检测,效果如下.</p>
-<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/Screen%20Shot%202019-05-22%20at%207.59.46%20PM.png" alt="img"></p>
-<p>发现该程序能够较为准确地检测人体.</p>
+<h2 id="compute"><a href="#compute" class="headerlink" title="compute()"></a>compute()</h2><p><code>StereoSGBM</code>类中计算StereoSGBM的方法为<code>compute()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># compute() 计算StereoSGBM</span><br><span class="line"># C++</span><br><span class="line">public void compute(Mat left,Mat right,Mat disp)</span><br><span class="line"># Python</span><br><span class="line">disp = StereoSGBM.compute(left,right)</span><br></pre></td></tr></table></figure>
+<p>其参数如下.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">left</td>
+<td style="text-align:left">左目图像矩阵</td>
+</tr>
+<tr>
+<td style="text-align:left">right</td>
+<td style="text-align:left">右目图像矩阵</td>
+</tr>
+<tr>
+<td style="text-align:left">disp</td>
+<td style="text-align:left">StereoSGBM结果矩阵</td>
+</tr>
+</tbody>
+</table>
+<h1 id="计算视差图代码"><a href="#计算视差图代码" class="headerlink" title="计算视差图代码"></a>计算视差图代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">window_size = <span class="number">5</span> <span class="comment"># 匹配的块大小 &gt; = 1的奇数</span></span><br><span class="line">min_disp = <span class="number">16</span> <span class="comment"># 最小可能的差异值</span></span><br><span class="line">num_disp = <span class="number">192</span>-min_disp <span class="comment"># 最大差异减去最小差异</span></span><br><span class="line">blockSize = window_size <span class="comment"># 匹配的块大小</span></span><br><span class="line">uniquenessRatio = <span class="number">1</span> <span class="comment"># 最佳（最小）计算成本函数值</span></span><br><span class="line">speckleRange = <span class="number">3</span> <span class="comment"># 每个连接组件内的最大视差变化</span></span><br><span class="line">speckleWindowSize = <span class="number">3</span> <span class="comment"># 平滑视差区域的最大尺寸</span></span><br><span class="line">disp12MaxDiff = <span class="number">200</span> <span class="comment"># 左右视差检查中允许的最大差异</span></span><br><span class="line">P1 = <span class="number">600</span> <span class="comment"># 控制视差平滑度的第一个参数</span></span><br><span class="line">P2 = <span class="number">2400</span> <span class="comment"># 第二个参数控制视差平滑度</span></span><br><span class="line">imgL = cv2.imread(<span class="string">'left1.jpg'</span>) <span class="comment"># 左目图像</span></span><br><span class="line">cv2.imshow(<span class="string">'Left Image'</span>, imgL)</span><br><span class="line">imgR = cv2.imread(<span class="string">'right1.jpg'</span>) <span class="comment"># 右目图像</span></span><br><span class="line">cv2.imshow(<span class="string">'Right Image'</span>, imgR)</span><br><span class="line"><span class="comment"># 创建StereoSGBM对象并计算</span></span><br><span class="line">stereo = cv2.StereoSGBM_create(minDisparity = min_disp,numDisparities = num_disp,blockSize = window_size,uniquenessRatio = uniquenessRatio,speckleRange = speckleRange,speckleWindowSize = speckleWindowSize,disp12MaxDiff = disp12MaxDiff,P1 = P1,P2 = P2)</span><br><span class="line">disp = stereo.compute(imgL, imgR).astype(np.float32) / <span class="number">16.0</span> <span class="comment"># 计算视差图</span></span><br><span class="line">cv2.imshow(<span class="string">'Depth Image SGBM'</span>, (disp-min_disp)/num_disp)<span class="comment"># 显示视差图结果</span></span><br><span class="line"></span><br><span class="line">key=cv2.waitKey(<span class="number">1</span>) <span class="comment">#等待键盘输入,间隔1ms waits for a key event infinitely (when [delay]&lt; 0 ) or for [delay] milliseconds,</span></span><br><span class="line"><span class="keyword">if</span> key == <span class="number">27</span> : <span class="comment">#ESC键的ASCII码</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"detect ESC"</span></span><br><span class="line">    <span class="keyword">break</span> <span class="comment">#退出while循环</span></span><br><span class="line">capture.release() <span class="comment">#释放笔记本摄像头</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#关闭所有图像窗口</span></span><br></pre></td></tr></table></figure>
+<h1 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h1><p>识别摄像头采集图像中的人体并实时跟踪,效果如下.</p>
+<p>左目图像:</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203456.png" alt="left.png"></p>
+<p>右目图像:</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203536.png" alt="right.png"></p>
+<p>StereoSGBM视差图像:</p>
+<p><img src="https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefined20190606203623.png" alt="20190606203623.png"></p>
+<p>该算法能够将两幅图像进行比较,计算出大体正确的视差图像结果,但物体边缘容易出现深度计算不准确,且存在不少噪声.总体上效果良好,可以进一步改进.</p>
 
       
     </div>
@@ -450,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/08/OpenCV-face-recognition/" rel="next" title="OpenCV Face-Recognition">
-                <i class="fa fa-chevron-left"></i> OpenCV Face-Recognition
+              <a href="/2019/06/04/opencv-track-people-camshift/" rel="next" title="OpenCV 行人跟踪">
+                <i class="fa fa-chevron-left"></i> OpenCV 行人跟踪
               </a>
             
           </div>
@@ -459,10 +487,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/31/OpenCV-flow/" rel="prev" title="OpenCV 前景/背景标注">
-                OpenCV 前景/背景标注 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -610,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HOGDescriptor"><span class="nav-number">1.</span> <span class="nav-text">HOGDescriptor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视频人体检测代码"><span class="nav-number">2.</span> <span class="nav-text">视频人体检测代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行结果"><span class="nav-number">3.</span> <span class="nav-text">运行结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视频人体检测"><span class="nav-number">3.1.</span> <span class="nav-text">视频人体检测</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#StereoSGBM"><span class="nav-number">1.</span> <span class="nav-text">StereoSGBM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">1.1.</span> <span class="nav-text">create()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compute"><span class="nav-number">1.2.</span> <span class="nav-text">compute()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算视差图代码"><span class="nav-number">2.</span> <span class="nav-text">计算视差图代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行结果"><span class="nav-number">3.</span> <span class="nav-text">运行结果</span></a></li></ol></div>
             
 
           </div>
