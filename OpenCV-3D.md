@@ -331,12 +331,12 @@ create_output(output_points, output_colors, output_file)
 
 原双目图像
 
-![left](left.png)
+![left.png](https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefinedleft.png)
 
-![right](right.png)
+![right.png](https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefinedright.png)
 
 点云图像
 
-![point-clouds](pointclouds.png)
+![pointclouds.png](https://oliveds-1258728895.cos.ap-beijing.myqcloud.com/undefinedpointclouds.png)
 
 鼠标移动到图像中的某点位置,下方显示该点的点云x,y坐标
