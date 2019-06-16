@@ -1,48 +1,64 @@
-OpenCV相机校准和3D重建
-3D重建步骤
-相机校准：使用一组图像来推断相机的焦距和光学中心
+# OpenCV相机校准和3D重建
 
-获取undistort图像：摆脱用于重建的图片中的镜头失真
+## 3D重建步骤
 
-特征匹配：在两个图片之间寻找相似的特征并构建深度图
+1. 相机校准：使用一组图像来推断相机的焦距和光学中心
 
-重新投影点：使用深度图将像素重新投影到3D空间
+2. 获取undistort图像：摆脱用于重建的图片中的镜头失真
 
-构建点云：生成包含3D空间中的点的新文件以进行可视化
+3. 特征匹配：在两个图片之间寻找相似的特征并构建深度图
 
-相机校准
-使用两张从不同角度拍摄的同一物体的照片, 就可以进行3D重建, 与人眼的原理类似. 具体的方法是在两张图片中寻找相同的东西, 并从位置差异中推断出深度, 也就是立体匹配. 为了进行立体匹配, 使两个图像具有完全相同的特征是很重要的. 也就是要求两张图片都不能有任何失真. 但实际上, 大多数相机镜头都会导致失真. 因此, 为了准确地进行立体匹配, 需要知道所使用相机的光学中心和焦距. 因此, 需要首先进行相机校准.
+4. 重新投影点：使用深度图将像素重新投影到3D空间
 
-findChessboardCorners
-cv2.findChessboardCorners是opencv的一个函数, 可以用来寻找棋盘图的内角点位置. 该函数试图确定输入图像是否是棋盘模式，并确定角点的位置。如果所有角点都被检测到且它们都被以一定顺序排布，函数返回非零值，否则在函数不能发现所有角点或者记录它们地情况下，函数返回0. 函数形式为:
+5. 构建点云：生成包含3D空间中的点的新文件以进行可视化
 
+## 相机校准
+使用两张从不同角度拍摄的同一物体的照片, 就可以进行3D重建, 与人眼的原理类似. 具体的方法是在两张图片中寻找相同的东西, 并从位置差异中推断出深度, 也就是立体匹配.
+为了进行立体匹配, 使两个图像具有完全相同的特征是很重要的. 也就是要求两张图片都不能有任何失真. 但实际上, 大多数相机镜头都会导致失真. 因此, 为了准确地进行立体匹配, 需要知道所使用相机的光学中心和焦距. 因此, 需要首先进行相机校准.
+
+### findChessboardCorners
+
+`cv2.findChessboardCorners`是`opencv`的一个函数, 可以用来寻找棋盘图的内角点位置. 该函数试图确定输入图像是否是棋盘模式，并确定角点的位置。如果所有角点都被检测到且它们都被以一定顺序排布，函数返回非零值，否则在函数不能发现所有角点或者记录它们地情况下，函数返回0. 函数形式为:
+
+```python
 # C++
 bool findChessboardCorners(InputArray image, Size patternSize, OutputArray corners, int flags=CALIB_CB_ADAPTIVE_THRESH+CALIB_CB_NORMALIZE_IMAGE )
 # Python
 cv2.findChessboardCorners(image, patternSize[, corners[, flags]]) → retval, corners
-参数	含义
-Image	输入的棋盘图，必须是8位的灰度或者彩色图像
-pattern_size	棋盘图中每行和每列角点的个数
-Corners	检测到的角点
-corner_count	输出，角点的个数。如果不是NULL，函数将检测到的角点的个数存储于此变量
-Flags	各种操作标志，可以是0或者下面值的组合：CV_CALIB_CB_ADAPTIVE_THRESH -使用自适应阈值（通过平均图像亮度计算得到）将图像转换为黑白图，而不是一个固定的阈值 CV_CALIB_CB_NORMALIZE_IMAGE -在利用固定阈值或者自适应的阈值进行二值化之前，先使用cvNormalizeHist来均衡化图像亮度 CV_CALIB_CB_FILTER_QUADS -使用其他的准则（如轮廓面积，周长，方形形状）来去除在轮廓检测阶段检测到的错误方块
-calibrateCamera
-cv2.calibrateCamera是opencv的一个函数, 用来标定模块,其函数形式为:
+```
 
+|参数|含义|
+|----------|----------------------|
+|Image|输入的棋盘图，必须是8位的灰度或者彩色图像|
+|pattern_size|棋盘图中每行和每列角点的个数|
+|Corners|检测到的角点|
+|corner_count|输出，角点的个数。如果不是NULL，函数将检测到的角点的个数存储于此变量|
+|Flags|各种操作标志，可以是0或者下面值的组合：CV_CALIB_CB_ADAPTIVE_THRESH -使用自适应阈值（通过平均图像亮度计算得到）将图像转换为黑白图，而不是一个固定的阈值 CV_CALIB_CB_NORMALIZE_IMAGE -在利用固定阈值或者自适应的阈值进行二值化之前，先使用cvNormalizeHist来均衡化图像亮度 CV_CALIB_CB_FILTER_QUADS -使用其他的准则（如轮廓面积，周长，方形形状）来去除在轮廓检测阶段检测到的错误方块|
+
+### calibrateCamera
+
+`cv2.calibrateCamera`是`opencv`的一个函数, 用来标定模块,其函数形式为:
+
+```python
 # C++
 double calibrateCamera(InputArrayOfArrays objectPoints, InputArrayOfArrays imagePoints, Size imageSize, InputOutputArray cameraMatrix, InputOutputArray distCoeffs, OutputArrayOfArrays rvecs, OutputArrayOfArrays tvecs, int flags=0, TermCriteria criteria=TermCriteria( TermCriteria::COUNT+TermCriteria::EPS, 30, DBL_EPSILON) )
 # Python
 cv2.calibrateCamera(objectPoints, imagePoints, imageSize[, cameraMatrix[, distCoeffs[, rvecs[, tvecs[, flags[, criteria]]]]]]) → retval, cameraMatrix, distCoeffs, rvecs, tvecs
-参数	含义
-objectPoints	世界坐标系中的点。在使用时，应该输入一个三维点的vector的vector，即vector<vector> objectPoints
-imagePoints	对应的图像点。和objectPoints一样，应该输入std::vector<std::vectorcv::Point2f> imagePoints型的变量
-imageSize	图像的大小，在计算相机的内参数和畸变矩阵需要用到
-cameraMatrix	内参数矩阵。输入一个cv::Mat cameraMatrix即可
-distCoeffs	畸变矩阵。输入一个cv::Mat distCoeffs即可
-rvecs	旋转向量；应该输入一个cv::Mat的vector，即vectorcv::Mat rvecs因为每个vector会得到一个rvecs
-tvecs	位移向量；和rvecs一样，也应该为vectorcv::Mat tvecs
-flags	标定时所采用的算法。可如下某个或者某几个参数： CV_CALIB_USE_INTRINSIC_GUESS：使用该参数时，在cameraMatrix矩阵中应该有fx,fy,cx,cy的估计值。否则的话，将初始化(cx,cy）图像的中心点，使用最小二乘估算出fx，fy。如果内参数矩阵和畸变居中已知的时候，应该标定模块中的solvePnP()函数计算外参数矩阵 CV_CALIB_FIX_PRINCIPAL_POINT：在进行优化时会固定光轴点。当CV_CALIB_USE_INTRINSIC_GUESS参数被设置，光轴点将保持在中心或者某个输入的值 CV_CALIB_FIX_ASPECT_RATIO：固定fx/fy的比值，只将fy作为可变量，进行优化计算。当CV_CALIB_USE_INTRINSIC_GUESS没有被设置，fx和fy将会被忽略。只有fx/fy的比值在计算中会被用到 CV_CALIB_ZERO_TANGENT_DIST：设定切向畸变参数（p1,p2）为零 CV_CALIB_FIX_K1,...,CV_CALIB_FIX_K6：对应的径向畸变在优化中保持不变 CV_CALIB_RATIONAL_MODEL：计算k4，k5，k6三个畸变参数。如果没有设置，则只计算其它5个畸变参数
-代码
+```
+
+|参数|含义|
+|----------|----------------------|
+|objectPoints|世界坐标系中的点。在使用时，应该输入一个三维点的vector的vector，即vector<vector<Point3f>> objectPoints|
+|imagePoints|对应的图像点。和objectPoints一样，应该输入std::vector<std::vector<cv::Point2f>> imagePoints型的变量|
+|imageSize|图像的大小，在计算相机的内参数和畸变矩阵需要用到|
+|cameraMatrix|内参数矩阵。输入一个cv::Mat cameraMatrix即可|
+|distCoeffs|畸变矩阵。输入一个cv::Mat distCoeffs即可|
+|rvecs|旋转向量；应该输入一个cv::Mat的vector，即vector<cv::Mat> rvecs因为每个vector<Point3f>会得到一个rvecs|
+|tvecs|位移向量；和rvecs一样，也应该为vector<cv::Mat> tvecs|
+|flags|标定时所采用的算法。可如下某个或者某几个参数： CV_CALIB_USE_INTRINSIC_GUESS：使用该参数时，在cameraMatrix矩阵中应该有fx,fy,cx,cy的估计值。否则的话，将初始化(cx,cy）图像的中心点，使用最小二乘估算出fx，fy。如果内参数矩阵和畸变居中已知的时候，应该标定模块中的solvePnP()函数计算外参数矩阵 CV_CALIB_FIX_PRINCIPAL_POINT：在进行优化时会固定光轴点。当CV_CALIB_USE_INTRINSIC_GUESS参数被设置，光轴点将保持在中心或者某个输入的值 CV_CALIB_FIX_ASPECT_RATIO：固定fx/fy的比值，只将fy作为可变量，进行优化计算。当CV_CALIB_USE_INTRINSIC_GUESS没有被设置，fx和fy将会被忽略。只有fx/fy的比值在计算中会被用到 CV_CALIB_ZERO_TANGENT_DIST：设定切向畸变参数（p1,p2）为零 CV_CALIB_FIX_K1,...,CV_CALIB_FIX_K6：对应的径向畸变在优化中保持不变 CV_CALIB_RATIONAL_MODEL：计算k4，k5，k6三个畸变参数。如果没有设置，则只计算其它5个畸变参数|
+
+### 代码
+```python
 #! /usr/local/bin/python
 # -*- coding: UTF-8 -*-
 '''
@@ -113,65 +129,88 @@ for i in range(len(obj_points)):
 	mean_error += error
 total_error = mean_error/len(obj_points)
 print (total_error)
-运行结果
-程序逐个加载每张棋盘照片, 检测棋盘角点, 并进行标定. 计算相机参数, 保存为numpy类型文件.
+```
 
-calibrateCamera
+### 运行结果
 
-3D重建
-StereoSGBM
-StereoSGBM是OpenCV提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图.
+程序逐个加载每张棋盘照片, 检测棋盘角点, 并进行标定. 计算相机参数, 保存为`numpy`类型文件.
 
-create()
-StereoSGBM类中创建StereoSGBM对象的方法为create()
+![calibrateCamera](calibrateCamera.png)
 
+## 3D重建
+
+### StereoSGBM
+`StereoSGBM`是`OpenCV`提供的用于立体匹配的类,可将两幅由处在同一水平线的不同摄像机拍摄的图像进行匹配,比较物体在两幅图像中的相对位置,计算求得其视差图.
+
+#### create()
+
+`StereoSGBM`类中创建`StereoSGBM`对象的方法为`create()`
+
+```python
 # create() 创建StereoSGBM对象
 # C++
 static Ptr<StereoSGBM> cv::StereoSGBM::create (int minDisparity = 0,int  numDisparities = 16,int 	blockSize = 3,int P1 = 0,int P2 = 0,int disp12MaxDiff = 0,int preFilterCap = 0,int uniquenessRatio = 0,int speckleWindowSize = 0,int speckleRange = 0,int mode = StereoSGBM::MODE_SGBM)
 # Python
 retval = cv2.StereoSGBM_create([，minDisparity [，numDisparities [，blockSize [，P1 [，P2 [，disp12MaxDiff [，preFilterCap [，uniquenessRatio [，speckleWindowSize [，speckleRange [，mode]]]]]]]]]]]])
+```
+
 其参数如下.
 
-参数	含义
-minDisparity	最小可能的差异值。通常情况下，它是零，但有时整流算法可能会改变图像，所以这个参数需要作相应的调整。
-numDisparities	最大差异减去最小差异。该值总是大于零。在当前的实现中，该参数必须可以被16整除。
-BLOCKSIZE	匹配的块大小。它必须是> = 1的奇数。通常情况下，它应该在3..11的范围内。
-P1	控制视差平滑度的第一个参数。
-P2	第二个参数控制视差平滑度。值越大，差异越平滑。P1是相邻像素之间的视差变化加或减1的惩罚。P2是相邻像素之间的视差变化超过1的惩罚。该算法需要P2> P1。请参见stereo_match.cpp示例，其中显示了一些相当好的P1和P2值（分别为8 number_of_image_channels SADWindowSize SADWindowSize和32 number_of_image_channels SADWindowSize SADWindowSize）。
-disp12MaxDiff	左右视差检查中允许的最大差异（以整数像素为单位）。将其设置为非正值以禁用检查。
-preFilterCap	预滤波图像像素的截断值。该算法首先计算每个像素的x导数，并通过[-preFilterCap，preFilterCap]间隔剪切其值。结果值传递给Birchfield-Tomasi像素成本函数。
-uniquenessRatio	最佳（最小）计算成本函数值应该“赢”第二个最佳值以考虑找到的匹配正确的百分比保证金。通常，5-15范围内的值就足够了。
-speckleWindowSize	平滑视差区域的最大尺寸，以考虑其噪声斑点和无效。将其设置为0可禁用斑点过滤。否则，将其设置在50-200的范围内。
-speckleRange	每个连接组件内的最大视差变化。如果你做斑点过滤，将参数设置为正值，它将被隐式乘以16.通常，1或2就足够好了。
-mode	将其设置为StereoSGBM :: MODE_HH以运行全尺寸双通道动态编程算法。它将消耗O（W H numDisparities）字节，这对640x480立体声很大，对于HD尺寸的图片很大。默认情况下，它被设置为false。
-compute()
-StereoSGBM类中计算StereoSGBM的方法为compute()
+|参数|含义|
+|------|----------------|
+|minDisparity|最小可能的差异值。通常情况下，它是零，但有时整流算法可能会改变图像，所以这个参数需要作相应的调整。|
+|numDisparities|最大差异减去最小差异。该值总是大于零。在当前的实现中，该参数必须可以被16整除。|
+|BLOCKSIZE|匹配的块大小。它必须是> = 1的奇数。通常情况下，它应该在3..11的范围内。|
+|P1	|控制视差平滑度的第一个参数。|
+|P2	|第二个参数控制视差平滑度。值越大，差异越平滑。P1是相邻像素之间的视差变化加或减1的惩罚。P2是相邻像素之间的视差变化超过1的惩罚。该算法需要P2> P1。请参见stereo_match.cpp示例，其中显示了一些相当好的P1和P2值（分别为8 number_of_image_channels SADWindowSize SADWindowSize和32 number_of_image_channels SADWindowSize SADWindowSize）。|
+|disp12MaxDiff|左右视差检查中允许的最大差异（以整数像素为单位）。将其设置为非正值以禁用检查。|
+|preFilterCap|预滤波图像像素的截断值。该算法首先计算每个像素的x导数，并通过[-preFilterCap，preFilterCap]间隔剪切其值。结果值传递给Birchfield-Tomasi像素成本函数。|
+|uniquenessRatio|最佳（最小）计算成本函数值应该“赢”第二个最佳值以考虑找到的匹配正确的百分比保证金。通常，5-15范围内的值就足够了。|
+|speckleWindowSize|平滑视差区域的最大尺寸，以考虑其噪声斑点和无效。将其设置为0可禁用斑点过滤。否则，将其设置在50-200的范围内。|
+|speckleRange|每个连接组件内的最大视差变化。如果你做斑点过滤，将参数设置为正值，它将被隐式乘以16.通常，1或2就足够好了。|
+|mode|将其设置为StereoSGBM :: MODE_HH以运行全尺寸双通道动态编程算法。它将消耗O（W H numDisparities）字节，这对640x480立体声很大，对于HD尺寸的图片很大。默认情况下，它被设置为false。|
 
+#### compute()
+
+`StereoSGBM`类中计算`StereoSGBM`的方法为`compute()`
+
+```python
 # compute() 计算StereoSGBM
 # C++
 public void compute(Mat left,Mat right,Mat disp)
 # Python
 disp = StereoSGBM.compute(left,right)
+```
+
 其参数如下.
 
-参数	含义
-left	左目图像矩阵
-right	右目图像矩阵
-disp	StereoSGBM结果矩阵
-reprojectImageTo3D
-reprojectImageTo3D是OpenCV提供的根据一组差异图像构建3D空间的函数, 该函数变换一个单通道代表三维表面的三通道图像的视差图. 其函数形式为:
+|参数|含义|
+|------|----------------|
+|left|左目图像矩阵|
+|right|右目图像矩阵|
+|disp|StereoSGBM结果矩阵|
 
+### reprojectImageTo3D
+
+`reprojectImageTo3D`是`OpenCV`提供的根据一组差异图像构建3D空间的函数, 该函数变换一个单通道代表三维表面的三通道图像的视差图. 其函数形式为:
+
+```python
 # C++
 void reprojectImageTo3D(InputArray disparity, OutputArray _3dImage, InputArray Q, bool handleMissingValues=false, int ddepth=-1 )
 # Python
 cv2.reprojectImageTo3D(disparity, Q[, _3dImage[, handleMissingValues[, ddepth]]]) → _3dImage¶
-参数	含义
-disparity	视差图像。可以是8位无符号，16位有符号或者32位有符号的浮点图像。
-_3dImage	和视差图同样大小的3通道浮点图像。_3dImage （x,y）位置（也是视察图的(x,y)）包含3D坐标点。
-Q	透视变换矩阵。 可以通过stereoRectify（）获得。
-handleMissingValues	是否处理缺失值（即点差距不计算）。如果handleMissingValues​​=true，则具有最小视差对应的异常值（见StereoBM::operator符（）） 否则，具有非常大的Z值​​（目前设置为10000）转化为三维点的像素。
-ddepth	可选的输出数组的深度。如果是-1，输出图像将有深度CV_32F。也可以设置ddepth的CV_16S，的CV_32S或CV_32F。
-代码
+```
+|参数|含义|
+|------|----------------|
+|disparity|视差图像。可以是8位无符号，16位有符号或者32位有符号的浮点图像。|
+|_3dImage |和视差图同样大小的3通道浮点图像。_3dImage （x,y）位置（也是视察图的(x,y)）包含3D坐标点。|
+|Q  |透视变换矩阵。 可以通过stereoRectify（）获得。|
+|handleMissingValues|是否处理缺失值（即点差距不计算）。如果handleMissingValues​​=true，则具有最小视差对应的异常值（见StereoBM::operator符（）） 否则，具有非常大的Z值​​（目前设置为10000）转化为三维点的像素。|
+|ddepth |可选的输出数组的深度。如果是-1，输出图像将有深度CV_32F。也可以设置ddepth的CV_16S，的CV_32S或CV_32F。|
+
+### 代码
+
+```python
 #! /usr/local/bin/python
 # -*- coding: UTF-8 -*-
 import cv2
@@ -286,15 +325,18 @@ output_file = 'reconstructed.ply'
 #Generate point cloud 
 print ("\n Creating the output file... \n")
 create_output(output_points, output_colors, output_file)
-运行结果
+```
+
+### 运行结果
+
 原双目图像
 
-left
+![left](left.png)
 
-right
+![right](right.png)
 
 点云图像
 
-point-clouds
+![point-clouds](pointclouds.png)
 
 鼠标移动到图像中的某点位置,下方显示该点的点云x,y坐标
